@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConstantVarable {
+    
+
   static String baseUrl = "https://qsimh.com";
   static String apiImg = "https://www.q8pulse.app/public/";
   static String apiMap = "AIzaSyCZCgOpXKbNdhTHAe4ANYKteYQSIYZYlGA";
@@ -109,4 +111,6 @@ class ConstantVarable {
   static final TextEditingController bankNameController =
       TextEditingController();
   static final TextEditingController amountController = TextEditingController();
+
+    
 }

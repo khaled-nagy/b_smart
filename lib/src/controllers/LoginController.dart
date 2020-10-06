@@ -1,4 +1,5 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:flutter/material.dart';
 
 class LoginController extends ControllerMVC {
   //to make single instance of class
@@ -11,4 +12,6 @@ class LoginController extends ControllerMVC {
   LoginController._();
 
   static LoginController get con => _this;
+ //  var size=MediaQuery.of(context).size;
+   
 }

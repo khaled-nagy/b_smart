@@ -11,7 +11,7 @@ void main() {
     child: MyApp(),
     supportedLocales: [Locale('en'), Locale('ar')],
     path: "assets/langs",
-    startLocale: Locale('ar'),
+    startLocale: Locale('en'),
     //  fallbackLocale: Locale('ar'),
     saveLocale: true,
     // useOnlyLangCode: true,
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ConstantVarable.lang = EasyLocalization.of(context).locale.toString();
-    print("lang is ${ConstantVarable.lang}");
+    
+     
     return MaterialApp(
-      title: 'قسيمة',
+      title: 'B Smart',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -91,25 +91,24 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontFamily: 'Tajawal'),
         ),
-
-        primarySwatch: Colors.blue,
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Color(0xff0091C4)),
+        primarySwatch: Colors.blue,accentIconTheme: IconThemeData(color: Color(0xff0091C4)),
         accentColor: Color(0xFFFFFFFF),
         focusColor: Color(0xFF8C98A8),
         hintColor: Color(0xFF44444f),
-        backgroundColor: Color(0xFF41AED9),
+        backgroundColor:Color(0xff006687),
         scaffoldBackgroundColor: Colors.white,
         bottomAppBarTheme: BottomAppBarTheme(
           color: Color(0xFF41AED9),
+          
         ),
-        // canvasColor: Colors.white.withOpacity(0.0),
-
+       
         fontFamily: 'Tajawal',
       ),
       home:
-          //  BlocProvider<ProductCounterBloc>(
-          //     create: (context) => ProductCounterBloc(), child:
+          
           SplashScreen()
-      // )
+      
       ,
     );
   }

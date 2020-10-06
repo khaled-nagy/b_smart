@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:b_smart/src/screens/login_screen.dart';
+import 'package:b_smart/src/widgets/transions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,27 +16,52 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          context, Scaletransition(screen: LoginScreen()));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Colors.green, Colors.blue])),
-      child: Center(
-        child: Container(
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                  image: AssetImage("assets/imgs/logo.png"),
-                  fit: BoxFit.cover)),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: size.height * 0.25,
+              ),
+              Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                      image: AssetImage("assets/imgs/logo.png")),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.1,
+              ),
+              SpinKitWave(
+                itemCount: 6,
+                type: SpinKitWaveType.center,
+                duration: Duration(seconds: 3),
+                size: 50.0,
+                itemBuilder: (context, index) {
+                  return DecoratedBox(
+                      decoration: BoxDecoration(
+                    color: index.isEven
+                        ? Theme.of(context).backgroundColor
+                        : Colors.white,
+                  ));
+                },
+              )
+            ],
+          ),
         ),
-      ),
-    ));
+        backgroundColor: Theme.of(context).backgroundColor.withOpacity(0.4));
+
+    //   image: AssetImage("assets/imgs/logo.png"),
   }
 }
