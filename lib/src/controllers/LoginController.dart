@@ -1,3 +1,4 @@
+import 'package:b_smart/src/screens/homePage_Screen.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,11 @@ class LoginController extends ControllerMVC {
   static LoginController _this;
 
   LoginController._();
-
+    
   static LoginController get con => _this;
- //  var size=MediaQuery.of(context).size;
-   
+     loginButton(BuildContext context){
+    return   Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) { 
+         return HomePage();
+        }));
+     }
 }

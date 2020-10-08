@@ -32,7 +32,7 @@ class LoginView extends StateMVC<LoginScreen> {
               child: Column(
             children: [
               SizedBox(
-                height: 120.0,
+                height: 100.0,
               ),
               Container(
                 height: 200,
@@ -71,11 +71,18 @@ class LoginView extends StateMVC<LoginScreen> {
                 height: 30.0,
               ),
               ButtonC(
+                onpress: (){
+                  _loginController.loginButton(context);
+                },
                 height: 43,
                 width: size.width * 0.75,
                 color: Theme.of(context).accentIconTheme.color,
                 text: "Log In",
                 textstyle: Theme.of(context).textTheme.headline1,
+              ),
+              SizedBox(height: 25,),
+              InkWell(
+                child: Text("Forget Password?",style: Theme.of(context).textTheme.headline2,),
               )
             ],
           )),

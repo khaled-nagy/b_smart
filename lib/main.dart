@@ -1,9 +1,9 @@
 import 'package:b_smart/src/screens/splash_screen.dart';
+import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:b_smart/ConstantVarables.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:provider/provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // PushNotificationService().initialise();
@@ -29,87 +29,89 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
-     
-    return MaterialApp(
-      title: 'B Smart',
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        EasyLocalization.of(context).delegate
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SelectRequest>(create: (context) { 
+              return SelectRequest();
+         },)
       ],
-      supportedLocales: EasyLocalization.of(context).supportedLocales,
-      locale: EasyLocalization.of(context).locale,
-      theme: ThemeData(
-        textTheme: TextTheme(
-          subtitle1: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.normal,
-              color: Colors.grey[800],
-              fontFamily: 'Tajawal'),
-          subtitle2: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[900],
-              fontFamily: 'Tajawal'),
-          button: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF41AED9),
-              fontFamily: 'Tajawal'),
-          headline1: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xFFFFFFFF),
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Tajawal'),
-          headline2: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF515C6F),
-              fontFamily: 'Tajawal'),
-          headline3: TextStyle(
-              fontSize: 14.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
-          headline4: TextStyle(
-              fontSize: 14.0, color: Color(0xFF41AED9), fontFamily: 'Tajawal'),
-          headline5: TextStyle(
-              fontSize: 14.0, color: Color(0xFF515C6F), fontFamily: 'Tajawal'),
-          headline6: TextStyle(
-              fontSize: 12.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
-          bodyText1: TextStyle(
-              fontSize: 18.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Tajawal'),
-          bodyText2: TextStyle(
-              fontSize: 14.0,
-              color: Color(0xFF707070),
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Tajawal'),
-          caption: TextStyle(
-              fontSize: 16.0,
-              color: Color(0xFF41AED9),
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Tajawal'),
+          child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'B Smart',
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          EasyLocalization.of(context).delegate
+        ],
+        supportedLocales: EasyLocalization.of(context).supportedLocales,
+        locale: EasyLocalization.of(context).locale,
+        theme: ThemeData(
+          textTheme: TextTheme(
+            subtitle1: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey[800],
+                fontFamily: 'Tajawal'),
+            subtitle2: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[900],
+                fontFamily: 'Tajawal'),
+            button: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF41AED9),
+                fontFamily: 'Tajawal'),
+            headline1: TextStyle(
+                fontSize: 18.0,
+                color: Color(0xFFFFFFFF),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Tajawal'),
+            headline2: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF515C6F),
+                fontFamily: 'Tajawal'),
+            headline3: TextStyle(
+                fontSize: 14.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
+            headline4: TextStyle(
+                fontSize: 14.0, color: Color(0xFF41AED9), fontFamily: 'Tajawal'),
+            headline5: TextStyle(
+                fontSize: 14.0, color: Color(0xFF515C6F), fontFamily: 'Tajawal'),
+            headline6: TextStyle(
+                fontSize: 12.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
+            bodyText1: TextStyle(
+                fontSize: 18.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Tajawal'),
+            bodyText2: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xFF707070),
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Tajawal'),
+            caption: TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFF41AED9),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Tajawal'),
+          ),
+          bottomNavigationBarTheme:
+              BottomNavigationBarThemeData(backgroundColor: Color(0xff0091C4)),
+          primarySwatch: Colors.blue,
+          accentIconTheme: IconThemeData(color: Color(0xff0091C4)),
+          accentColor: Color(0xFFFFFFFF),
+          focusColor: Color(0xFF8C98A8),
+          hintColor: Color(0xFF44444f),
+          backgroundColor: Color(0xff006687),
+          scaffoldBackgroundColor: Colors.white,
+          bottomAppBarTheme: BottomAppBarTheme(
+            color: Color(0xFF41AED9),
+          ),
+          fontFamily: 'Tajawal',
         ),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Color(0xff0091C4)),
-        primarySwatch: Colors.blue,accentIconTheme: IconThemeData(color: Color(0xff0091C4)),
-        accentColor: Color(0xFFFFFFFF),
-        focusColor: Color(0xFF8C98A8),
-        hintColor: Color(0xFF44444f),
-        backgroundColor:Color(0xff006687),
-        scaffoldBackgroundColor: Colors.white,
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: Color(0xFF41AED9),
-          
-        ),
-       
-        fontFamily: 'Tajawal',
+        home: SplashScreen(),
       ),
-      home:
-          
-          SplashScreen()
-      
-      ,
     );
   }
 }
