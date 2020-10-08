@@ -101,14 +101,14 @@ class Permission extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      height: 470,
+      height: 550,
       width: size.width * 0.9,
       child: Column(
         children: [
           Container(
               height: 80.0,
             child: ListTile(
-                leading: Text("Vacation Type ID :",style: Theme.of(context).textTheme.headline2,),
+                leading: Text("Permission Type ID :",style: Theme.of(context).textTheme.headline2,),
                 title: Container(
                   child: DropdownButton(
                     isExpanded: true,
@@ -126,14 +126,21 @@ class Permission extends StatelessWidget {
                     onChanged: (value) {},
                   ),
                 )),
+          ),Container(
+            height: 80.0,
+            child: ListTile(
+                leading: Text("Permission Date",style: Theme.of(context).textTheme.headline2,),
+                title: Text("10/8/2020"),
+                trailing: Icon(Icons.calendar_today_rounded)),
           ),
+         
           Container(
             height: 80.0,
             child: ListTile(
-              leading: Text("Number Of Days :",style: Theme.of(context).textTheme.headline2,),
-              title: Text("1"),
-              trailing: Container(
-                width: size.width * 0.245,
+                leading: Text("Duration",style: Theme.of(context).textTheme.headline2,),
+                title: Text("0"),
+                trailing:Container(
+                width: size.width *0.5,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -144,25 +151,26 @@ class Permission extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.arrow_drop_up),
                       onPressed: () {},
-                    )
+                    ),
+                    Text("Minute")
                   ],
                 ),
               ),
-            ),
+            )
           ),
           Container(
             height: 80.0,
             child: ListTile(
-                leading: Text("Start Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("10/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
+                leading: Text("Start Time",style: Theme.of(context).textTheme.headline2,),
+                title: Text("00.00"),
+            )
           ),
           Container(
             height: 80.0,
             child: ListTile(
-                leading: Text("End Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("15/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
+                leading: Text("End Time",style: Theme.of(context).textTheme.headline2,),
+                title: Text("00.00"),
+            )
           ),
           Container(
             height: 80.0,
@@ -203,69 +211,74 @@ class Assignment extends StatelessWidget {
           Container(
               height: 80.0,
             child: ListTile(
-                leading: Text("Vacation Type ID :",style: Theme.of(context).textTheme.headline2,),
+                leading: Text("New Location :",style: Theme.of(context).textTheme.headline2,),
                 title: Container(
                   child: DropdownButton(
                     isExpanded: true,
                     items: [
                       DropdownMenuItem(
-                        child: Text("1"),
+                        child: Text("Test1"),
                       ),
                       DropdownMenuItem(
-                        child: Text("2"),
+                        child: Text("Test2"),
                       ),
                       DropdownMenuItem(
-                        child: Text("3"),
+                        child: Text("Test3"),
                       )
                     ],
                     onChanged: (value) {},
                   ),
                 )),
           ),
-          Container(
-            height: 80.0,
+             Container(
+              height: 80.0,
             child: ListTile(
-              leading: Text("Number Of Days :",style: Theme.of(context).textTheme.headline2,),
-              title: Text("1"),
-              trailing: Container(
-                width: size.width * 0.245,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
-              ),
-            ),
+                leading: Text("New Department :",style: Theme.of(context).textTheme.headline2,),
+                title: Container(
+                  child: DropdownButton(
+                    isExpanded: true,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Test1"),
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Test2"),
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Test3"),
+                      )
+                    ],
+                    onChanged: (value) {},
+                  ),
+                )),
           ),
-          Container(
-            height: 80.0,
+             Container(
+              height: 80.0,
             child: ListTile(
-                leading: Text("Start Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("10/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
+                leading: Text("New Position :",style: Theme.of(context).textTheme.headline2,),
+                title: Container(
+                  child: DropdownButton(
+                    isExpanded: true,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Test1"),
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Test2"),
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Test3"),
+                      )
+                    ],
+                    onChanged: (value) {},
+                  ),
+                )),
           ),
-          Container(
-            height: 80.0,
-            child: ListTile(
-                leading: Text("End Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("15/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
-          ),
-          Container(
-            height: 80.0,
-            child: ListTile(
-              leading: Text("Notes",style: Theme.of(context).textTheme.headline2,),
-              title: TextFormField(),
-            ),
-          ),SizedBox(
+          
+           
+          
+          
+         SizedBox(
             height: 18.0,
           ),
           Container(
@@ -320,7 +333,29 @@ class VacationBalance extends StatelessWidget {
           Container(
             height: 80.0,
             child: ListTile(
-              leading: Text("Number Of Days :",style: Theme.of(context).textTheme.headline2,),
+              leading: Text("Year :",style: Theme.of(context).textTheme.headline2,),
+              title: Text("1"),
+              trailing: Container(
+                width: size.width * 0.245,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_down),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_up),
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),  Container(
+            height: 80.0,
+            child: ListTile(
+              leading: Text("Value :",style: Theme.of(context).textTheme.headline2,),
               title: Text("1"),
               trailing: Container(
                 width: size.width * 0.245,
@@ -340,20 +375,8 @@ class VacationBalance extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 80.0,
-            child: ListTile(
-                leading: Text("Start Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("10/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
-          ),
-          Container(
-            height: 80.0,
-            child: ListTile(
-                leading: Text("End Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("15/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
-          ),
+        
+           
           Container(
             height: 80.0,
             child: ListTile(
@@ -394,59 +417,31 @@ class Termination extends StatelessWidget {
           Container(
               height: 80.0,
             child: ListTile(
-                leading: Text("Vacation Type ID :",style: Theme.of(context).textTheme.headline2,),
+                leading: Text("Termination Type :",style: Theme.of(context).textTheme.headline2,),
                 title: Container(
                   child: DropdownButton(
                     isExpanded: true,
                     items: [
                       DropdownMenuItem(
-                        child: Text("1"),
+                        child: Text("dadddd1"),
                       ),
                       DropdownMenuItem(
-                        child: Text("2"),
+                        child: Text("dddd2"),
                       ),
                       DropdownMenuItem(
-                        child: Text("3"),
+                        child: Text("dddd3"),
                       )
                     ],
                     onChanged: (value) {},
                   ),
                 )),
           ),
+          
+         
           Container(
             height: 80.0,
             child: ListTile(
-              leading: Text("Number Of Days :",style: Theme.of(context).textTheme.headline2,),
-              title: Text("1"),
-              trailing: Container(
-                width: size.width * 0.245,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 80.0,
-            child: ListTile(
-                leading: Text("Start Date",style: Theme.of(context).textTheme.headline2,),
-                title: Text("10/8/2020"),
-                trailing: Icon(Icons.calendar_today_rounded)),
-          ),
-          Container(
-            height: 80.0,
-            child: ListTile(
-                leading: Text("End Date",style: Theme.of(context).textTheme.headline2,),
+                leading: Text("Last Working day",style: Theme.of(context).textTheme.headline2,),
                 title: Text("15/8/2020"),
                 trailing: Icon(Icons.calendar_today_rounded)),
           ),

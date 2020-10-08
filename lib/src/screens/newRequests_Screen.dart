@@ -25,9 +25,8 @@ class NewRequestsView extends StateMVC<NewRequests> {
     final prov = Provider.of<SelectRequest>(context);
     return Scaffold(
         appBar: appbar(
-            context: context,
-             
-            ),
+          context: context,
+        ),
         body: SingleChildScrollView(
           child: new Column(
             children: [
@@ -44,7 +43,23 @@ class NewRequestsView extends StateMVC<NewRequests> {
               SizedBox(
                 height: 20.0,
               ),
-               Vacation()
+              prov.requesttype == "Vacation Request"
+                  ? Vacation()
+                  : prov.requesttype == "Permission Request"
+                      ? Permission()
+                      : prov.requesttype == "Assignment Change Request"
+                          ? Assignment()
+                          : prov.requesttype ==
+                                  "Vacation Balance Adjustment Request"
+                              ? VacationBalance()
+                              : prov.requesttype == "Termination Request"
+                                  ? Termination()
+                                  : prov.requesttype == "Loan request"
+                                      ? Loan()
+                                      : prov.requesttype ==
+                                              "Payroll Adjustment Request"
+                                          ? PayrollAdjustment()
+                                          : Text("Select Request type")
             ],
           ),
         ));

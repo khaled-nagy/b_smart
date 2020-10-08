@@ -12,7 +12,7 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final prov = Provider.of<SelectRequest>(context);
-    print(prov.requestType);
+    print(prov.requesttype);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Card(
@@ -21,7 +21,7 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
           height: 50.0,
           width: size.width,
           child: DropdownButton(
-            value: prov.requestType  ,
+            value: prov.requesttype ,
             isExpanded: true,
             items: [
               DropdownMenuItem(
@@ -54,9 +54,9 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
               ),
             ],
             onChanged: (value) {
-              setState(() {
-                prov.requestType = value;
-              });
+              
+                prov.requesttype = value;
+              
             },
           ),
         ),
