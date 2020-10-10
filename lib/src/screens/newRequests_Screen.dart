@@ -32,12 +32,8 @@ class NewRequestsView extends StateMVC<NewRequests> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "Select Request Type",
-                      style: Theme.of(context).textTheme.headline2,
-                    )),
+                child: Container()
+                     
               ),
               SelectRequestType(),
               SizedBox(
@@ -59,7 +55,7 @@ class NewRequestsView extends StateMVC<NewRequests> {
                                       : prov.requesttype ==
                                               "Payroll Adjustment Request"
                                           ? PayrollAdjustment()
-                                          : Text("Select Request type")
+                                          : Container()
             ],
           ),
         ));

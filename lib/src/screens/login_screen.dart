@@ -24,7 +24,7 @@ class LoginView extends StateMVC<LoginScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar:  BottomNavigationbar(),
+      bottomNavigationBar: BottomNavigationbar(),
       backgroundColor: Color(0xffF4F4F4),
       body: SingleChildScrollView(
         child: Form(
@@ -32,35 +32,35 @@ class LoginView extends StateMVC<LoginScreen> {
               child: Column(
             children: [
               SizedBox(
-                height: 100.0,
+                height: size.height * 0.1,
               ),
               Container(
-                height: 200,
-                width: 200,
+                height: size.height * 0.2,
+                width: size.width * 0.4,
                 child: Image.asset("assets/imgs/logo.png"),
               ),
               SizedBox(
-                height: 40,
+                height: size.height * 0.04,
               ),
               TextFormFieldC(
                 width: size.width * 0.88,
-                height: 52,
+                height: size.height * 0.075,
                 labeltext: "Domain/Username",
               ),
               SizedBox(
-                height: 40,
+                height: size.height * 0.04,
               ),
               TextFormFieldC(
                 width: size.width * 0.88,
-                height: 52,
+                height: size.height * 0.075,
                 labeltext: "Password",
               ),
               SizedBox(
-                height: 30,
+                height: size.height * 0.02,
               ),
               Container(
                 width: size.width * 0.88,
-                height: 28.0,
+                height: size.height * 0.045,
                 child: Text(
                   "Language",
                   style: Theme.of(context).textTheme.headline2,
@@ -68,21 +68,26 @@ class LoginView extends StateMVC<LoginScreen> {
               ),
               DropDownButton(),
               SizedBox(
-                height: 30.0,
+                height: size.height * 0.038,
               ),
-              ButtonC(
-                onpress: (){
+              ButtonW(
+                onpress: () {
                   _loginController.loginButton(context);
                 },
-                height: 43,
+                height: size.height * 0.065,
                 width: size.width * 0.75,
                 color: Theme.of(context).accentIconTheme.color,
                 text: "Log In",
                 textstyle: Theme.of(context).textTheme.headline1,
               ),
-              SizedBox(height: 25,),
+              SizedBox(
+                height: size.height * 0.04,
+              ),
               InkWell(
-                child: Text("Forget Password?",style: Theme.of(context).textTheme.headline2,),
+                child: Text(
+                  "Forget Password?",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
               )
             ],
           )),

@@ -10,7 +10,7 @@ class DropDownButton extends StatelessWidget {
      width: size.width *0.88,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: DropdownButton(
+        child: DropdownButton(underline: Container(),
            isDense: true,
           onChanged: (value) {},isExpanded: true,
           items: [

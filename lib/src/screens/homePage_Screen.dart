@@ -28,7 +28,7 @@ class HomePageView extends StateMVC<HomePage> {
               height: size.height * 0.25,
             ),
             Center(
-              child: ButtonC(
+              child: ButtonW(
                 height: 50.0,
                 onpress: () {},
                 width: size.width * 0.8,
@@ -41,7 +41,7 @@ class HomePageView extends StateMVC<HomePage> {
               height: size.height * 0.06,
             ),
             Center(
-              child: ButtonC(
+              child: ButtonW(
                 height: 50.0,
                 onpress: () {},
                 width: size.width * 0.8,

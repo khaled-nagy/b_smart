@@ -4,25 +4,29 @@ import 'package:easy_localization/easy_localization.dart';
  import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:device_preview/device_preview.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // PushNotificationService().initialise();
-  runApp(EasyLocalization(
-    child: MyApp(),
-    supportedLocales: [Locale('en'), Locale('ar')],
-    path: "assets/langs",
-    startLocale: Locale('en'),
-    //  fallbackLocale: Locale('ar'),
-    saveLocale: true,
-    // useOnlyLangCode: true,
-    // optional assetLoader default used is RootBundleAssetLoader which uses flutter's assetloader
-    // assetLoader: RootBundleAssetLoader()
-    // assetLoader: NetworkAssetLoader()
-    // assetLoader: TestsAssetLoader()
-    // assetLoader: FileAssetLoader()
-    // assetLoader: StringAssetLoader()
-    // preloaderColor: Colors.red,
-  ));
+  runApp( 
+       EasyLocalization(
+      child: MyApp(),
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: "assets/langs",
+      startLocale: Locale('en'),
+      //  fallbackLocale: Locale('ar'),
+      saveLocale: true,
+      // useOnlyLangCode: true,
+      // optional assetLoader default used is RootBundleAssetLoader which uses flutter's assetloader
+      // assetLoader: RootBundleAssetLoader()
+      // assetLoader: NetworkAssetLoader()
+      // assetLoader: TestsAssetLoader()
+      // assetLoader: FileAssetLoader()
+      // assetLoader: StringAssetLoader()
+      // preloaderColor: Colors.red,
+    ));
+     
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -97,9 +101,9 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'Tajawal'),
           ),
           bottomNavigationBarTheme:
-              BottomNavigationBarThemeData(backgroundColor: Color(0xff0091C4)),
+              BottomNavigationBarThemeData(backgroundColor: Color(0xff006687)),
           primarySwatch: Colors.blue,
-          accentIconTheme: IconThemeData(color: Color(0xff0091C4)),
+          accentIconTheme: IconThemeData(color: Color(0xff006687)),
           accentColor: Color(0xFFFFFFFF),
           focusColor: Color(0xFF8C98A8),
           hintColor: Color(0xFF44444f),
