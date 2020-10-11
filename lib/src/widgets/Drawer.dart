@@ -1,6 +1,7 @@
 import 'package:b_smart/src/screens/homePage_Screen.dart';
 import 'package:b_smart/src/screens/my_Requests.dart';
 import 'package:b_smart/src/screens/my_Tasks.dart';
+import 'package:b_smart/src/screens/myattendance_Screen.dart';
 import 'package:b_smart/src/screens/newRequests_Screen.dart';
 import 'package:b_smart/src/widgets/transions.dart';
 import 'package:flutter/material.dart';
@@ -68,12 +69,11 @@ class Drawerc extends StatelessWidget {
               ),
             ),
             Divider(),
-         InkWell(
-           onTap: (){
-                             Navigator.push(context, Scaletransition(screen: (MyTasks())));
-
-           },
-                          child: new ListTile(
+            InkWell(
+              onTap: () {
+                Navigator.push(context, Scaletransition(screen: (MyTasks())));
+              },
+              child: new ListTile(
                 leading: Icon(
                   Icons.list_alt_outlined,
                   color: Theme.of(context).backgroundColor,
@@ -84,15 +84,24 @@ class Drawerc extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(), 
-            new ListTile(
-              leading:  Container(
-                height: 30.0,
-                width: 30.0,
-                child: Image.asset("assets/imgs/attendance.png",color:Theme.of(context).backgroundColor ,)),
-              title: Text(
-                "My Attendance",
-                style: Theme.of(context).textTheme.headline2,
+            Divider(),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, Scaletransition(screen: (MyAttendance())));
+              },
+              child: new ListTile(
+                leading: Container(
+                    height: 30.0,
+                    width: 30.0,
+                    child: Image.asset(
+                      "assets/imgs/attendance.png",
+                      color: Theme.of(context).backgroundColor,
+                    )),
+                title: Text(
+                  "My Attendance",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
               ),
             ),
             Divider(),

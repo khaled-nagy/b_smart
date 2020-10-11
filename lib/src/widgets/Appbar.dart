@@ -1,3 +1,5 @@
+import 'package:b_smart/src/screens/ChangePass_Screen.dart';
+import 'package:b_smart/src/screens/Profile_Screen.dart';
 import 'package:flutter/material.dart';
 
 Widget appbar({BuildContext context}) {
@@ -36,16 +38,34 @@ Widget appbar({BuildContext context}) {
           },
           items: [
             DropdownMenuItem(
-              child: Text("My Profile"),
-              value: "My Profile",
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context){
+                      return MyProfile();
+                    }
+                  ));
+                },
+                child: Text("My Profile")),
+              value: "Profile",
             ),
             DropdownMenuItem(
-              child: Text("Change Password"),
-              value: "My Profile",
+              child: InkWell(
+                onTap: (){
+                    Navigator.push(context, MaterialPageRoute(
+                    builder: (context){
+                      return ChangePassword();
+                    }
+                  ));
+                },
+                child: Text("Change Password")),
+              value: "ChangePass",
             ),
             DropdownMenuItem(
-              child: Text("My Profile"),
-              value: "Log Out",
+              child: InkWell(
+                
+                child: Text("Log Out")),
+              value: "LogOut",
             ),
           ],
         ),

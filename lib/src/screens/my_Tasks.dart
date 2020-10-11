@@ -132,19 +132,7 @@ class MyTasksView extends StateMVC<MyTasks> {
               ],
             ),
 
-            // new Row(
-            //   children: [
-            //        SizedBox(width: size.width*0.025,),
-            //     Text("Request Code"),
-            //     Container(height:size.height ,width:size.width*0.002 ,color: Colors.black,),
-            //     SizedBox(width: size.width*0.05,),
-            //     Text("Request Type"),
-            //        SizedBox(width: size.width*0.05,),
-            //     Text("Request Date"),
-            //        SizedBox(width: size.width*0.05,),
-            //     Text("Current State")
-            //   ],
-            // )
+           
           ],
         ),
       ),
