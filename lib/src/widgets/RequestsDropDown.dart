@@ -22,6 +22,7 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
           width: size.width,
           
           child: DropdownButton(
+            underline: Container(),
             hint: Text("Select Request Type"),
             value: prov.requesttype ,
             isExpanded: true,

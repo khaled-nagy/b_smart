@@ -1,12 +1,15 @@
+import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // forms types
 class Vacation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final prov = Provider.of<VacationRequest>(context);
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-          child: Container(
+      child: Container(
         height: 470,
         width: size.width * 0.9,
         child: Column(
@@ -20,19 +23,26 @@ class Vacation extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select Vacation Type ID"),
                       isExpanded: true,
+                      value: prov.vacationTypeID,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.vacationTypeID = value;
+                      },
                     ),
                   )),
             ),
@@ -41,24 +51,28 @@ class Vacation extends StatelessWidget {
                 child: new Row(
                   children: [
                     new SizedBox(
-                      width: size.width * 0.048,
+                      width: size.width * 0.03,
                     ),
                     Text("Number Of Days :",
                         style: Theme.of(context).textTheme.headline2),
                     new SizedBox(
-                      width: size.width * 0.048,
+                      width: size.width * 0.040,
                     ),
-                    new Text("1"),
+                    new Text(prov.counter.toString()),
                     new SizedBox(
-                      width: size.width * 0.23,
+                      width: size.width * 0.2,
                     ),
                     new IconButton(
                       icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
+                      onPressed: () {
+                        prov.discreament();
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
+                      onPressed: () {
+                        prov.increament();
+                      },
                     ),
                   ],
                 )),
@@ -116,8 +130,9 @@ class Permission extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final prov = Provider.of<PermissionRequest>(context);
     return SingleChildScrollView(
-          child: Container(
+      child: Container(
         height: 550,
         width: size.width * 0.9,
         child: Column(
@@ -131,19 +146,26 @@ class Permission extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select Permision ID"),
+                      value: prov.permisionTypeID,
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.permisionTypeID = value;
+                      },
                     ),
                   )),
             ),
@@ -159,30 +181,37 @@ class Permission extends StatelessWidget {
             ),
             Container(
                 height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    Text("Duration ",
-                        style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.23,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                    new Text("Minute")
-                  ],
+                child: Container(
+                  width: size.width,
+                  child: new Row(
+                    children: [
+                      new SizedBox(
+                        width: size.width * 0.03,
+                      ),
+                      Text("Duration ",
+                          style: Theme.of(context).textTheme.headline2),
+                      new SizedBox(
+                        width: size.width * 0.040,
+                      ),
+                      new Text(prov.durationCounter.toString()),
+                      new SizedBox(
+                        width: size.width * 0.2,
+                      ),
+                      new IconButton(
+                        icon: Icon(Icons.arrow_drop_down),
+                        onPressed: () {
+                          prov.durationdicreasent();
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_drop_up),
+                        onPressed: () {
+                          prov.durationIncaresment();
+                        },
+                      ),
+                      new Text("Minute")
+                    ],
+                  ),
                 )),
             Container(
                 height: 80.0,
@@ -236,8 +265,9 @@ class Assignment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final prov = Provider.of<AssignmentChangeRequest>(context);
     return SingleChildScrollView(
-          child: Container(
+      child: Container(
         height: 470,
         width: size.width * 0.9,
         child: Column(
@@ -251,19 +281,26 @@ class Assignment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select New Location"),
+                      value: prov.newLocation,
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("Test1"),
+                          child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
-                          child: Text("Test2"),
+                          child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
-                          child: Text("Test3"),
+                          child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.newLocation = value;
+                      },
                     ),
                   )),
             ),
@@ -276,19 +313,26 @@ class Assignment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select New Department"),
                       isExpanded: true,
+                      value: prov.newDepartment,
                       items: [
                         DropdownMenuItem(
-                          child: Text("Test1"),
+                          child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
-                          child: Text("Test2"),
+                          child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
-                          child: Text("Test3"),
+                          child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.newDepartment = value;
+                      },
                     ),
                   )),
             ),
@@ -301,19 +345,26 @@ class Assignment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select New Postion"),
                       isExpanded: true,
+                      value: prov.newPostion,
                       items: [
                         DropdownMenuItem(
-                          child: Text("Test1"),
+                          child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
-                          child: Text("Test2"),
+                          child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
-                          child: Text("Test3"),
+                          child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.newPostion = value;
+                      },
                     ),
                   )),
             ),
@@ -340,9 +391,11 @@ class Assignment extends StatelessWidget {
 class VacationBalance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+        final prov = Provider.of<VacationBalanceRequest>(context);
+
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-          child: Container(
+      child: Container(
         height: 470,
         width: size.width * 0.9,
         child: Column(
@@ -356,72 +409,73 @@ class VacationBalance extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
-                      isExpanded: true,
+                      hint: Text("Select Vacation ID"),
+                      isExpanded: true, 
+                      value: prov.vacationBalanceID,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.vacationBalanceID=value;
+                      },
                     ),
                   )),
             ),
             Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
+              height: 80.0,
+              child: ListTile(
+                  leading: Text(
+                    "Year :",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  title: Container(
+                    child: DropdownButton(
+                      hint: Text("Select Year"),
+                      value: prov.year,
+                      isExpanded: true,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("1"),
+                          value: "1",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("2"),
+                          value: "2",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("3"),
+                          value: "3",
+                        )
+                      ],
+                      onChanged: (value) {
+                        prov.year=value;
+                      },
                     ),
-                    Text("Year ", style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.41,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                  ],
-                )),
-            Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    Text("Value ", style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.39,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                  ],
-                )),
+                  )),
+            ),
+             Container(
+              height: 80.0,
+              child: ListTile(
+                  leading: Text(
+                    "Value :",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  title: Container(
+                    child: Text("1000")
+                  )),
+            ),
+           
             Container(
               height: 80.0,
               child: ListTile(
@@ -456,8 +510,9 @@ class Termination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final prov= Provider.of<TermnisionRequest>(context);
     return SingleChildScrollView(
-          child: Container(
+      child: Container(
         height: 470,
         width: size.width * 0.9,
         child: Column(
@@ -472,18 +527,25 @@ class Termination extends StatelessWidget {
                   title: Container(
                     child: DropdownButton(
                       isExpanded: true,
+                      value: prov.terminationType,
+                      hint: Text("Select Termination Type"),
                       items: [
                         DropdownMenuItem(
-                          child: Text("dadddd1"),
+                          child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
-                          child: Text("dddd2"),
+                          child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
-                          child: Text("dddd3"),
+                          child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.terminationType=value;
+                      },
                     ),
                   )),
             ),
@@ -531,9 +593,9 @@ class Loan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final prov =Provider.of<LoanRequest>(context);
     return SingleChildScrollView(
-          child: Container(
-         
+      child: Container(
         width: size.width * 0.9,
         child: Column(
           children: [
@@ -546,209 +608,251 @@ class Loan extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select Loan Type"),
+                      value: prov.loanType,
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
+                          child: Text("test1"),
+                          value: "test1",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
+                          child: Text("test2"),
+                          value: "test2",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
+                          child: Text("test3"),
+                          value: "test3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.loanType=value;
+                      },
                     ),
                   )),
             ),
-            Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    Text("Value ", style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.41,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                  ],
-                )),
-            Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    Text("Installments Count ",
-                        style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.2,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                  ],
-                )),
-          Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "Start Month :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  title: Container(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("1"),
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2"),
-                        ),
-                        DropdownMenuItem(
-                          child: Text("3"),
-                        )
-                      ],
-                      onChanged: (value) {},
-                    ),
-                  )),
-            ),Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "End Month :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  title: Container(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("1"),
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2"),
-                        ),
-                        DropdownMenuItem(
-                          child: Text("3"),
-                        )
-                      ],
-                      onChanged: (value) {},
-                    ),
-                  )),
-            ),Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    Text("InstallmentValue ",
-                        style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.2,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                  ],
-                )),
               Container(
               height: 80.0,
               child: ListTile(
                   leading: Text(
-                    "Start Year :",
+                    "Value :",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  title: Container(
+                    child: TextFormField(
+                      keyboardType: TextInputType.numberWithOptions(),
+                    )
+                  )),
+            ),
+           
+            Container(
+                height: 80.0,
+                child: new Row(
+                  children: [
+                    new SizedBox(
+                      width: size.width * 0.030,
+                    ),
+                    Text("Installments Count ",
+                        style: Theme.of(context).textTheme.headline2),
+                    new SizedBox(
+                      width: size.width * 0.040,
+                    ),
+                    new Text(prov.count.toString()),
+                    new SizedBox(
+                      width: size.width * 0.2,
+                    ),
+                    new IconButton(
+                      icon: Icon(Icons.arrow_drop_down),
+                      onPressed: () {
+                        prov.discreamntcount();
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_up),
+                      onPressed: () {
+                        prov.increamentCount();
+                      },
+                    ),
+                  ],
+                )),
+            Container(
+              height: 80.0,
+              child: ListTile(
+                  leading: Text(
+                    "Start Month :",
+                    
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select Start Month"),
+                      value: prov.startmonth,
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.startmonth=value;
+                      },
                     ),
-                  ))),
-                    Container(
+                  )),
+            ),
+              Container(
+              height: 80.0,
+              child: ListTile(
+                  leading: Text(
+                    "End Month :",
+                    
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  title: Container(
+                    child: DropdownButton(
+                      hint: Text("Select End Month"),
+                      value: prov.endMonth,
+                      isExpanded: true,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("1"),
+                          value: "1",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("2"),
+                          value: "2",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("3"),
+                          value: "3",
+                        )
+                      ],
+                      onChanged: (value) {
+                        prov.endMonth=value;
+                      },
+                    ),
+                  )),
+            ),
+            Container(
+                height: 80.0,
+                child: new Row(
+                  children: [
+                    new SizedBox(
+                      width: size.width * 0.030,
+                    ),
+                    Text("InstallmentValue ",
+                        style: Theme.of(context).textTheme.headline2),
+                    new SizedBox(
+                      width: size.width * 0.040,
+                    ),
+                    new Text(prov.value.toString()),
+                    new SizedBox(
+                      width: size.width * 0.2,
+                    ),
+                    new IconButton(
+                      icon: Icon(Icons.arrow_drop_down),
+                      onPressed: () {
+                        prov.discraemnetntvalue();
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_up),
+                      onPressed: () {
+                        prov.incraementvalue();
+                      },
+                    ),
+                  ],
+                )),
+           Container(
+              height: 80.0,
+              child: ListTile(
+                  leading: Text(
+                    "Start Year:",
+                    
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  title: Container(
+                    child: DropdownButton(
+                      hint: Text("Select Start Year"),
+                      value: prov.startYear,
+                      isExpanded: true,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("1"),
+                          value: "1",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("2"),
+                          value: "2",
+                        ),
+                        DropdownMenuItem(
+                          child: Text("3"),
+                          value: "3",
+                        )
+                      ],
+                      onChanged: (value) {
+                        prov.startYear=value;
+                      },
+                    ),
+                  )),
+            ),
+           Container(
               height: 80.0,
               child: ListTile(
                   leading: Text(
                     "End Year :",
+                    
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
                     child: DropdownButton(
+                      hint: Text("Select End Year"),
+                      value: prov.endYear,
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.endYear=value;
+                      },
                     ),
-                  ))),  SizedBox(
-            height: 18.0,
-          ),
-          Container(
-            color: Theme.of(context).backgroundColor,
-            child: FlatButton(
-              onPressed: () {},
-              child: Text(
-                "Save Request",
-                style: Theme.of(context).textTheme.headline1,
+                  )),
+            ),
+            SizedBox(
+              height: 18.0,
+            ),
+            Container(
+              color: Theme.of(context).backgroundColor,
+              child: FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Save Request",
+                  style: Theme.of(context).textTheme.headline1,
+                ),
               ),
             ),
-          ),  SizedBox(
-            height: 40.0,
-          ),
+            SizedBox(
+              height: 40.0,
+            ),
           ],
         ),
       ),
@@ -760,9 +864,9 @@ class PayrollAdjustment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-   return SingleChildScrollView(
-          child: Container(
-         
+    final prov =Provider.of<PayrollAdjustmentRequest>(context);
+    return SingleChildScrollView(
+      child: Container(
         width: size.width * 0.9,
         child: Column(
           children: [
@@ -775,25 +879,30 @@ class PayrollAdjustment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      value: prov.payItem,
+                      hint: Text("Select Pay Item"),
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.payItem=value;
+                      },
                     ),
                   )),
             ),
-          
-           
-          Container(
+              Container(
               height: 65.0,
               child: ListTile(
                   leading: Text(
@@ -802,22 +911,30 @@ class PayrollAdjustment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      value: prov.startMonth,
+                      hint: Text("Select Start Month"),
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.startMonth=value;
+                      },
                     ),
                   )),
-            ),Container(
+            ),
+            Container(
               height: 65.0,
               child: ListTile(
                   leading: Text(
@@ -826,47 +943,30 @@ class PayrollAdjustment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      value: prov.endMonth,
+                      hint: Text("Select End Month"),
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.endMonth=value;
+                      },
                     ),
-                  ))),  Container(
-                height: 65.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    Text("Value ", style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.048,
-                    ),
-                    new Text("1"),
-                    new SizedBox(
-                      width: size.width * 0.41,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {},
-                    ),
-                  ],
-                )),
-           
-              Container(
+                  )),
+            ),
+            Container(
               height: 65.0,
               child: ListTile(
                   leading: Text(
@@ -875,22 +975,40 @@ class PayrollAdjustment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      value: prov.startYear,
+                      hint: Text("Select Start Year"),
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.startYear=value;
+                      },
                     ),
-                  ))),
-                    Container(
+                  )),
+            ),
+            Container(
+                height: 65.0,
+                child: ListTile(
+                    leading: Text(
+                      "Value:",
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                    title: Container(
+                      child: TextFormField()
+                    ))),
+           Container(
               height: 65.0,
               child: ListTile(
                   leading: Text(
@@ -899,21 +1017,30 @@ class PayrollAdjustment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
+                      value: prov.endyear,
+                      hint: Text("Select End year"),
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
                           child: Text("1"),
+                          value: "1",
                         ),
                         DropdownMenuItem(
                           child: Text("2"),
+                          value: "2",
                         ),
                         DropdownMenuItem(
                           child: Text("3"),
+                          value: "3",
                         )
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        prov.endyear=value;
+                      },
                     ),
-                  ))),  Container(
+                  )),
+            ),
+            Container(
               height: 65.0,
               child: ListTile(
                 leading: Text(
@@ -923,18 +1050,19 @@ class PayrollAdjustment extends StatelessWidget {
                 title: TextFormField(),
               ),
             ),
-          Container(
-            color: Theme.of(context).backgroundColor,
-            child: FlatButton(
-              onPressed: () {},
-              child: Text(
-                "Save Request",
-                style: Theme.of(context).textTheme.headline1,
+            Container(
+              color: Theme.of(context).backgroundColor,
+              child: FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Save Request",
+                  style: Theme.of(context).textTheme.headline1,
+                ),
               ),
             ),
-          ),  SizedBox(
-            height: 40.0,
-          ),
+            SizedBox(
+              height: 40.0,
+            ),
           ],
         ),
       ),

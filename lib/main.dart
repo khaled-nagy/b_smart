@@ -1,5 +1,6 @@
 import 'package:b_smart/src/screens/splash_screen.dart';
 import 'package:b_smart/src/statemanagment/Change_Language.dart';
+import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:b_smart/src/statemanagment/show_Attendance.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -44,6 +45,23 @@ class MyApp extends StatelessWidget {
          },),
             ChangeNotifierProvider<ShowAttendance>(create: (context) { 
               return ShowAttendance();
+         },),
+          ChangeNotifierProvider<VacationRequest>(create: (context) { 
+              return VacationRequest();
+         },),
+          ChangeNotifierProvider<AssignmentChangeRequest>(create: (context) { 
+              return AssignmentChangeRequest();
+         },), ChangeNotifierProvider<PermissionRequest>(create: (context) { 
+              return PermissionRequest();
+         },), ChangeNotifierProvider<VacationBalanceRequest>(create: (context) { 
+              return VacationBalanceRequest();
+         },), ChangeNotifierProvider<TermnisionRequest>(create: (context) { 
+              return TermnisionRequest();
+         },), ChangeNotifierProvider<LoanRequest>(create: (context) { 
+              return LoanRequest();
+         },),
+          ChangeNotifierProvider<PayrollAdjustmentRequest>(create: (context) { 
+              return PayrollAdjustmentRequest();
          },)
       ],
           child: MaterialApp(
@@ -88,7 +106,7 @@ class MyApp extends StatelessWidget {
             headline4: TextStyle(
                 fontSize: 14.0, color: Color(0xFF41AED9), fontFamily: 'Tajawal'),
             headline5: TextStyle(
-                fontSize: 14.0, color: Color(0xFF515C6F), fontFamily: 'Tajawal'),
+                fontSize: 16.0, color: Colors.grey[600],fontFamily: 'Tajawal'),
             headline6: TextStyle(
                 fontSize: 12.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
             bodyText1: TextStyle(
