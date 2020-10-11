@@ -42,7 +42,7 @@ class Drawerc extends StatelessWidget {
               },
               child: new ListTile(
                 leading: Icon(
-                  Icons.home,
+                  Icons.note_add_outlined,
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
@@ -58,7 +58,7 @@ class Drawerc extends StatelessWidget {
               },
               child: new ListTile(
                 leading: Icon(
-                  Icons.home,
+                  Icons.format_list_bulleted,
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
@@ -75,7 +75,7 @@ class Drawerc extends StatelessWidget {
            },
                           child: new ListTile(
                 leading: Icon(
-                  Icons.home,
+                  Icons.list_alt_outlined,
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
@@ -84,12 +84,12 @@ class Drawerc extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(),
+            Divider(), 
             new ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Theme.of(context).backgroundColor,
-              ),
+              leading:  Container(
+                height: 30.0,
+                width: 30.0,
+                child: Image.asset("assets/imgs/attendance.png",color:Theme.of(context).backgroundColor ,)),
               title: Text(
                 "My Attendance",
                 style: Theme.of(context).textTheme.headline2,

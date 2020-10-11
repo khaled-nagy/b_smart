@@ -1,11 +1,11 @@
 import 'package:b_smart/src/screens/splash_screen.dart';
+import 'package:b_smart/src/statemanagment/Change_Language.dart';
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:easy_localization/easy_localization.dart';
  import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:device_preview/device_preview.dart';
-void main() {
+ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // PushNotificationService().initialise();
   runApp( 
@@ -37,6 +37,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SelectRequest>(create: (context) { 
               return SelectRequest();
+         },),
+         ChangeNotifierProvider<ChangeLanguage>(create: (context) { 
+              return ChangeLanguage();
          },)
       ],
           child: MaterialApp(
