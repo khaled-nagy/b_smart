@@ -1,6 +1,9 @@
 import 'package:b_smart/ConstantVarables.dart';
+import 'package:b_smart/src/controllers/UserController.dart';
 import 'package:b_smart/src/statemanagment/Requests_type.dart';
+import 'package:b_smart/src/widgets/TextFormFieldW%20copy.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
@@ -13,11 +16,15 @@ Future<bool> pickerCalenderStart(BuildContext context, int id) async {
       firstDate: picker.NepaliDateTime(2000),
       lastDate: picker.NepaliDateTime(2090));
   print(_selectedDateTime.toString().substring(0, 10));
-  ConstantVarable.vacationStartCalender =
-      _selectedDateTime.toString().substring(0, 10);
+  ConstantVarable.vacationStartDay = _selectedDateTime.day;
+  ConstantVarable.vacationStartMonth = _selectedDateTime.month;
+  ConstantVarable.vacationStartYear = _selectedDateTime.year;
+
   if (_selectedDateTime == null) {
     return false;
   } else {
+    ConstantVarable.vacationStartCalender =
+        _selectedDateTime.toString().substring(0, 10);
     return true;
   }
 }
@@ -29,13 +36,32 @@ Future<bool> pickerCalenderEnd(BuildContext context, int id) async {
       initialDate: picker.NepaliDateTime.now(),
       firstDate: picker.NepaliDateTime(2000),
       lastDate: picker.NepaliDateTime(2090));
+  ConstantVarable.vacationEndDay = _selectedDateTime.day;
+  ConstantVarable.vacationEndMonth = _selectedDateTime.month;
+  ConstantVarable.vacationEndYear = _selectedDateTime.year;
   print(_selectedDateTime.toString().substring(0, 10));
-  ConstantVarable.vacationEndCalender =
-      _selectedDateTime.toString().substring(0, 10);
+
   if (_selectedDateTime == null) {
     return false;
   } else {
-    return true;
+    if (ConstantVarable.vacationEndDay > ConstantVarable.vacationStartDay &&
+        ConstantVarable.vacationEndMonth > ConstantVarable.vacationStartMonth &&
+        ConstantVarable.vacationEndYear > ConstantVarable.vacationStartYear) {
+      ConstantVarable.vacationEndCalender =
+          _selectedDateTime.toString().substring(0, 10);
+      return true;
+    } else {
+      Fluttertoast.showToast(
+          msg: "Please choose a date after the start date",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      ConstantVarable.vacationEndCalender = "";
+      return false;
+    }
   }
 }
 
@@ -202,7 +228,12 @@ class _VacationState extends State<Vacation> {
   }
 }
 
-class Permission extends StatelessWidget {
+class Permission extends StatefulWidget {
+  @override
+  _PermissionState createState() => _PermissionState();
+}
+
+class _PermissionState extends State<Permission> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -213,93 +244,104 @@ class Permission extends StatelessWidget {
         width: size.width * 0.9,
         child: Column(
           children: [
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "Permission Type ID :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  title: Container(
-                    child: DropdownButton(
-                      hint: Text("Select Permision ID"),
-                      value: prov.permisionTypeID,
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.permisionTypeID = value;
-                      },
-                    ),
-                  )),
-            ),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "Permission Date",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  title: Text("10/8/2020"),
-                  trailing: InkWell(
-                    onTap: (){},
-                    child: Icon(Icons.calendar_today_rounded))),
-            ),
-            Container(
-                height: 80.0,
-                child: Container(
-                  width: size.width,
-                  child: new Row(
-                    children: [
-                      new SizedBox(
-                        width: size.width * 0.03,
+            Row(
+              children: [
+                Text(
+                  "Permission Type ID :",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                  width: size.width / 2.3,
+                  child: DropdownButton(
+                    hint: Text("Select Permision ID"),
+                    value: prov.permisionTypeID,
+                    isExpanded: true,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("1"),
+                        value: "1",
                       ),
-                      Text("Duration ",
-                          style: Theme.of(context).textTheme.headline2),
-                      new SizedBox(
-                        width: size.width * 0.040,
+                      DropdownMenuItem(
+                        child: Text("2"),
+                        value: "2",
                       ),
-                      new Text(prov.durationCounter.toString()),
-                      new SizedBox(
-                        width: size.width * 0.2,
-                      ),
-                      new IconButton(
-                        icon: Icon(Icons.arrow_drop_down),
-                        onPressed: () {
-                          prov.durationdicreasent();
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.arrow_drop_up),
-                        onPressed: () {
-                          prov.durationIncaresment();
-                        },
-                      ),
-                      new Text("Minute")
+                      DropdownMenuItem(
+                        child: Text("3"),
+                        value: "3",
+                      )
                     ],
+                    onChanged: (value) {
+                      prov.permisionTypeID = value;
+                    },
                   ),
-                )),
-            Container(
-                height: 80.0,
-                child: ListTile(
-                  leading: Text(
-                    "Start Time",
-                    style: Theme.of(context).textTheme.headline2,
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Permisson Date",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Text(ConstantVarable.vacationEndCalender == null
+                    ? "0000-00-00"
+                    : ConstantVarable.vacationEndCalender),
+                IconButton(
+                    icon: Icon(Icons.calendar_today_rounded),
+                    onPressed: () {
+                      pickerCalenderEnd(context, 1).then((value) {
+                        if (value == true) {
+                          setState(() {});
+                        }
+                      });
+                    })
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Duration ", style: Theme.of(context).textTheme.headline2),
+                SizedBox(
+                  width: size.width * 0.040,
+                ),
+                Text(prov.durationCounter.toString()),
+                IconButton(
+                  icon: Icon(Icons.arrow_drop_down),
+                  onPressed: () {
+                    prov.durationdicreasent();
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_drop_up),
+                  onPressed: () {
+                    prov.durationIncaresment();
+                  },
+                ),
+                Text("Minute")
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "Start Time",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                  width: size.width / 2,
+                  child: TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.permissionStartDateController,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "00 : 00",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
                   ),
-                  title: Text("00.00"),
-                )),
+                ),
+              ],
+            ),
             Container(
                 height: 80.0,
                 child: ListTile(

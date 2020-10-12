@@ -4,31 +4,29 @@ import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:b_smart/src/statemanagment/show_Attendance.dart';
 import 'package:easy_localization/easy_localization.dart';
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
- void main() {
+
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // PushNotificationService().initialise();
-  runApp( 
-       EasyLocalization(
-      child: MyApp(),
-      supportedLocales: [Locale('en'), Locale('ar')],
-      path: "assets/langs",
-      startLocale: Locale('en'),
-      //  fallbackLocale: Locale('ar'),
-      saveLocale: true,
-      // useOnlyLangCode: true,
-      // optional assetLoader default used is RootBundleAssetLoader which uses flutter's assetloader
-      // assetLoader: RootBundleAssetLoader()
-      // assetLoader: NetworkAssetLoader()
-      // assetLoader: TestsAssetLoader()
-      // assetLoader: FileAssetLoader()
-      // assetLoader: StringAssetLoader()
-      // preloaderColor: Colors.red,
-    ));
-     
-  
+  runApp(EasyLocalization(
+    child: MyApp(),
+    supportedLocales: [Locale('en'), Locale('ar')],
+    path: "assets/langs",
+    startLocale: Locale('en'),
+    //  fallbackLocale: Locale('ar'),
+    saveLocale: true,
+    // useOnlyLangCode: true,
+    // optional assetLoader default used is RootBundleAssetLoader which uses flutter's assetloader
+    // assetLoader: RootBundleAssetLoader()
+    // assetLoader: NetworkAssetLoader()
+    // assetLoader: TestsAssetLoader()
+    // assetLoader: FileAssetLoader()
+    // assetLoader: StringAssetLoader()
+    // preloaderColor: Colors.red,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,34 +35,58 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SelectRequest>(create: (context) { 
-              return SelectRequest();
-         },),
-         ChangeNotifierProvider<ChangeLanguage>(create: (context) { 
-              return ChangeLanguage();
-         },),
-            ChangeNotifierProvider<ShowAttendance>(create: (context) { 
-              return ShowAttendance();
-         },),
-          ChangeNotifierProvider<VacationRequest>(create: (context) { 
-              return VacationRequest();
-         },),
-          ChangeNotifierProvider<AssignmentChangeRequest>(create: (context) { 
-              return AssignmentChangeRequest();
-         },), ChangeNotifierProvider<PermissionRequest>(create: (context) { 
-              return PermissionRequest();
-         },), ChangeNotifierProvider<VacationBalanceRequest>(create: (context) { 
-              return VacationBalanceRequest();
-         },), ChangeNotifierProvider<TermnisionRequest>(create: (context) { 
-              return TermnisionRequest();
-         },), ChangeNotifierProvider<LoanRequest>(create: (context) { 
-              return LoanRequest();
-         },),
-          ChangeNotifierProvider<PayrollAdjustmentRequest>(create: (context) { 
-              return PayrollAdjustmentRequest();
-         },)
+        ChangeNotifierProvider<SelectRequest>(
+          create: (context) {
+            return SelectRequest();
+          },
+        ),
+        ChangeNotifierProvider<ChangeLanguage>(
+          create: (context) {
+            return ChangeLanguage();
+          },
+        ),
+        ChangeNotifierProvider<ShowAttendance>(
+          create: (context) {
+            return ShowAttendance();
+          },
+        ),
+        ChangeNotifierProvider<VacationRequest>(
+          create: (context) {
+            return VacationRequest();
+          },
+        ),
+        ChangeNotifierProvider<AssignmentChangeRequest>(
+          create: (context) {
+            return AssignmentChangeRequest();
+          },
+        ),
+        ChangeNotifierProvider<PermissionRequest>(
+          create: (context) {
+            return PermissionRequest();
+          },
+        ),
+        ChangeNotifierProvider<VacationBalanceRequest>(
+          create: (context) {
+            return VacationBalanceRequest();
+          },
+        ),
+        ChangeNotifierProvider<TermnisionRequest>(
+          create: (context) {
+            return TermnisionRequest();
+          },
+        ),
+        ChangeNotifierProvider<LoanRequest>(
+          create: (context) {
+            return LoanRequest();
+          },
+        ),
+        ChangeNotifierProvider<PayrollAdjustmentRequest>(
+          create: (context) {
+            return PayrollAdjustmentRequest();
+          },
+        )
       ],
-          child: MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'B Smart',
         localizationsDelegates: [
@@ -102,13 +124,19 @@ class MyApp extends StatelessWidget {
                 color: Color(0xFF515C6F),
                 fontFamily: 'Tajawal'),
             headline3: TextStyle(
-                fontSize: 14.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
+                fontSize: 14.0,
+                color: Color(0xFFFFFFFF),
+                fontFamily: 'Tajawal'),
             headline4: TextStyle(
-                fontSize: 14.0, color: Color(0xFF41AED9), fontFamily: 'Tajawal'),
+                fontSize: 14.0,
+                color: Color(0xFF41AED9),
+                fontFamily: 'Tajawal'),
             headline5: TextStyle(
-                fontSize: 16.0, color: Colors.grey[600],fontFamily: 'Tajawal'),
+                fontSize: 16.0, color: Colors.grey[600], fontFamily: 'Tajawal'),
             headline6: TextStyle(
-                fontSize: 12.0, color: Color(0xFFFFFFFF), fontFamily: 'Tajawal'),
+                fontSize: 12.0,
+                color: Color(0xFFFFFFFF),
+                fontFamily: 'Tajawal'),
             bodyText1: TextStyle(
                 fontSize: 18.0,
                 color: Colors.black,

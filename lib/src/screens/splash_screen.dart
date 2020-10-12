@@ -44,23 +44,23 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: size.height * 0.1,
               ),
               SpinKitWave(
-                itemCount: 6,
+                itemCount: 20,
                 type: SpinKitWaveType.center,
                 duration: Duration(seconds: 3),
-                size: 50.0,
+                size: 100.0,
                 itemBuilder: (context, index) {
                   return DecoratedBox(
                       decoration: BoxDecoration(
                     color: index.isEven
                         ? Theme.of(context).backgroundColor
-                        : Colors.white,
+                        : Colors.black,
                   ));
                 },
               )
             ],
           ),
         ),
-        backgroundColor: Theme.of(context).backgroundColor.withOpacity(0.4));
+        backgroundColor: Colors.white);
 
     //   image: AssetImage("assets/imgs/logo.png"),
   }

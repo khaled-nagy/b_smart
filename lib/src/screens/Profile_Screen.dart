@@ -1,7 +1,5 @@
-import 'package:b_smart/src/controllers/Change_passController.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
 import 'package:b_smart/src/controllers/Profile_controller.dart';
 
 class MyProfile extends StatefulWidget {
@@ -58,53 +56,70 @@ class MyProfileView extends StateMVC<MyProfile> {
               )),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 250),
-              child: Center(
-                  child: new Container(
-                child:Container(
-                  height: 60.0,width: size.width*0.85,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)
-                    ),
-                    child:Center(child: Text("Sales Manager,  "+"Advertising department",style:Theme.of(context).textTheme.headline2 ,)) ,))
-              )),
-            ),
+                padding: const EdgeInsets.only(top: 245),
+                child: Center(
+                  child: Container(
+                      width: size.width / 1.2,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Sales Manager",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                              Text(
+                                "Advertising department",
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                )),
             Padding(
-              
               padding: const EdgeInsets.only(top: 340),
-              child: Card(child: ListTile(
-                leading: Icon(Icons.code),
-                title: Text("Code:"),
-                subtitle: Text("#0221020210"),
-              ),),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.code),
+                  title: Text("Code:"),
+                  subtitle: Text("#0221020210"),
+                ),
+              ),
             ),
             Padding(
-              
               padding: const EdgeInsets.only(top: 435),
-              child: Card(child: ListTile(
-                leading: Icon(Icons.data_usage),
-                title: Text("Hire Data:"),
-                subtitle: Text("Test"),
-              ),),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.data_usage),
+                  title: Text("Hire Data:"),
+                  subtitle: Text("Test"),
+                ),
+              ),
             ),
             Padding(
-              
               padding: const EdgeInsets.only(top: 535),
-              child: Card(child: ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text("Location:"),
-                subtitle: Text("6th,October,Giza,Egypt"),
-              ),),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.location_on),
+                  title: Text("Location:"),
+                  subtitle: Text("6th,October,Giza,Egypt"),
+                ),
+              ),
             ),
-              Padding(
-              
+            Padding(
               padding: const EdgeInsets.only(top: 635),
-              child: Card(child: ListTile(
-                leading: Icon(Icons.dashboard_customize),
-                title: Text("Documents:"),
-                subtitle: Text("Test"),
-              ),),
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.dashboard_customize),
+                  title: Text("Documents:"),
+                  subtitle: Text("Test"),
+                ),
+              ),
             )
           ],
         ),

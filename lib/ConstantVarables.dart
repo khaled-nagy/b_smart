@@ -106,15 +106,22 @@ class ConstantVarable {
       TextEditingController();
   ////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
-  static final TextEditingController fullNameController =
+  static final TextEditingController permissionStartDateController =
       TextEditingController();
-  static final TextEditingController ibanBumberController =
+  static final TextEditingController permissionEndDateController =
       TextEditingController();
   static final TextEditingController bankNameController =
       TextEditingController();
   static final TextEditingController amountController = TextEditingController();
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
+  ///
+  static int vacationStartDay;
+  static int vacationStartMonth;
+  static int vacationStartYear;
+  static int vacationEndDay;
+  static int vacationEndMonth;
+  static int vacationEndYear;
   static String vacationStartCalender;
   static String vacationEndCalender;
 }

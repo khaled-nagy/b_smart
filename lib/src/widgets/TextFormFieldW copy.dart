@@ -1,3 +1,4 @@
+import 'package:b_smart/ConstantVarables.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -11,6 +12,7 @@ class TextFormFieldW extends StatefulWidget {
   bool searchOrKnow;
   final bool addOrNo;
   final bool aboutOrNo;
+  final bool timeOrNo;
 
   TextFormFieldW(
       {this.textInputType,
@@ -21,7 +23,8 @@ class TextFormFieldW extends StatefulWidget {
       this.image,
       this.searchOrKnow,
       this.addOrNo,
-      this.aboutOrNo});
+      this.aboutOrNo,
+      this.timeOrNo});
   @override
   _TextFormFieldWState createState() => _TextFormFieldWState();
 }
@@ -60,6 +63,14 @@ class _TextFormFieldWState extends State<TextFormFieldW> {
                 controller: widget.controller,
                 validator: widget.validator,
                 obscureText: widget.obSecureText,
+                onChanged: (value) {
+                  if (widget.timeOrNo == true) {
+                    if (value.length == 2) {
+                      // print(value.length);
+                      // ConstantVarable.permissionStartDateController.text = ;
+                    }
+                  }
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   contentPadding:
