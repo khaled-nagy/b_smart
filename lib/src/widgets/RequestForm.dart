@@ -253,7 +253,9 @@ class Permission extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Text("10/8/2020"),
-                  trailing: Icon(Icons.calendar_today_rounded)),
+                  trailing: InkWell(
+                    onTap: (){},
+                    child: Icon(Icons.calendar_today_rounded))),
             ),
             Container(
                 height: 80.0,
