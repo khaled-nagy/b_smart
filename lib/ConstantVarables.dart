@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConstantVarable {
-    
-
   static String baseUrl = "https://qsimh.com";
   static String apiImg = "https://www.q8pulse.app/public/";
   static String apiMap = "AIzaSyCZCgOpXKbNdhTHAe4ANYKteYQSIYZYlGA";
@@ -24,6 +22,10 @@ class ConstantVarable {
   static final GlobalKey<ScaffoldState> loginScaffoldkey =
       GlobalKey<ScaffoldState>();
   static bool loginAutoValid = false;
+  static final GlobalKey<FormState> passFormKey = GlobalKey<FormState>();
+  static final GlobalKey<ScaffoldState> passScaffoldKey =
+      GlobalKey<ScaffoldState>();
+  static bool passAutoValidate = false;
 
   static final GlobalKey<FormState> addPageFormKey = GlobalKey<FormState>();
   static final GlobalKey<ScaffoldState> addPageScaffoldkey =
@@ -111,6 +113,8 @@ class ConstantVarable {
   static final TextEditingController bankNameController =
       TextEditingController();
   static final TextEditingController amountController = TextEditingController();
-
-    
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+  static String vacationStartCalender;
+  static String vacationEndCalender;
 }

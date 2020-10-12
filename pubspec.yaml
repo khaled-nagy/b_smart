@@ -23,10 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_verification_code_input:
+    git:
+      url: git://github.com/tiny-express/flutter_verification_code_input
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  nepali_date_picker: ^4.2.0+1
   badges: ^1.1.3
   cupertino_icons: ^0.1.3
   easy_localization: ^2.3.2
