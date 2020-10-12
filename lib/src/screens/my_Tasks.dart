@@ -1,4 +1,5 @@
 import 'package:b_smart/src/controllers/MyTasksController.dart';
+import 'package:b_smart/src/screens/MyTasksDetails_Screen.dart';
 import 'package:b_smart/src/widgets/Appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -11,137 +12,76 @@ class MyTasks extends StatefulWidget {
 
 class MyTasksView extends StateMVC<MyTasks> {
   MyTasksView() : super(MyTasksController()) {
-    _myrequestcontroller = MyTasksController.con;
+    _mytasksdetaailsocntroller = MyTasksController.con;
   }
-  MyTasksController _myrequestcontroller;
+  MyTasksController _mytasksdetaailsocntroller;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: appbar(context: context),
-
-            body: new ListView(
-              children: [
-                new Card()
-              ],
+      body: ListView(
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                return MyTaskesDetails();
+              }));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Container(
+                    height: 140.0,
+                    width: size.width * 0.8,
+                    child: ListTile(
+                      
+                      title: Text(
+                        "Vacation Request",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      subtitle: Column(
+                        children: [
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text( "#30",
+                              style:Theme.of(context).textTheme.headline4),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text("May.10.2020" + " (5:00 PM)",style: Theme.of(context).textTheme.headline4,)
+                        ],
+                      ),
+                      trailing: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Theme.of(context).backgroundColor,
+                            ),
+                            child: Container(
+                                height: 38.0,
+                                width: size.width * 0.2,
+                                child: Center(
+                                    child: Text(
+                                  "New",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ))),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
             ),
-      // body: SingleChildScrollView(
-      //   child: Column(
-      //     children: [
-      //       Padding(
-      //         padding: const EdgeInsets.all(10.0),
-      //         child: new Text(
-      //           "My Tasks",
-      //           style: Theme.of(context).textTheme.headline2,
-      //         ),
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.all(11.0),
-      //         child: Container(
-      //           child: new Text(
-      //             "Request Code : 20",
-      //             style: Theme.of(context).textTheme.bodyText1,
-      //           ),
-      //           alignment: Alignment.topLeft,
-      //         ),
-      //       ),
-      //       Divider(
-      //         thickness: 1.2,
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.all(11.0),
-      //         child: Container(
-      //           child: new Text("Request Type : ahmed gamal mohamed",
-      //               style: Theme.of(context).textTheme.bodyText1),
-      //           alignment: Alignment.topLeft,
-      //         ),
-      //       ),
-      //       Divider(
-      //         thickness: 1.2,
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.all(11.0),
-      //         child: Container(
-      //           child: new Text("Request Date : 1.20/10/1.201.20",
-      //               style: Theme.of(context).textTheme.bodyText1),
-      //           alignment: Alignment.topLeft,
-      //         ),
-      //       ),
-      //       Divider(
-      //         thickness: 1.2,
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.all(11.0),
-      //         child: Container(
-      //           child: new Text("Empolyee : Khaled",
-      //               style: Theme.of(context).textTheme.bodyText1),
-      //           alignment: Alignment.topLeft,
-      //         ),
-      //       ),
-      //       Divider(
-      //         thickness: 1.2,
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.all(11.0),
-      //         child: Container(
-      //           child: new Text("Status : New",
-      //               style: Theme.of(context).textTheme.bodyText1),
-      //           alignment: Alignment.topLeft,
-      //         ),
-      //       ),
-      //       Divider(
-      //         thickness: 1.2,
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.all(11.0),
-      //         child: Container(
-      //           child: new Text("Notes : Fine",
-      //               style: Theme.of(context).textTheme.bodyText1),
-      //           alignment: Alignment.topLeft,
-      //         ),
-      //       ),
-      //       Divider(
-      //         thickness: 1.2,
-      //       ),
-      //       new SizedBox(
-      //         height: 20,
-      //       ),
-
-      //       new Row(
-      //         crossAxisAlignment: CrossAxisAlignment.center,
-      //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //         children: [
-      //           ButtonW(
-      //             borderradius: BorderRadius.circular(10),
-      //             width: size.width * 0.3,
-      //             height: 40,
-      //             color: Theme.of(context).backgroundColor,
-      //             text: "View",
-      //             textstyle: Theme.of(context).textTheme.headline1,
-      //           ),
-      //           ButtonW(
-      //             borderradius: BorderRadius.circular(10),
-      //             width: size.width * 0.3,
-      //             height: 40,
-      //             color: Colors.green,
-      //             text: "Approved",
-      //             textstyle: Theme.of(context).textTheme.headline1,
-      //           ),
-      //           ButtonW(
-      //             borderradius: BorderRadius.circular(10),
-      //             width: size.width * 0.3,
-      //             height: 40,
-      //             color: Colors.red,
-      //             text: "Reject",
-      //             textstyle: Theme.of(context).textTheme.headline1,
-      //           ),
-      //         ],
-      //       ),
-
-           
-      //     ],
-      //   ),
-      // ),
+          ),
+        ],
+      ),
     );
   }
 }
