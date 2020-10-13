@@ -103,10 +103,10 @@ class VerificationCodeView extends StateMVC<VerificationCodeScreen> {
                   height: MediaQuery.of(context).size.height / 22,
                 ),
 
-                FlatButton(
-                  child: Text(widget.verificationCode),
-                  onPressed: () {},
-                ),
+                // FlatButton(
+                //   child: Text(widget.verificationCode),
+                //   onPressed: () {},
+                // ),
 
                 Card(
                   elevation: 3,
@@ -140,7 +140,7 @@ class VerificationCodeView extends StateMVC<VerificationCodeScreen> {
                                           borderRadius:
                                               BorderRadius.circular(12)),
                                       onCompleted: (String value) {
-                                        if (value.toString() !=
+                                        if (value.toString() ==
                                             widget.verificationCode
                                                 .toString()) {
                                           print(
@@ -150,7 +150,7 @@ class VerificationCodeView extends StateMVC<VerificationCodeScreen> {
                                         } else {
                                           SharedWidget.alertDialog(
                                               context, "كود تاكيد صحيح ...");
-                                          if (widget.forgot_or_register !=
+                                          if (widget.forgot_or_register ==
                                               "forget") {
                                             _userController
                                                 .sendCodeActivation(
@@ -278,28 +278,28 @@ class VerificationCodeView extends StateMVC<VerificationCodeScreen> {
                                   ),
                                 ),
                                 onTap: () {
-                                  if (counter == 0) {
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                    _userController
-                                        .sendCodeActivation(
-                                            widget.email, ConstantVarable.otp)
-                                        .then((done) {
-                                      if (done == true) {
-                                        setState(() {
-                                          isLoading = false;
+                                  // if (counter == 0) {
+                                  //   setState(() {
+                                  //     isLoading = false;
+                                  //   });
+                                  //   _userController
+                                  //       .sendCodeActivation(
+                                  //           widget.email, ConstantVarable.otp)
+                                  //       .then((done) {
+                                  //     if (done == true) {
+                                  //       setState(() {
+                                  //         isLoading = false;
 
-                                          counter = 30;
-                                        });
-                                        startTimer();
-                                      } else {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                      }
-                                    });
-                                  }
+                                  //         counter = 30;
+                                  //       });
+                                  //       startTimer();
+                                  //     } else {
+                                  //       setState(() {
+                                  //         isLoading = false;
+                                  //       });
+                                  //     }
+                                  //   });
+                                  // }
                                 },
                               ),
                       ],

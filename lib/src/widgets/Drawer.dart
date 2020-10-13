@@ -55,7 +55,8 @@ class Drawerc extends StatelessWidget {
             Divider(),
             InkWell(
               onTap: () {
-                Navigator.push(context, Scaletransition(screen: (MyRequest())));
+                Navigator.push(
+                    context, Scaletransition(screen: (MyRequestScreen())));
               },
               child: new ListTile(
                 leading: Icon(

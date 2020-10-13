@@ -1,5 +1,7 @@
 import 'package:b_smart/src/screens/ChangePass_Screen.dart';
 import 'package:b_smart/src/screens/Profile_Screen.dart';
+import 'package:b_smart/src/screens/login_screen.dart';
+import 'package:b_smart/src/screens/new_password_screen.dart';
 import 'package:b_smart/src/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +44,7 @@ Widget appbar({BuildContext context}) {
               DropdownMenuItem(
                 child: InkWell(
                     onTap: () {
+                      Navigator.pop(context);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return MyProfile();
@@ -53,16 +56,27 @@ Widget appbar({BuildContext context}) {
               DropdownMenuItem(
                 child: InkWell(
                     onTap: () {
+                      Navigator.pop(context);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return ChangePassword();
+                        return NewPasswordScreen(
+                          modifyOrNew: "modify",
+                        );
                       }));
                     },
                     child: Text("Change Password")),
                 value: "ChangePass",
               ),
               DropdownMenuItem(
-                child: InkWell(child: Text("Log Out")),
+                child: InkWell(
+                  child: Text("Log Out"),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        (Route<dynamic> route) => false);
+                  },
+                ),
                 value: "LogOut",
               ),
             ],

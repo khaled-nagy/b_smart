@@ -1,4 +1,3 @@
-import 'package:b_smart/src/controllers/Change_passController.dart';
 import 'package:b_smart/src/controllers/my_attendanceController.dart';
 import 'package:b_smart/src/statemanagment/show_Attendance.dart';
 import 'package:b_smart/src/widgets/Appbar.dart';
@@ -8,7 +7,6 @@ import 'package:b_smart/src/widgets/DropDown_BtnW.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import 'package:b_smart/src/controllers/Profile_controller.dart';
 import 'package:provider/provider.dart';
 
 class MyAttendance extends StatefulWidget {
@@ -26,6 +24,8 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var prov = Provider.of<ShowAttendance>(context);
+    String year = " Select Year ";
+    String month = " Select Month ";
 
     return Scaffold(
       appBar: appbar(context: context),
@@ -71,7 +71,7 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                 children: [
                   Container(
                     child: Text(
-                      ". Display Attendance ?",
+                      "Display Attendance ?",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     alignment: Alignment.topLeft,
@@ -89,51 +89,56 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                       children: [
                         Card(
                           child: DropDownW(
-                            width: size.width*0.4,
+                            width: size.width * 0.4,
                             isexpanded: true,
-                            onchanged: (value) {},
+                            onchanged: (value) {
+                              year = value;
+                            },
                             hint: Text(
-                              " Select Year ",
-                              style: Theme.of(context).textTheme.bodyText1,
+                              year,
+                              style: Theme.of(context).textTheme.headline5,
                             ),
                             items: [
                               DropdownMenuItem(
-                                child: Text("test"),
-                                value: "test",
+                                child: Text("2019"),
+                                value: "2019",
                               ),
                               DropdownMenuItem(
-                                child: Text("test"),
-                                value: "test",
+                                child: Text("2020"),
+                                value: "2020",
                               ),
                               DropdownMenuItem(
-                                child: Text("test"),
-                                value: "test",
+                                child: Text("2021"),
+                                value: "2021",
                               )
                             ],
                           ),
                         ),
                         Card(
-                                                  child: DropDownW(
-
-                             width: size.width*0.4,
+                          child: DropDownW(
+                            width: size.width * 0.4,
                             isexpanded: true,
-                            onchanged: (value) {},
+                            onchanged: (value) {
+                              print(value);
+                              month = value;
+                              print(value);
+                            },
                             hint: Text(
-                              " Select Month ",
-                              style: Theme.of(context).textTheme.bodyText1,
+                              month,
+                              style: Theme.of(context).textTheme.headline5,
                             ),
                             items: [
                               DropdownMenuItem(
-                                child: Text("test"),
-                                value: "test",
+                                child: Text("January"),
+                                value: "January",
                               ),
                               DropdownMenuItem(
-                                child: Text("test"),
-                                value: "test",
+                                child: Text("February"),
+                                value: "February",
                               ),
                               DropdownMenuItem(
-                                child: Text("test"),
-                                value: "test",
+                                child: Text("March"),
+                                value: "March",
                               )
                             ],
                           ),

@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-class Scaletransition  extends PageRouteBuilder {
+class Scaletransition extends PageRouteBuilder {
   final Widget screen;
   Scaletransition({this.screen})
       : super(

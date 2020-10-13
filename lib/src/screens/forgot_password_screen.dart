@@ -9,7 +9,6 @@ import 'package:b_smart/src/widgets/TextFormFieldW%20copy.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:b_smart/src/widgets/TextFormFieldC.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   createState() => ForgotPasswordView();
@@ -23,7 +22,6 @@ class ForgotPasswordView extends StateMVC<ForgotPasswordScreen> {
   UserController _userController;
   bool isLoading = false;
 
-  String title = "_forgot_pass_title".tr();
   final GlobalKey<ScaffoldState> _scaffoldKeyHome =
       new GlobalKey<ScaffoldState>();
 
@@ -32,7 +30,9 @@ class ForgotPasswordView extends StateMVC<ForgotPasswordScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKeyHome,
-      appBar: appbar(context: context),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).backgroundColor,
+      ),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -104,12 +104,19 @@ class ForgotPasswordView extends StateMVC<ForgotPasswordScreen> {
                       isLoading == false
                           ? ButtonW(
                               onpress: () {
-                                // _loginController.loginButton(context);
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VerificationCodeScreen(
+                                              forgot_or_register: "forget",
+                                            )),
+                                    (Route<dynamic> route) => false);
                               },
                               height: size.height * 0.065,
                               width: size.width * 0.75,
                               color: Theme.of(context).accentIconTheme.color,
-                              text: "Log In",
+                              text: "Reset",
                               textstyle: Theme.of(context).textTheme.headline1,
                             )
                           : CircularProgressIndicator(

@@ -16,15 +16,28 @@ Future<bool> pickerCalenderStart(BuildContext context, int id) async {
       firstDate: picker.NepaliDateTime(2000),
       lastDate: picker.NepaliDateTime(2090));
   print(_selectedDateTime.toString().substring(0, 10));
-  ConstantVarable.vacationStartDay = _selectedDateTime.day;
-  ConstantVarable.vacationStartMonth = _selectedDateTime.month;
-  ConstantVarable.vacationStartYear = _selectedDateTime.year;
 
   if (_selectedDateTime == null) {
     return false;
   } else {
-    ConstantVarable.vacationStartCalender =
-        _selectedDateTime.toString().substring(0, 10);
+    switch (id) {
+      case 1:
+        {
+          ConstantVarable.vacationStartDay = _selectedDateTime.day;
+          ConstantVarable.vacationStartMonth = _selectedDateTime.month;
+          ConstantVarable.vacationStartYear = _selectedDateTime.year;
+          ConstantVarable.vacationStartCalender =
+              _selectedDateTime.toString().substring(0, 10);
+          break;
+        }
+      case 2:
+        {
+          ConstantVarable.permissionDate =
+              _selectedDateTime.toString().substring(0, 10);
+          break;
+        }
+    }
+
     return true;
   }
 }
@@ -240,9 +253,10 @@ class _PermissionState extends State<Permission> {
     final prov = Provider.of<PermissionRequest>(context);
     return SingleChildScrollView(
       child: Container(
-        height: 550,
+        height: size.height / 1.5,
         width: size.width * 0.9,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
               children: [
@@ -253,7 +267,7 @@ class _PermissionState extends State<Permission> {
                 Container(
                   width: size.width / 2.3,
                   child: DropdownButton(
-                    hint: Text("Select Permision ID"),
+                    hint: Text("Permision ID"),
                     value: prov.permisionTypeID,
                     isExpanded: true,
                     items: [
@@ -284,13 +298,13 @@ class _PermissionState extends State<Permission> {
                   "Permisson Date",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                Text(ConstantVarable.vacationEndCalender == null
+                Text(ConstantVarable.permissionDate == null
                     ? "0000-00-00"
-                    : ConstantVarable.vacationEndCalender),
+                    : ConstantVarable.permissionDate),
                 IconButton(
                     icon: Icon(Icons.calendar_today_rounded),
                     onPressed: () {
-                      pickerCalenderEnd(context, 1).then((value) {
+                      pickerCalenderStart(context, 2).then((value) {
                         if (value == true) {
                           setState(() {});
                         }
@@ -342,15 +356,27 @@ class _PermissionState extends State<Permission> {
                 ),
               ],
             ),
-            Container(
-                height: 80.0,
-                child: ListTile(
-                  leading: Text(
-                    "End Time",
-                    style: Theme.of(context).textTheme.headline2,
+            Row(
+              children: [
+                Text(
+                  "End Time",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                  width: size.width / 2,
+                  child: TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.permissionEndDateController,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "00 : 00",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
                   ),
-                  title: Text("00.00"),
-                )),
+                ),
+              ],
+            ),
             Container(
               height: 80.0,
               child: ListTile(

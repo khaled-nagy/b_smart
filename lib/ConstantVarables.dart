@@ -124,4 +124,5 @@ class ConstantVarable {
   static int vacationEndYear;
   static String vacationStartCalender;
   static String vacationEndCalender;
+  static String permissionDate;
 }

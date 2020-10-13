@@ -91,10 +91,10 @@ class LoginView extends StateMVC<LoginScreen> {
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      Scaletransition(screen: ForgotPasswordScreen()),
-                      (Route<dynamic> route) => false);
+                  Navigator.push(
+                    context,
+                    Scaletransition(screen: ForgotPasswordScreen()),
+                  );
                 },
               )
             ],
