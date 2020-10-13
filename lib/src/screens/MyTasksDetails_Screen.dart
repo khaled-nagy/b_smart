@@ -89,7 +89,7 @@ class MyTaskesDetailsView extends StateMVC<MyTaskesDetails> {
                       subtitle: Text("i want to take a vacation Request , Because i am tired"),
                     )),
               ),
-             
+                 
                 Card(
                 elevation: 2,
                 child: Padding(
