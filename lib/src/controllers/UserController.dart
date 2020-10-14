@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:b_smart/src/data/models/CityMenu.dart';
+import 'package:b_smart/src/data/models/MonthModel.dart';
 import 'package:b_smart/src/data/models/ContactResonModel.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:b_smart/ConstantVarables.dart';
@@ -35,10 +35,10 @@ class UserController extends ControllerMVC {
     ContactResonModel(id: "3", name: " مشكلة تتعلق بقسيمتى"),
     ContactResonModel(id: "4", name: "اخرى")
   ];
-  List<CityMenu> cityList = [
-    CityMenu(id: "1", name: "تبوك"),
-    CityMenu(id: "2", name: "الرياض"),
-    CityMenu(id: "3", name: "جدة"),
+  List<MonthModel> monthlist = [
+    MonthModel(id: "1", name: "تبوك"),
+    MonthModel(id: "2", name: "الرياض"),
+    MonthModel(id: "3", name: "جدة"),
   ];
 
   // Future<bool> signInWithEmailAndPassword(
@@ -203,7 +203,9 @@ class UserController extends ControllerMVC {
   Widget showErrorMsg() {
     return Text(
       errorMsg == ""
-          ? ConstantVarable.loginError == null ? "" : ConstantVarable.loginError
+          ? ConstantVarable.loginError == null
+              ? ""
+              : ConstantVarable.loginError
           : errorMsg,
       style: new TextStyle(
         color: Colors.red,

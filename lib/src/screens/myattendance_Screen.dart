@@ -1,4 +1,6 @@
 import 'package:b_smart/src/controllers/my_attendanceController.dart';
+import 'package:b_smart/src/data/models/MonthModel.dart';
+import 'package:b_smart/src/data/models/YearModel.dart';
 import 'package:b_smart/src/statemanagment/show_Attendance.dart';
 import 'package:b_smart/src/widgets/Appbar.dart';
 import 'package:b_smart/src/widgets/ButtonW.dart';
@@ -19,7 +21,10 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
     _myAttendanceController = MyAttendanceController.con;
   }
   MyAttendanceController _myAttendanceController;
-
+  String dropDownTitleMonth = "Select Month";
+  String dropDowntitleyear = "Select Year";
+  MonthModel selectedCity;
+  YearModel selectedYear;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -88,59 +93,107 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Card(
-                          child: DropDownW(
-                            width: size.width * 0.4,
-                            isexpanded: true,
-                            onchanged: (value) {
-                              year = value;
-                            },
-                            hint: Text(
-                              year,
-                              style: Theme.of(context).textTheme.headline5,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                // border: Border.all(color: Colors.grey[500]
+                                // ),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Row(
+                              children: <Widget>[
+                                DropdownButton<YearModel>(
+                                    hint: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: Text(
+                                        dropDowntitleyear,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline5,
+                                      ),
+                                    ),
+                                    underline: Container(),
+                                    value: selectedYear,
+                                    iconSize: 30,
+                                    icon: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 14),
+                                        child: Icon(Icons.arrow_drop_down)),
+                                    items: _myAttendanceController.yearList
+                                        .map((YearModel year) {
+                                      return DropdownMenuItem<YearModel>(
+                                          value: year,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8, right: 8),
+                                            child: Text(
+                                              year.name,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline,
+                                            ),
+                                          ));
+                                    }).toList(),
+                                    onChanged: (YearModel value) {
+                                      setState(() {
+                                        selectedYear = value;
+                                      });
+                                    })
+                              ],
                             ),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("2019"),
-                                value: "2019",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("2020"),
-                                value: "2020",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("2021"),
-                                value: "2021",
-                              )
-                            ],
                           ),
                         ),
                         Card(
-                          child: DropDownW(
-                            width: size.width * 0.4,
-                            isexpanded: true,
-                            onchanged: (value) {
-                              print(value);
-                              month = value;
-                              print(value);
-                            },
-                            hint: Text(
-                              month,
-                              style: Theme.of(context).textTheme.headline5,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                // border: Border.all(color: Colors.grey[500]
+                                // ),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Row(
+                              children: <Widget>[
+                                DropdownButton<MonthModel>(
+                                    hint: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: Text(
+                                        dropDownTitleMonth,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline5,
+                                      ),
+                                    ),
+                                    underline: Container(),
+                                    value: selectedCity,
+                                    iconSize: 30,
+                                    icon: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 14),
+                                        child: Icon(Icons.arrow_drop_down)),
+                                    items: _myAttendanceController.monthlist
+                                        .map((MonthModel month) {
+                                      return DropdownMenuItem<MonthModel>(
+                                          value: month,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8, right: 8),
+                                            child: Text(
+                                              month.name,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline,
+                                            ),
+                                          ));
+                                    }).toList(),
+                                    onChanged: (MonthModel value) {
+                                      setState(() {
+                                        selectedCity = value;
+                                      });
+                                    })
+                              ],
                             ),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("January"),
-                                value: "January",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("February"),
-                                value: "February",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("March"),
-                                value: "March",
-                              )
-                            ],
                           ),
                         ),
                       ],

@@ -240,7 +240,7 @@ class _VacationState extends State<Vacation> {
                     "Notes :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title:  TextFormFieldW(
+                  title: TextFormFieldW(
                     textInputType: TextInputType.text,
                     controller: ConstantVarable.vacationNotesController,
                     validator: (val) =>
@@ -455,7 +455,7 @@ class Assignment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
-                      hint: Text("Select New Location"),
+                      hint: Text("Location"),
                       value: prov.newLocation,
                       isExpanded: true,
                       items: [
@@ -487,7 +487,7 @@ class Assignment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
-                      hint: Text("Select New Department"),
+                      hint: Text("Department"),
                       isExpanded: true,
                       value: prov.newDepartment,
                       items: [
@@ -519,7 +519,7 @@ class Assignment extends StatelessWidget {
                   ),
                   title: Container(
                     child: DropdownButton(
-                      hint: Text("Select New Postion"),
+                      hint: Text("Postion"),
                       isExpanded: true,
                       value: prov.newPostion,
                       items: [
@@ -574,7 +574,7 @@ class VacationBalance extends StatelessWidget {
                     ),
                     title: Container(
                       child: DropdownButton(
-                        hint: Text("Select Vacation ID"),
+                        hint: Text("Vacation ID"),
                         isExpanded: true,
                         value: prov.vacationBalanceID,
                         items: [
@@ -639,7 +639,8 @@ class VacationBalance extends StatelessWidget {
                     title: Container(
                       child: TextFormFieldW(
                         textInputType: TextInputType.text,
-                        controller: ConstantVarable.vacationBalanceadjustValueVontroller,
+                        controller: ConstantVarable
+                            .vacationBalanceadjustValueVontroller,
                         validator: (val) =>
                             UserController().validateAnyFeild(context, val),
                         hintText: "00",
@@ -658,7 +659,8 @@ class VacationBalance extends StatelessWidget {
                   ),
                   title: TextFormFieldW(
                     textInputType: TextInputType.text,
-                    controller: ConstantVarable.vacationBalanceadjustNotesVontroller,
+                    controller:
+                        ConstantVarable.vacationBalanceadjustNotesVontroller,
                     validator: (val) =>
                         UserController().validateAnyFeild(context, val),
                     hintText: "You Can Add Notes Here",
@@ -686,84 +688,91 @@ class _TerminationState extends State<Termination> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final prov = Provider.of<TermnisionRequest>(context);
-    return SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Container(
-        height: 470,
-        width: size.width * 0.9,
+        height: size.height / 1.8,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "Termination Type :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  title: Container(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      value: prov.terminationType,
-                      hint: Text("Select Termination Type"),
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.terminationType = value;
-                      },
-                    ),
-                  )),
-            ),
-            Container(
-                height: 80.0,
-                child: ListTile(
-                  leading: Text(
-                    "Last Working day",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  title:  Text(ConstantVarable.terminasionLastWorkinDayCalender == null
-                      ? "0000-00-00"
-                      : ConstantVarable.terminasionLastWorkinDayCalender),
-                  trailing: IconButton(
-                    icon: Icon(Icons.calendar_today_rounded),
-                    onPressed: () {
-                      {
-                        setState(() {
-                          pickerCalenderStart(context, 1).then((value) {
-                            if (value == true) {
-                              setState(() {});
-                            }
-                          });
-                        });
-
-                        // _selectedDateTime = await picker.showMaterialDatePicker(
-                        //     context: context,
-                        //     initialDate: picker.NepaliDateTime.now(),
-                        //     firstDate: picker.NepaliDateTime(2000),
-                        //     lastDate: picker.NepaliDateTime(2090));
-                        // print(_selectedDateTime);
-                      }
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Termination Type ",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                  width: size.width / 2,
+                  child: DropdownButton(
+                    isExpanded: true,
+                    value: prov.terminationType,
+                    hint: Text("Termination Type"),
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("1"),
+                        value: "1",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("2"),
+                        value: "2",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("3"),
+                        value: "3",
+                      )
+                    ],
+                    onChanged: (value) {
+                      prov.terminationType = value;
                     },
                   ),
-                )),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                leading: Text(
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Last Working day",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                  width: size.width / 2,
+                  child: DateTimePicker(
+                    cursorColor: Theme.of(context).backgroundColor,
+
+                    initialValue: DateTime.now().toString(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2021),
+                    icon: Icon(Icons.calendar_today_rounded),
+                    // controller: ConstantVarable.vacationStartCalender,
+                    dateLabelText: '',
+                    onChanged: (val) {
+                      print(val);
+
+                      ConstantVarable.vacationStartCalender = val;
+                    },
+                    validator: (val) {
+                      print(val);
+                      return null;
+                    },
+                    onSaved: (val) {
+                      print(val);
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
                   "Notes :",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                title:  TextFormFieldW(
+                Container(
+                  width: size.width / 1.5,
+                  child: TextFormFieldW(
                     textInputType: TextInputType.text,
                     controller: ConstantVarable.terminasionNotescontroller,
                     validator: (val) =>
@@ -773,7 +782,8 @@ class _TerminationState extends State<Termination> {
                     obSecureText: false,
                     timeOrNo: true,
                   ),
-              ),
+                ),
+              ],
             ),
           ],
         ),
@@ -789,17 +799,22 @@ class Loan extends StatelessWidget {
     final prov = Provider.of<LoanRequest>(context);
     return SingleChildScrollView(
       child: Container(
-        width: size.width * 0.9,
-        child: Column(
-          children: [
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "Loan Type :",
+        width: size.width,
+        height: size.height / 1.5,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Loan Type ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
+                  Container(
+                    width: size.width / 2,
                     child: DropdownButton(
                       hint: Text("Select Loan Type"),
                       value: prov.loanType,
@@ -822,65 +837,66 @@ class Loan extends StatelessWidget {
                         prov.loanType = value;
                       },
                     ),
-                  )),
-            ),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
                     "Value :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
-                      child:  TextFormFieldW(
-                    textInputType: TextInputType.text,
-                    controller: ConstantVarable.loanValuecontroller,
-                    validator: (val) =>
-                        UserController().validateAnyFeild(context, val),
-                    hintText: "00",
-                    searchOrKnow: false,
-                    obSecureText: false,
-                    timeOrNo: true,
-                  ),)),
-            ),
-            Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.030,
+                  Expanded(
+                    flex: 1,
+                    child: TextFormFieldW(
+                      textInputType: TextInputType.text,
+                      controller: ConstantVarable.loanValuecontroller,
+                      validator: (val) =>
+                          UserController().validateAnyFeild(context, val),
+                      hintText: "00",
+                      searchOrKnow: false,
+                      obSecureText: false,
+                      timeOrNo: true,
                     ),
-                    Text("Installments Count ",
-                        style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.040,
+                  ),
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Installments Count ",
+                      style: Theme.of(context).textTheme.headline2),
+                  Text(prov.count.toString()),
+                  Container(
+                    width: 100,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_drop_down),
+                          onPressed: () {
+                            prov.discreamntcount();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_drop_up),
+                          onPressed: () {
+                            prov.increamentCount();
+                          },
+                        ),
+                      ],
                     ),
-                    new Text(prov.count.toString()),
-                    new SizedBox(
-                      width: size.width * 0.2,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {
-                        prov.discreamntcount();
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {
-                        prov.increamentCount();
-                      },
-                    ),
-                  ],
-                )),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
                     "Start Month :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
+                  Container(
+                    width: size.width / 2,
                     child: DropdownButton(
                       hint: Text("Select Start Month"),
                       value: prov.startmonth,
@@ -903,16 +919,18 @@ class Loan extends StatelessWidget {
                         prov.startmonth = value;
                       },
                     ),
-                  )),
-            ),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
                     "End Month :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
+                  Container(
+                    width: size.width / 2,
                     child: DropdownButton(
                       hint: Text("Select End Month"),
                       value: prov.endMonth,
@@ -935,46 +953,45 @@ class Loan extends StatelessWidget {
                         prov.endMonth = value;
                       },
                     ),
-                  )),
-            ),
-            Container(
-                height: 80.0,
-                child: new Row(
-                  children: [
-                    new SizedBox(
-                      width: size.width * 0.030,
+                  )
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("InstallmentValue ",
+                      style: Theme.of(context).textTheme.headline2),
+                  Text(prov.count.toString()),
+                  Container(
+                    width: 100,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_drop_down),
+                          onPressed: () {
+                            prov.discreamntcount();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_drop_up),
+                          onPressed: () {
+                            prov.increamentCount();
+                          },
+                        ),
+                      ],
                     ),
-                    Text("InstallmentValue ",
-                        style: Theme.of(context).textTheme.headline2),
-                    new SizedBox(
-                      width: size.width * 0.040,
-                    ),
-                    new Text(prov.value.toString()),
-                    new SizedBox(
-                      width: size.width * 0.2,
-                    ),
-                    new IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {
-                        prov.discraemnetntvalue();
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_up),
-                      onPressed: () {
-                        prov.incraementvalue();
-                      },
-                    ),
-                  ],
-                )),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "Start Year:",
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Start Year",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
+                  Container(
+                    width: size.width / 2,
                     child: DropdownButton(
                       hint: Text("Select Start Year"),
                       value: prov.startYear,
@@ -997,16 +1014,18 @@ class Loan extends StatelessWidget {
                         prov.startYear = value;
                       },
                     ),
-                  )),
-            ),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
-                    "End Year :",
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "End Year",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
+                  Container(
+                    width: size.width / 2,
                     child: DropdownButton(
                       hint: Text("Select End Year"),
                       value: prov.endYear,
@@ -1029,9 +1048,11 @@ class Loan extends StatelessWidget {
                         prov.endYear = value;
                       },
                     ),
-                  )),
-            ),
-          ],
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1183,16 +1204,18 @@ class PayrollAdjustment extends StatelessWidget {
                       "Value:",
                       style: Theme.of(context).textTheme.headline2,
                     ),
-                    title: Container(child:  TextFormFieldW(
-                    textInputType: TextInputType.text,
-                    controller: ConstantVarable.payrollValueController,
-                    validator: (val) =>
-                        UserController().validateAnyFeild(context, val),
-                    hintText: "00",
-                    searchOrKnow: false,
-                    obSecureText: false,
-                    timeOrNo: true,
-                  ),))),
+                    title: Container(
+                      child: TextFormFieldW(
+                        textInputType: TextInputType.text,
+                        controller: ConstantVarable.payrollValueController,
+                        validator: (val) =>
+                            UserController().validateAnyFeild(context, val),
+                        hintText: "00",
+                        searchOrKnow: false,
+                        obSecureText: false,
+                        timeOrNo: true,
+                      ),
+                    ))),
             Container(
               height: 65.0,
               child: ListTile(
@@ -1232,16 +1255,16 @@ class PayrollAdjustment extends StatelessWidget {
                   "Notes",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                title:  TextFormFieldW(
-                    textInputType: TextInputType.text,
-                    controller: ConstantVarable.payrollNotesController,
-                    validator: (val) =>
-                        UserController().validateAnyFeild(context, val),
-                    hintText: "You Can Add Notes Here",
-                    searchOrKnow: false,
-                    obSecureText: false,
-                    timeOrNo: true,
-                  ),
+                title: TextFormFieldW(
+                  textInputType: TextInputType.text,
+                  controller: ConstantVarable.payrollNotesController,
+                  validator: (val) =>
+                      UserController().validateAnyFeild(context, val),
+                  hintText: "You Can Add Notes Here",
+                  searchOrKnow: false,
+                  obSecureText: false,
+                  timeOrNo: true,
+                ),
               ),
             ),
           ],
