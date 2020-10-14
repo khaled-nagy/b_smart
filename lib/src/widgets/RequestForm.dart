@@ -237,10 +237,19 @@ class _VacationState extends State<Vacation> {
                 height: 80.0,
                 child: ListTile(
                   leading: Text(
-                    "Notes",
+                    "Notes :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: TextFormField(),
+                  title:  TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.vacationNotesController,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "You Can Add Notes Here",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
+                  ),
                 ),
               ),
             ],
@@ -407,7 +416,16 @@ class _PermissionState extends State<Permission> {
                   "Notes",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                title: TextFormField(),
+                title: TextFormFieldW(
+                  textInputType: TextInputType.text,
+                  controller: ConstantVarable.permissionNotesController,
+                  validator: (val) =>
+                      UserController().validateAnyFeild(context, val),
+                  hintText: "You Can Add Notes here ",
+                  searchOrKnow: false,
+                  obSecureText: false,
+                  timeOrNo: true,
+                ),
               ),
             ),
           ],
@@ -442,16 +460,16 @@ class Assignment extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("6th,Octobre,City"),
+                          value: "6th,Octobre,City",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("Elsadat City"),
+                          value: "Elsadat City",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("Nasr City"),
+                          value: "Nasr City",
                         )
                       ],
                       onChanged: (value) {
@@ -474,16 +492,16 @@ class Assignment extends StatelessWidget {
                       value: prov.newDepartment,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("Technical Support"),
+                          value: "Technical Support",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("sowftware engineering"),
+                          value: "sowftware engineering",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("customers service"),
+                          value: "customers service",
                         )
                       ],
                       onChanged: (value) {
@@ -506,16 +524,16 @@ class Assignment extends StatelessWidget {
                       value: prov.newPostion,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("Manager"),
+                          value: "Manager",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("Assistant"),
+                          value: "Assistant",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("Technical"),
+                          value: "Technical",
                         )
                       ],
                       onChanged: (value) {
@@ -593,16 +611,16 @@ class VacationBalance extends StatelessWidget {
                         isExpanded: true,
                         items: [
                           DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
+                            child: Text("2018"),
+                            value: "2018",
                           ),
                           DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
+                            child: Text("2019"),
+                            value: "2019",
                           ),
                           DropdownMenuItem(
-                            child: Text("3"),
-                            value: "3",
+                            child: Text("2020"),
+                            value: "2020",
                           )
                         ],
                         onChanged: (value) {
@@ -618,7 +636,18 @@ class VacationBalance extends StatelessWidget {
                       "Value :",
                       style: Theme.of(context).textTheme.headline2,
                     ),
-                    title: Container(child: Text("1000"))),
+                    title: Container(
+                      child: TextFormFieldW(
+                        textInputType: TextInputType.text,
+                        controller: ConstantVarable.vacationBalanceadjustValueVontroller,
+                        validator: (val) =>
+                            UserController().validateAnyFeild(context, val),
+                        hintText: "00",
+                        searchOrKnow: false,
+                        obSecureText: false,
+                        timeOrNo: true,
+                      ),
+                    )),
               ),
               Container(
                 height: 80.0,
@@ -627,7 +656,16 @@ class VacationBalance extends StatelessWidget {
                     "Notes",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: TextFormField(),
+                  title: TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.vacationBalanceadjustNotesVontroller,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "You Can Add Notes Here",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
+                  ),
                 ),
               ),
             ],
@@ -638,7 +676,12 @@ class VacationBalance extends StatelessWidget {
   }
 }
 
-class Termination extends StatelessWidget {
+class Termination extends StatefulWidget {
+  @override
+  _TerminationState createState() => _TerminationState();
+}
+
+class _TerminationState extends State<Termination> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -682,23 +725,54 @@ class Termination extends StatelessWidget {
                   )),
             ),
             Container(
-              height: 80.0,
-              child: ListTile(
+                height: 80.0,
+                child: ListTile(
                   leading: Text(
                     "Last Working day",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Text("15/8/2020"),
-                  trailing: Icon(Icons.calendar_today_rounded)),
-            ),
+                  title:  Text(ConstantVarable.terminasionLastWorkinDayCalender == null
+                      ? "0000-00-00"
+                      : ConstantVarable.terminasionLastWorkinDayCalender),
+                  trailing: IconButton(
+                    icon: Icon(Icons.calendar_today_rounded),
+                    onPressed: () {
+                      {
+                        setState(() {
+                          pickerCalenderStart(context, 1).then((value) {
+                            if (value == true) {
+                              setState(() {});
+                            }
+                          });
+                        });
+
+                        // _selectedDateTime = await picker.showMaterialDatePicker(
+                        //     context: context,
+                        //     initialDate: picker.NepaliDateTime.now(),
+                        //     firstDate: picker.NepaliDateTime(2000),
+                        //     lastDate: picker.NepaliDateTime(2090));
+                        // print(_selectedDateTime);
+                      }
+                    },
+                  ),
+                )),
             Container(
               height: 80.0,
               child: ListTile(
                 leading: Text(
-                  "Notes",
+                  "Notes :",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                title: TextFormField(),
+                title:  TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.terminasionNotescontroller,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "You Can Add Notes Here",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
+                  ),
               ),
             ),
           ],
@@ -758,9 +832,16 @@ class Loan extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                      child: TextFormField(
-                    keyboardType: TextInputType.numberWithOptions(),
-                  ))),
+                      child:  TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.loanValuecontroller,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "00",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
+                  ),)),
             ),
             Container(
                 height: 80.0,
@@ -806,16 +887,16 @@ class Loan extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("Januray"),
+                          value: "Januray",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("March"),
+                          value: "March",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("May"),
+                          value: "May",
                         )
                       ],
                       onChanged: (value) {
@@ -838,16 +919,16 @@ class Loan extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("July"),
+                          value: "July",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("August"),
+                          value: "August",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("October"),
+                          value: "October",
                         )
                       ],
                       onChanged: (value) {
@@ -900,16 +981,16 @@ class Loan extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("2018"),
+                          value: "2018",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("2019"),
+                          value: "2019",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("2020"),
+                          value: "2020",
                         )
                       ],
                       onChanged: (value) {
@@ -932,16 +1013,16 @@ class Loan extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("2021"),
+                          value: "2021",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("2022"),
+                          value: "2022",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("2023"),
+                          value: "2023",
                         )
                       ],
                       onChanged: (value) {
@@ -1013,16 +1094,16 @@ class PayrollAdjustment extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("Januray"),
+                          value: "Januray",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("April"),
+                          value: "April",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("Decemper"),
+                          value: "Decemper",
                         )
                       ],
                       onChanged: (value) {
@@ -1045,16 +1126,16 @@ class PayrollAdjustment extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("March"),
+                          value: "March",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("May"),
+                          value: "May",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("June"),
+                          value: "June",
                         )
                       ],
                       onChanged: (value) {
@@ -1077,16 +1158,16 @@ class PayrollAdjustment extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("2020"),
+                          value: "2020",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("2021"),
+                          value: "2021",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("2022"),
+                          value: "2022",
                         )
                       ],
                       onChanged: (value) {
@@ -1102,7 +1183,16 @@ class PayrollAdjustment extends StatelessWidget {
                       "Value:",
                       style: Theme.of(context).textTheme.headline2,
                     ),
-                    title: Container(child: TextFormField()))),
+                    title: Container(child:  TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.payrollValueController,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "00",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
+                  ),))),
             Container(
               height: 65.0,
               child: ListTile(
@@ -1117,16 +1207,16 @@ class PayrollAdjustment extends StatelessWidget {
                       isExpanded: true,
                       items: [
                         DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
+                          child: Text("2023"),
+                          value: "2023",
                         ),
                         DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
+                          child: Text("2024"),
+                          value: "2024",
                         ),
                         DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
+                          child: Text("2025"),
+                          value: "2025",
                         )
                       ],
                       onChanged: (value) {
@@ -1142,7 +1232,16 @@ class PayrollAdjustment extends StatelessWidget {
                   "Notes",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                title: TextFormField(),
+                title:  TextFormFieldW(
+                    textInputType: TextInputType.text,
+                    controller: ConstantVarable.payrollNotesController,
+                    validator: (val) =>
+                        UserController().validateAnyFeild(context, val),
+                    hintText: "You Can Add Notes Here",
+                    searchOrKnow: false,
+                    obSecureText: false,
+                    timeOrNo: true,
+                  ),
               ),
             ),
           ],

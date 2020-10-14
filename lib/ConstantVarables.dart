@@ -113,9 +113,26 @@ class ConstantVarable {
   // static final TextEditingController vacationStartCalender =
   //     TextEditingController();
   static final TextEditingController amountController = TextEditingController();
+  
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
   ///
+  ///
+  ///  
+      
+       static final TextEditingController vacationBalanceadjustNotesVontroller =TextEditingController();
+       static final TextEditingController vacationBalanceadjustValueVontroller =TextEditingController();
+       static final TextEditingController textEditingController =TextEditingController();
+       static final TextEditingController terminasionNotescontroller =TextEditingController();
+       static final TextEditingController loanValuecontroller =TextEditingController();
+       static final TextEditingController payrollValueController =TextEditingController();
+       static final TextEditingController payrollNotesController =TextEditingController();
+              static final TextEditingController vacationNotesController =TextEditingController();
+                     static final TextEditingController permissionNotesController =TextEditingController();
+
+
+
+
   static int vacationStartDay;
   static int vacationStartMonth;
   static int vacationStartYear;
@@ -125,4 +142,6 @@ class ConstantVarable {
   static String vacationStartCalender;
   static String vacationEndCalender;
   static String permissionDate;
+
+  static String terminasionLastWorkinDayCalender;
 }
