@@ -3,6 +3,7 @@ import 'package:b_smart/src/screens/Profile_Screen.dart';
 import 'package:b_smart/src/screens/login_screen.dart';
 import 'package:b_smart/src/screens/new_password_screen.dart';
 import 'package:b_smart/src/screens/notifications_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 Widget appbar({BuildContext context}) {
@@ -10,7 +11,7 @@ Widget appbar({BuildContext context}) {
 
   return AppBar(
     actions: [
-      Center(child: Text("Ar")),
+      Center(child: Text(EasyLocalization.of(context).locale.toString())),
       Center(
           child: IconButton(
               icon: Icon(Icons.notifications),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b_smart/src/statemanagment/Change_Language.dart';
+
 class DropDownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var prov = Provider.of<ChangeLanguage>(context);
-    print(prov.language);
+    print(prov.lang);
     return Container(
       color: Theme.of(context).accentColor,
       height: 50.0,
@@ -17,19 +18,20 @@ class DropDownButton extends StatelessWidget {
           underline: Container(),
           isDense: true,
           hint: Text("English"),
-          value:prov.language ,
+          value: prov.lang,
           onChanged: (value) {
-            prov.language = value;
+            // prov.lang = value;
+            prov.language(value == "en" ? Locale("en") : Locale("ar"), context);
           },
           isExpanded: true,
           items: [
             DropdownMenuItem(
               child: Text("English"),
-              value: "English",
+              value: "en",
             ),
             DropdownMenuItem(
               child: Text("العربيه"),
-              value: "العربيه",
+              value: "ar",
             ),
           ],
         ),

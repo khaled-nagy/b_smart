@@ -2,81 +2,80 @@ import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/controllers/UserController.dart';
 import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:b_smart/src/widgets/TextFormFieldW%20copy.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
 
-Future<bool> pickerCalenderStart(BuildContext context, int id) async {
-  NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
-      context: context,
-      locale: Locale("en"),
-      initialDate: picker.NepaliDateTime.now(),
-      firstDate: picker.NepaliDateTime(2000),
-      lastDate: picker.NepaliDateTime(2090));
-  print(_selectedDateTime.toString().substring(0, 10));
+// Future<bool> pickerCalenderStart(BuildContext context, int id) async {
+//   NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
+//       context: context,
+//       locale: EasyLocalization.of(context).locale,
+//       initialDate: NepaliDateTime.now(),
+//       firstDate: picker.NepaliDateTime(2000),
+//       lastDate: picker.NepaliDateTime(2021));
+//   print(_selectedDateTime.toString().substring(0, 10));
 
-  if (_selectedDateTime == null) {
-    return false;
-  } else {
-    switch (id) {
-      case 1:
-        {
-          ConstantVarable.vacationStartDay = _selectedDateTime.day;
-          ConstantVarable.vacationStartMonth = _selectedDateTime.month;
-          ConstantVarable.vacationStartYear = _selectedDateTime.year;
-          ConstantVarable.vacationStartCalender =
-              _selectedDateTime.toString().substring(0, 10);
-          break;
-        }
-      case 2:
-        {
-          ConstantVarable.permissionDate =
-              _selectedDateTime.toString().substring(0, 10);
-          break;
-        }
-    }
+//   if (_selectedDateTime == null) {
+//     return false;
+//   } else {
+//     switch (id) {
+//       case 1:
+//         {
+//           ConstantVarable.vacationStartDay = _selectedDateTime.day;
+//           ConstantVarable.vacationStartMonth = _selectedDateTime.month;
+//           ConstantVarable.vacationStartYear = _selectedDateTime.year;
 
-    return true;
-  }
-}
+//           break;
+//         }
+//       case 2:
+//         {
+//           break;
+//         }
+//     }
 
-Future<bool> pickerCalenderEnd(BuildContext context, int id) async {
-  NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
-      context: context,
-      locale: Locale("en"),
-      initialDate: picker.NepaliDateTime.now(),
-      firstDate: picker.NepaliDateTime(2000),
-      lastDate: picker.NepaliDateTime(2090));
-  ConstantVarable.vacationEndDay = _selectedDateTime.day;
-  ConstantVarable.vacationEndMonth = _selectedDateTime.month;
-  ConstantVarable.vacationEndYear = _selectedDateTime.year;
-  print(_selectedDateTime.toString().substring(0, 10));
+//     return true;
+//   }
+// }
 
-  if (_selectedDateTime == null) {
-    return false;
-  } else {
-    if (ConstantVarable.vacationEndDay > ConstantVarable.vacationStartDay &&
-        ConstantVarable.vacationEndMonth > ConstantVarable.vacationStartMonth &&
-        ConstantVarable.vacationEndYear > ConstantVarable.vacationStartYear) {
-      ConstantVarable.vacationEndCalender =
-          _selectedDateTime.toString().substring(0, 10);
-      return true;
-    } else {
-      Fluttertoast.showToast(
-          msg: "Please choose a date after the start date",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      ConstantVarable.vacationEndCalender = "";
-      return false;
-    }
-  }
-}
+// Future<bool> pickerCalenderEnd(BuildContext context, int id) async {
+//   NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
+//       context: context,
+//       locale: EasyLocalization.of(context).locale,
+//       initialDate: picker.NepaliDateTime.now(),
+//       firstDate: picker.NepaliDateTime(2000),
+//       lastDate: picker.NepaliDateTime(2020));
+//   ConstantVarable.vacationEndDay = _selectedDateTime.day;
+//   ConstantVarable.vacationEndMonth = _selectedDateTime.month;
+//   ConstantVarable.vacationEndYear = _selectedDateTime.year;
+//   print(_selectedDateTime.toString().substring(0, 10));
+
+//   if (_selectedDateTime == null) {
+//     return false;
+//   } else {
+//     if (ConstantVarable.vacationEndDay > ConstantVarable.vacationStartDay &&
+//         ConstantVarable.vacationEndMonth > ConstantVarable.vacationStartMonth &&
+//         ConstantVarable.vacationEndYear > ConstantVarable.vacationStartYear) {
+//       ConstantVarable.vacationEndCalender =
+//           _selectedDateTime.toString().substring(0, 10);
+//       return true;
+//     } else {
+//       Fluttertoast.showToast(
+//           msg: "Please choose a date after the start date",
+//           toastLength: Toast.LENGTH_LONG,
+//           gravity: ToastGravity.CENTER,
+//           timeInSecForIosWeb: 1,
+//           backgroundColor: Colors.red,
+//           textColor: Colors.white,
+//           fontSize: 16.0);
+//       ConstantVarable.vacationEndCalender = "";
+//       return false;
+//     }
+//   }
+// }
 
 // forms types
 
@@ -102,7 +101,7 @@ class _VacationState extends State<Vacation> {
               Row(
                 children: [
                   Text(
-                    "Vacation Type ID :",
+                    "Vacation Type ID ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
@@ -136,7 +135,7 @@ class _VacationState extends State<Vacation> {
                   child: new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Number Of Days :",
+                  Text("Number Of Days ",
                       style: Theme.of(context).textTheme.headline2),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
@@ -169,27 +168,31 @@ class _VacationState extends State<Vacation> {
                     "Start Date",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  Text(ConstantVarable.vacationStartCalender == null
-                      ? "0000-00-00"
-                      : ConstantVarable.vacationStartCalender),
-                  IconButton(
-                      icon: Icon(Icons.calendar_today_rounded),
-                      onPressed: () {
-                        setState(() {
-                          pickerCalenderStart(context, 1).then((value) {
-                            if (value == true) {
-                              setState(() {});
-                            }
-                          });
-                        });
+                  Container(
+                    width: size.width / 2,
+                    child: DateTimePicker(
+                      cursorColor: Theme.of(context).backgroundColor,
 
-                        // _selectedDateTime = await picker.showMaterialDatePicker(
-                        //     context: context,
-                        //     initialDate: picker.NepaliDateTime.now(),
-                        //     firstDate: picker.NepaliDateTime(2000),
-                        //     lastDate: picker.NepaliDateTime(2090));
-                        // print(_selectedDateTime);
-                      })
+                      initialValue: DateTime.now().toString(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2021),
+                      icon: Icon(Icons.calendar_today_rounded),
+                      // controller: ConstantVarable.vacationStartCalender,
+                      dateLabelText: '',
+                      onChanged: (val) {
+                        print(val);
+
+                        ConstantVarable.vacationStartCalender = val;
+                      },
+                      validator: (val) {
+                        print(val);
+                        return null;
+                      },
+                      onSaved: (val) {
+                        print(val);
+                      },
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -199,18 +202,35 @@ class _VacationState extends State<Vacation> {
                     "End Date",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  Text(ConstantVarable.vacationEndCalender == null
-                      ? "0000-00-00"
-                      : ConstantVarable.vacationEndCalender),
-                  IconButton(
+                  Container(
+                    width: size.width / 2,
+                    child: DateTimePicker(
+                      cursorColor: Theme.of(context).backgroundColor,
+
+                      initialValue: ConstantVarable.vacationStartCalender,
+                      firstDate: DateTime(
+                          ConstantVarable.vacationStartCalender == null
+                              ? 2000
+                              : int.parse(ConstantVarable.vacationStartCalender
+                                  .substring(0, 3))),
+                      lastDate: DateTime(2021),
                       icon: Icon(Icons.calendar_today_rounded),
-                      onPressed: () {
-                        pickerCalenderEnd(context, 1).then((value) {
-                          if (value == true) {
-                            setState(() {});
-                          }
-                        });
-                      })
+                      // controller: ConstantVarable.vacationStartCalender,
+                      dateLabelText: '',
+                      onChanged: (val) {
+                        print(val);
+
+                        ConstantVarable.vacationStartCalender = val;
+                      },
+                      validator: (val) {
+                        print(val);
+                        return null;
+                      },
+                      onSaved: (val) {
+                        print(val);
+                      },
+                    ),
+                  ),
                 ],
               ),
               Container(
@@ -223,16 +243,6 @@ class _VacationState extends State<Vacation> {
                   title: TextFormField(),
                 ),
               ),
-              Container(
-                color: Theme.of(context).backgroundColor,
-                child: FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Save Request",
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-                ),
-              )
             ],
           ),
         ),
@@ -261,7 +271,7 @@ class _PermissionState extends State<Permission> {
             Row(
               children: [
                 Text(
-                  "Permission Type ID :",
+                  "Permission Type ID ",
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 Container(
@@ -298,18 +308,31 @@ class _PermissionState extends State<Permission> {
                   "Permisson Date",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                Text(ConstantVarable.permissionDate == null
-                    ? "0000-00-00"
-                    : ConstantVarable.permissionDate),
-                IconButton(
+                Container(
+                  width: size.width / 2,
+                  child: DateTimePicker(
+                    cursorColor: Theme.of(context).backgroundColor,
+
+                    initialValue: DateTime.now().toString(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2021),
                     icon: Icon(Icons.calendar_today_rounded),
-                    onPressed: () {
-                      pickerCalenderStart(context, 2).then((value) {
-                        if (value == true) {
-                          setState(() {});
-                        }
-                      });
-                    })
+                    // controller: ConstantVarable.vacationStartCalender,
+                    dateLabelText: '',
+                    onChanged: (val) {
+                      print(val);
+
+                      ConstantVarable.vacationStartCalender = val;
+                    },
+                    validator: (val) {
+                      print(val);
+                      return null;
+                    },
+                    onSaved: (val) {
+                      print(val);
+                    },
+                  ),
+                ),
               ],
             ),
             Row(
@@ -387,19 +410,6 @@ class _PermissionState extends State<Permission> {
                 title: TextFormField(),
               ),
             ),
-            SizedBox(
-              height: 18.0,
-            ),
-            Container(
-              color: Theme.of(context).backgroundColor,
-              child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Save Request",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -517,16 +527,6 @@ class Assignment extends StatelessWidget {
             SizedBox(
               height: 18.0,
             ),
-            Container(
-              color: Theme.of(context).backgroundColor,
-              child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Save Request",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -630,16 +630,6 @@ class VacationBalance extends StatelessWidget {
                   title: TextFormField(),
                 ),
               ),
-              Container(
-                color: Theme.of(context).backgroundColor,
-                child: FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Save Request",
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-                ),
-              )
             ],
           ),
         ),
@@ -711,16 +701,6 @@ class Termination extends StatelessWidget {
                 title: TextFormField(),
               ),
             ),
-            Container(
-              color: Theme.of(context).backgroundColor,
-              child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Save Request",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -970,22 +950,6 @@ class Loan extends StatelessWidget {
                     ),
                   )),
             ),
-            SizedBox(
-              height: 18.0,
-            ),
-            Container(
-              color: Theme.of(context).backgroundColor,
-              child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Save Request",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 40.0,
-            ),
           ],
         ),
       ),
@@ -1180,19 +1144,6 @@ class PayrollAdjustment extends StatelessWidget {
                 ),
                 title: TextFormField(),
               ),
-            ),
-            Container(
-              color: Theme.of(context).backgroundColor,
-              child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Save Request",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 40.0,
             ),
           ],
         ),

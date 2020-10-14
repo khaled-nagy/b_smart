@@ -110,8 +110,8 @@ class ConstantVarable {
       TextEditingController();
   static final TextEditingController permissionEndDateController =
       TextEditingController();
-  static final TextEditingController bankNameController =
-      TextEditingController();
+  // static final TextEditingController vacationStartCalender =
+  //     TextEditingController();
   static final TextEditingController amountController = TextEditingController();
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////

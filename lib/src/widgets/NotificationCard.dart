@@ -46,7 +46,16 @@ class _NotificationCardState extends State<NotificationCard> {
             ),
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                    content: Text(
+                      "vacation request #37 has been  Rejected",
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                  ));
+        },
       ),
     );
   }

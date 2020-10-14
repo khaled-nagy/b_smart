@@ -68,7 +68,7 @@ class NewPasswordView extends StateMVC<NewPasswordScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "يرجى ادخال الرقم السرى الجديد",
+                                "Please enter the new password",
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.grey[800],
@@ -114,7 +114,7 @@ class NewPasswordView extends StateMVC<NewPasswordScreen> {
                                                     right: 4.0,
                                                     top: 0.0,
                                                     left: 4),
-                                                hintText: "الرقم السرى القديم",
+                                                hintText: "Old password",
                                                 hintStyle: TextStyle(
                                                     color: Colors.grey[400],
                                                     fontSize: 12),
@@ -160,7 +160,7 @@ class NewPasswordView extends StateMVC<NewPasswordScreen> {
                                           border: InputBorder.none,
                                           contentPadding: EdgeInsets.only(
                                               right: 4.0, top: 0.0, left: 4),
-                                          hintText: "الرقم السرى الجديد",
+                                          hintText: "The new password",
                                           hintStyle: TextStyle(
                                               color: Colors.grey[400],
                                               fontSize: 12),
@@ -205,7 +205,7 @@ class NewPasswordView extends StateMVC<NewPasswordScreen> {
                                           border: InputBorder.none,
                                           contentPadding: EdgeInsets.only(
                                               right: 4.0, top: 0.0, left: 4),
-                                          hintText: "تاكيد الرقم السرى الجديد",
+                                          hintText: "Confirm the new password",
                                           hintStyle: TextStyle(
                                               color: Colors.grey[400],
                                               fontSize: 12),
@@ -237,7 +237,7 @@ class NewPasswordView extends StateMVC<NewPasswordScreen> {
                                             padding: EdgeInsets.only(
                                                 top: 0.0, bottom: 0.0),
                                             child: Text(
-                                              "تاكيد",
+                                              "Change",
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 18.0,

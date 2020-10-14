@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:b_smart/src/controllers/LoginController.dart';
 import 'package:b_smart/src/screens/forgot_password_screen.dart';
 import 'package:b_smart/src/widgets/BottomNavigationBar.dart';
@@ -5,6 +7,7 @@ import 'package:b_smart/src/widgets/ButtonW.dart';
 import 'package:b_smart/src/widgets/Language_Dropdownbtn.dart';
 import 'package:b_smart/src/widgets/TextFormFieldC.dart';
 import 'package:b_smart/src/widgets/transions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -96,11 +99,41 @@ class LoginView extends StateMVC<LoginScreen> {
                     Scaletransition(screen: ForgotPasswordScreen()),
                   );
                 },
-              )
+              ),
             ],
           )),
         ),
       ),
+    );
+  }
+
+  Widget buildSwitchLanguege(
+      {BuildContext context, String title, String subtitle, Locale locale}) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Change",
+                style: TextStyle(
+                    fontSize: 15.0, color: Theme.of(context).accentColor),
+              ),
+            ),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headline,
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        log(locale.toString(), name: toString());
+        EasyLocalization.of(context).locale = locale;
+      },
     );
   }
 }
