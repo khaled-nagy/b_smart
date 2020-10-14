@@ -1,5 +1,15 @@
 import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/controllers/UserController.dart';
+import 'package:b_smart/src/data/models/DepartmentModel.dart';
+import 'package:b_smart/src/data/models/LoanTypeModel.dart';
+import 'package:b_smart/src/data/models/LocationModel.dart';
+import 'package:b_smart/src/data/models/MonthModel.dart';
+import 'package:b_smart/src/data/models/PayItemModel.dart';
+import 'package:b_smart/src/data/models/PostionModel.dart';
+import 'package:b_smart/src/data/models/TerminasiontypeModel.dart';
+import 'package:b_smart/src/data/models/VacationBalanceIDModel.dart';
+import 'package:b_smart/src/data/models/VacationIdModel.dart';
+import 'package:b_smart/src/data/models/YearModel.dart';
 import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:b_smart/src/widgets/TextFormFieldW%20copy.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -10,73 +20,6 @@ import 'package:nepali_date_picker/nepali_date_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
 
-// Future<bool> pickerCalenderStart(BuildContext context, int id) async {
-//   NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
-//       context: context,
-//       locale: EasyLocalization.of(context).locale,
-//       initialDate: NepaliDateTime.now(),
-//       firstDate: picker.NepaliDateTime(2000),
-//       lastDate: picker.NepaliDateTime(2021));
-//   print(_selectedDateTime.toString().substring(0, 10));
-
-//   if (_selectedDateTime == null) {
-//     return false;
-//   } else {
-//     switch (id) {
-//       case 1:
-//         {
-//           ConstantVarable.vacationStartDay = _selectedDateTime.day;
-//           ConstantVarable.vacationStartMonth = _selectedDateTime.month;
-//           ConstantVarable.vacationStartYear = _selectedDateTime.year;
-
-//           break;
-//         }
-//       case 2:
-//         {
-//           break;
-//         }
-//     }
-
-//     return true;
-//   }
-// }
-
-// Future<bool> pickerCalenderEnd(BuildContext context, int id) async {
-//   NepaliDateTime _selectedDateTime = await picker.showMaterialDatePicker(
-//       context: context,
-//       locale: EasyLocalization.of(context).locale,
-//       initialDate: picker.NepaliDateTime.now(),
-//       firstDate: picker.NepaliDateTime(2000),
-//       lastDate: picker.NepaliDateTime(2020));
-//   ConstantVarable.vacationEndDay = _selectedDateTime.day;
-//   ConstantVarable.vacationEndMonth = _selectedDateTime.month;
-//   ConstantVarable.vacationEndYear = _selectedDateTime.year;
-//   print(_selectedDateTime.toString().substring(0, 10));
-
-//   if (_selectedDateTime == null) {
-//     return false;
-//   } else {
-//     if (ConstantVarable.vacationEndDay > ConstantVarable.vacationStartDay &&
-//         ConstantVarable.vacationEndMonth > ConstantVarable.vacationStartMonth &&
-//         ConstantVarable.vacationEndYear > ConstantVarable.vacationStartYear) {
-//       ConstantVarable.vacationEndCalender =
-//           _selectedDateTime.toString().substring(0, 10);
-//       return true;
-//     } else {
-//       Fluttertoast.showToast(
-//           msg: "Please choose a date after the start date",
-//           toastLength: Toast.LENGTH_LONG,
-//           gravity: ToastGravity.CENTER,
-//           timeInSecForIosWeb: 1,
-//           backgroundColor: Colors.red,
-//           textColor: Colors.white,
-//           fontSize: 16.0);
-//       ConstantVarable.vacationEndCalender = "";
-//       return false;
-//     }
-//   }
-// }
-
 // forms types
 
 class Vacation extends StatefulWidget {
@@ -85,6 +28,15 @@ class Vacation extends StatefulWidget {
 }
 
 class _VacationState extends State<Vacation> {
+  List<VacationIdModel> vacationidList = [
+    VacationIdModel(id: "1", name: "10"),
+    VacationIdModel(id: "2", name: "20"),
+    VacationIdModel(id: "3", name: "30"),
+    VacationIdModel(id: "4", name: "40"),
+    VacationIdModel(id: "5", name: "50"),
+    VacationIdModel(id: "6", name: "60"),
+  ];
+  VacationIdModel selectedId;
   @override
   @override
   Widget build(BuildContext context) {
@@ -105,30 +57,38 @@ class _VacationState extends State<Vacation> {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    width: size.width / 2.3,
-                    child: DropdownButton(
-                      hint: Text(" Vacation ID"),
-                      isExpanded: true,
-                      value: prov.vacationTypeID,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text(" 1 "),
-                          value: "1",
-                        ),
-                        DropdownMenuItem(
-                          child: Text(" 2 "),
-                          value: "2",
-                        ),
-                        DropdownMenuItem(
-                          child: Text(" 3 "),
-                          value: "3",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.vacationTypeID = value;
-                      },
-                    ),
-                  )
+                      width: size.width / 2.3,
+                      child: DropdownButton<VacationIdModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Vacation ID",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectedId,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: vacationidList.map((VacationIdModel year) {
+                            return DropdownMenuItem<VacationIdModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (VacationIdModel value) {
+                            setState(() {
+                              selectedId = value;
+                            });
+                          }))
                 ],
               ),
               Container(
@@ -172,12 +132,10 @@ class _VacationState extends State<Vacation> {
                     width: size.width / 2,
                     child: DateTimePicker(
                       cursorColor: Theme.of(context).backgroundColor,
-
                       initialValue: DateTime.now().toString(),
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2021),
                       icon: Icon(Icons.calendar_today_rounded),
-                      // controller: ConstantVarable.vacationStartCalender,
                       dateLabelText: '',
                       onChanged: (val) {
                         print(val);
@@ -266,6 +224,21 @@ class Permission extends StatefulWidget {
 }
 
 class _PermissionState extends State<Permission> {
+  List<VacationIdModel> vacationidList = [
+    VacationIdModel(
+      id: "1",
+      name: "10",
+    ),
+    VacationIdModel(
+      id: "2",
+      name: "20",
+    ),
+    VacationIdModel(
+      id: "3",
+      name: "30",
+    )
+  ];
+  VacationIdModel selectedId;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -286,25 +259,29 @@ class _PermissionState extends State<Permission> {
                 Container(
                   width: size.width / 2.3,
                   child: DropdownButton(
-                    hint: Text("Permision ID"),
-                    value: prov.permisionTypeID,
+                    iconSize: 30,
+                    icon: Padding(
+                        padding: const EdgeInsets.only(left: 14),
+                        child: Icon(Icons.arrow_drop_down)),
+                    hint: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Permision ID",
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ),
+                    value: selectedId,
                     isExpanded: true,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("1"),
-                        value: "1",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("2"),
-                        value: "2",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("3"),
-                        value: "3",
-                      )
-                    ],
+                    items: vacationidList.map((VacationIdModel vacationid) {
+                      return DropdownMenuItem<VacationIdModel>(
+                        child: Text(vacationid.name),
+                        value: vacationid,
+                      );
+                    }).toList(),
                     onChanged: (value) {
-                      prov.permisionTypeID = value;
+                      setState(() {
+                        selectedId = value;
+                      });
                     },
                   ),
                 )
@@ -435,7 +412,39 @@ class _PermissionState extends State<Permission> {
   }
 }
 
-class Assignment extends StatelessWidget {
+class Assignment extends StatefulWidget {
+  @override
+  _AssignmentState createState() => _AssignmentState();
+}
+   
+class _AssignmentState extends State<Assignment> {
+  List<LocationModel> locationList = [
+    LocationModel(id: "1", name: "10"),
+    LocationModel(id: "2", name: "20"),
+    LocationModel(id: "3", name: "30"),
+    LocationModel(id: "4", name: "40"),
+    LocationModel(id: "5", name: "50"),
+    LocationModel(id: "6", name: "60"),
+  ];
+  LocationModel selectlocation;
+  List<DepartmentModel> departmentList = [
+    DepartmentModel(id: "1", name: "10"),
+    DepartmentModel(id: "2", name: "20"),
+    DepartmentModel(id: "3", name: "30"),
+    DepartmentModel(id: "4", name: "40"),
+    DepartmentModel(id: "5", name: "50"),
+    DepartmentModel(id: "6", name: "60"),
+  ];
+  DepartmentModel selectDepartment;
+  List<PositionModel> positionList = [
+    PositionModel(id: "1", name: "10"),
+    PositionModel(id: "2", name: "20"),
+    PositionModel(id: "3", name: "30"),
+    PositionModel(id: "4", name: "40"),
+    PositionModel(id: "5", name: "50"),
+    PositionModel(id: "6", name: "60"),
+  ];
+  PositionModel selectPosition;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -445,106 +454,138 @@ class Assignment extends StatelessWidget {
         height: 470,
         width: size.width * 0.9,
         child: Column(
+          
           children: [
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
                     "New Location :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
-                    child: DropdownButton(
-                      hint: Text("Location"),
-                      value: prov.newLocation,
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("6th,Octobre,City"),
-                          value: "6th,Octobre,City",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Elsadat City"),
-                          value: "Elsadat City",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Nasr City"),
-                          value: "Nasr City",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.newLocation = value;
-                      },
-                    ),
-                  )),
-            ),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
+                   Container(
+                    child:  DropdownButton<LocationModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Location",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectlocation,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: locationList.map((LocationModel location) {
+                            return DropdownMenuItem<LocationModel>(
+                                value: location,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    location.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (LocationModel value) {
+                            setState(() {
+                              selectlocation = value;
+                            });
+                          })
+                  ),
+             
+              ],
+            ), SizedBox(height: 40.0,),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                   Text(
                     "New Department :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
-                    child: DropdownButton(
-                      hint: Text("Department"),
-                      isExpanded: true,
-                      value: prov.newDepartment,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Technical Support"),
-                          value: "Technical Support",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("sowftware engineering"),
-                          value: "sowftware engineering",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("customers service"),
-                          value: "customers service",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.newDepartment = value;
-                      },
-                    ),
-                  )),
-            ),
-            Container(
-              height: 80.0,
-              child: ListTile(
-                  leading: Text(
+                  Container(
+                    child:  DropdownButton<DepartmentModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Department",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectDepartment,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: departmentList.map((DepartmentModel year) {
+                            return DropdownMenuItem<DepartmentModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (DepartmentModel value) {
+                            setState(() {
+                              selectDepartment = value;
+                            });
+                          })
+                  ),
+            
+               ],),SizedBox(height: 40.0,),
+             Row
+             (
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               
+               children: [
+
+              Text(
                     "New Position :",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                  title: Container(
-                    child: DropdownButton(
-                      hint: Text("Postion"),
-                      isExpanded: true,
-                      value: prov.newPostion,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Manager"),
-                          value: "Manager",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Assistant"),
-                          value: "Assistant",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Technical"),
-                          value: "Technical",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.newPostion = value;
-                      },
-                    ),
-                  )),
-            ),
-            SizedBox(
-              height: 18.0,
-            ),
+                   Container(
+                    child:  DropdownButton<PositionModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Position",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectPosition,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: positionList.map((PositionModel year) {
+                            return DropdownMenuItem<PositionModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (PositionModel value) {
+                            setState(() {
+                              selectPosition = value;
+                            });
+                          })
+                   ),
+             ],
+             )
           ],
         ),
       ),
@@ -552,8 +593,35 @@ class Assignment extends StatelessWidget {
   }
 }
 
-class VacationBalance extends StatelessWidget {
+class VacationBalance extends StatefulWidget {
   @override
+  _VacationBalanceState createState() => _VacationBalanceState();
+}
+
+class _VacationBalanceState extends State<VacationBalance> {
+  @override
+  List<VacationBalanceIdModel> vacationbalanceList = [
+    VacationBalanceIdModel(id: "1", name: "01"),
+    VacationBalanceIdModel(id: "2", name: "02"),
+    VacationBalanceIdModel(id: "3", name: "03"),
+    VacationBalanceIdModel(id: "4", name: "04"),
+  ];
+  List<YearModel> yearList = [
+    YearModel(id: "1", name: "2010"),
+    YearModel(id: "2", name: "2011"),
+    YearModel(id: "3", name: "2012"),
+    YearModel(id: "4", name: "2013"),
+    YearModel(id: "5", name: "2014"),
+    YearModel(id: "6", name: "2015"),
+    YearModel(id: "7", name: "2016"),
+    YearModel(id: "8", name: "2017"),
+    YearModel(id: "9", name: "2018"),
+    YearModel(id: "10", name: "2019"),
+    YearModel(id: "11", name: "2020"),
+    YearModel(id: "12", name: "2021"),
+  ];
+  YearModel selectyear;
+  VacationBalanceIdModel selectID;
   Widget build(BuildContext context) {
     final prov = Provider.of<VacationBalanceRequest>(context);
 
@@ -574,25 +642,26 @@ class VacationBalance extends StatelessWidget {
                     ),
                     title: Container(
                       child: DropdownButton(
-                        hint: Text("Vacation ID"),
+                        hint: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Vacation ID",
+                              style: Theme.of(context).textTheme.headline5),
+                        ),
+                        iconSize: 30.0,
+                        icon: Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Icon(Icons.arrow_drop_down),
+                        ),
                         isExpanded: true,
                         value: prov.vacationBalanceID,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("1"),
-                            value: "1",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2"),
-                            value: "2",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("3"),
-                            value: "3",
-                          )
-                        ],
+                        items: vacationbalanceList.map((vacation) {
+                          return DropdownMenuItem<VacationBalanceIdModel>(
+                            child: Text(vacation.name),
+                            value: vacation,
+                          );
+                        }).toList(),
                         onChanged: (value) {
-                          prov.vacationBalanceID = value;
+                          selectID = value;
                         },
                       ),
                     )),
@@ -606,25 +675,26 @@ class VacationBalance extends StatelessWidget {
                     ),
                     title: Container(
                       child: DropdownButton(
-                        hint: Text("Select Year"),
-                        value: prov.year,
+                        hint: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Select Year",
+                              style: Theme.of(context).textTheme.headline5),
+                        ),
+                        iconSize: 30.0,
+                        icon: Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Icon(Icons.arrow_drop_down),
+                        ),
                         isExpanded: true,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("2018"),
-                            value: "2018",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2019"),
-                            value: "2019",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("2020"),
-                            value: "2020",
-                          )
-                        ],
+                        value: selectyear,
+                        items: yearList.map((year) {
+                          return DropdownMenuItem<YearModel>(
+                            child: Text(year.name),
+                            value: year,
+                          );
+                        }).toList(),
                         onChanged: (value) {
-                          prov.year = value;
+                          selectyear = value;
                         },
                       ),
                     )),
@@ -684,6 +754,13 @@ class Termination extends StatefulWidget {
 }
 
 class _TerminationState extends State<Termination> {
+  List<TerminationTypeModel> terminationTypeList = [
+    TerminationTypeModel(id: "1", name: "01"),
+    TerminationTypeModel(id: "2", name: "02"),
+    TerminationTypeModel(id: "3", name: "03"),
+    TerminationTypeModel(id: "4", name: "04"),
+  ];
+  TerminationTypeModel selecttype;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -705,25 +782,26 @@ class _TerminationState extends State<Termination> {
                 Container(
                   width: size.width / 2,
                   child: DropdownButton(
+                    hint: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Select Type",
+                          style: Theme.of(context).textTheme.headline5),
+                    ),
+                    iconSize: 30.0,
+                    icon: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Icon(Icons.arrow_drop_down),
+                    ),
                     isExpanded: true,
-                    value: prov.terminationType,
-                    hint: Text("Termination Type"),
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("1"),
-                        value: "1",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("2"),
-                        value: "2",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("3"),
-                        value: "3",
-                      )
-                    ],
+                    value: selecttype,
+                    items: terminationTypeList.map((year) {
+                      return DropdownMenuItem<TerminationTypeModel>(
+                        child: Text(year.name),
+                        value: year,
+                      );
+                    }).toList(),
                     onChanged: (value) {
-                      prov.terminationType = value;
+                      selecttype = value;
                     },
                   ),
                 )
@@ -792,7 +870,56 @@ class _TerminationState extends State<Termination> {
   }
 }
 
-class Loan extends StatelessWidget {
+class Loan extends StatefulWidget {
+  @override
+  _LoanState createState() => _LoanState();
+}
+
+
+class _LoanState extends State<Loan> {
+  
+List<LoanTypeModel> loantypelist = [
+  LoanTypeModel(id: "1", name: "10"),
+  LoanTypeModel(id: "2", name: "20"),
+  LoanTypeModel(id: "3", name: "30"),
+  LoanTypeModel(id: "4", name: "40"),
+  LoanTypeModel(id: "5", name: "50"),
+  LoanTypeModel(id: "6", name: "60"),
+];
+
+LoanTypeModel selectItemModel;
+MonthModel selectEndmonth;
+MonthModel selecStartmonth;
+YearModel selectStartyear;
+YearModel selectEndyear;
+List<MonthModel> monthlist = [
+  MonthModel(id: "1", name: "January"),
+  MonthModel(id: "2", name: "February"),
+  MonthModel(id: "3", name: "March"),
+  MonthModel(id: "4", name: "April"),
+  MonthModel(id: "5", name: "May"),
+  MonthModel(id: "6", name: "June"),
+  MonthModel(id: "7", name: "July"),
+  MonthModel(id: "8", name: "August"),
+  MonthModel(id: "9", name: "Septemper"),
+  MonthModel(id: "10", name: "October"),
+  MonthModel(id: "11", name: "November"),
+  MonthModel(id: "12", name: "December"),
+];
+List<YearModel> yearList = [
+  YearModel(id: "1", name: "2010"),
+  YearModel(id: "2", name: "2011"),
+  YearModel(id: "3", name: "2012"),
+  YearModel(id: "4", name: "2013"),
+  YearModel(id: "5", name: "2014"),
+  YearModel(id: "6", name: "2015"),
+  YearModel(id: "7", name: "2016"),
+  YearModel(id: "8", name: "2017"),
+  YearModel(id: "9", name: "2018"),
+  YearModel(id: "10", name: "2019"),
+  YearModel(id: "11", name: "2020"),
+  YearModel(id: "12", name: "2021"),
+];
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -816,31 +943,35 @@ class Loan extends StatelessWidget {
                   Container(
                     width: size.width / 2,
                     child: DropdownButton(
-                      hint: Text("Select Loan Type"),
-                      value: prov.loanType,
+                      iconSize: 30,
+                      icon: Padding(
+                          padding: const EdgeInsets.only(left: 14),
+                          child: Icon(Icons.arrow_drop_down)),
+                      hint: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Permision ID",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ),
+                      value: selectItemModel,
                       isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("test1"),
-                          value: "test1",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("test2"),
-                          value: "test2",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("test3"),
-                          value: "test3",
-                        )
-                      ],
+                      items: loantypelist.map((LoanTypeModel type) {
+                        return DropdownMenuItem<LoanTypeModel>(
+                          child: Text(type.name),
+                          value: type,
+                        );
+                      }).toList(),
                       onChanged: (value) {
-                        prov.loanType = value;
+                        setState(() {
+                          selectItemModel = value;
+                        });
                       },
                     ),
                   )
                 ],
               ),
-              Row(
+              Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Value :",
@@ -861,7 +992,7 @@ class Loan extends StatelessWidget {
                   ),
                 ],
               ),
-              new Row(
+              new Row( 
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Installments Count ",
@@ -897,28 +1028,37 @@ class Loan extends StatelessWidget {
                   ),
                   Container(
                     width: size.width / 2,
-                    child: DropdownButton(
-                      hint: Text("Select Start Month"),
-                      value: prov.startmonth,
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Januray"),
-                          value: "Januray",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("March"),
-                          value: "March",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("May"),
-                          value: "May",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.startmonth = value;
-                      },
-                    ),
+                    child: DropdownButton<MonthModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Start Month",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selecStartmonth,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: monthlist.map((MonthModel month) {
+                            return DropdownMenuItem<MonthModel>(
+                                value: month,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    month.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (MonthModel value) {
+                            setState(() {
+                              selecStartmonth = value;
+                            });
+                          })
                   )
                 ],
               ),
@@ -931,28 +1071,37 @@ class Loan extends StatelessWidget {
                   ),
                   Container(
                     width: size.width / 2,
-                    child: DropdownButton(
-                      hint: Text("Select End Month"),
-                      value: prov.endMonth,
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("July"),
-                          value: "July",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("August"),
-                          value: "August",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("October"),
-                          value: "October",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.endMonth = value;
-                      },
-                    ),
+                    child: DropdownButton<MonthModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select End Month",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectEndmonth,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: monthlist.map((MonthModel month) {
+                            return DropdownMenuItem<MonthModel>(
+                                value: month,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    month.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (MonthModel value) {
+                            setState(() {
+                              selectEndmonth = value;
+                            });
+                          })
                   )
                 ],
               ),
@@ -992,28 +1141,37 @@ class Loan extends StatelessWidget {
                   ),
                   Container(
                     width: size.width / 2,
-                    child: DropdownButton(
-                      hint: Text("Select Start Year"),
-                      value: prov.startYear,
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("2018"),
-                          value: "2018",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2019"),
-                          value: "2019",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2020"),
-                          value: "2020",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.startYear = value;
-                      },
-                    ),
+                    child:  DropdownButton<YearModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Start End",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectStartyear,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: yearList.map((YearModel year) {
+                            return DropdownMenuItem<YearModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (YearModel value) {
+                            setState(() {
+                              selectStartyear = value;
+                            });
+                          })
                   )
                 ],
               ),
@@ -1026,28 +1184,37 @@ class Loan extends StatelessWidget {
                   ),
                   Container(
                     width: size.width / 2,
-                    child: DropdownButton(
-                      hint: Text("Select End Year"),
-                      value: prov.endYear,
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("2021"),
-                          value: "2021",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2022"),
-                          value: "2022",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2023"),
-                          value: "2023",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.endYear = value;
-                      },
-                    ),
+                    child: DropdownButton<YearModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select End Year",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectEndyear,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: yearList.map((YearModel year) {
+                            return DropdownMenuItem<YearModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (YearModel value) {
+                            setState(() {
+                              selectEndyear = value;
+                            });
+                          })
                   )
                 ],
               ),
@@ -1059,7 +1226,56 @@ class Loan extends StatelessWidget {
   }
 }
 
-class PayrollAdjustment extends StatelessWidget {
+class PayrollAdjustment extends StatefulWidget {
+  @override
+  _PayrollAdjustmentState createState() => _PayrollAdjustmentState();
+}
+
+class _PayrollAdjustmentState extends State<PayrollAdjustment> {
+  
+List<PayItemModel> payItemList = [
+  PayItemModel(id: "1", name: "10"),
+  PayItemModel(id: "2", name: "20"),
+  PayItemModel(id: "3", name: "30"),
+  PayItemModel(id: "4", name: "40"),
+  PayItemModel(id: "5", name: "50"),
+  PayItemModel(id: "6", name: "60"),
+];
+
+PayItemModel selectpayItem;
+MonthModel selectEndmonth;
+MonthModel selecStartmonth;
+YearModel selectStartyear;
+YearModel selectEndyear;
+List<MonthModel> monthlist = [
+  MonthModel(id: "1", name: "January"),
+  MonthModel(id: "2", name: "February"),
+  MonthModel(id: "3", name: "March"),
+  MonthModel(id: "4", name: "April"),
+  MonthModel(id: "5", name: "May"),
+  MonthModel(id: "6", name: "June"),
+  MonthModel(id: "7", name: "July"),
+  MonthModel(id: "8", name: "August"),
+  MonthModel(id: "9", name: "Septemper"),
+  MonthModel(id: "10", name: "October"),
+  MonthModel(id: "11", name: "November"),
+  MonthModel(id: "12", name: "December"),
+];
+List<YearModel> yearList = [
+  YearModel(id: "1", name: "2010"),
+  YearModel(id: "2", name: "2011"),
+  YearModel(id: "3", name: "2012"),
+  YearModel(id: "4", name: "2013"),
+  YearModel(id: "5", name: "2014"),
+  YearModel(id: "6", name: "2015"),
+  YearModel(id: "7", name: "2016"),
+  YearModel(id: "8", name: "2017"),
+  YearModel(id: "9", name: "2018"),
+  YearModel(id: "10", name: "2019"),
+  YearModel(id: "11", name: "2020"),
+  YearModel(id: "12", name: "2021"),
+];
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -1077,26 +1293,30 @@ class PayrollAdjustment extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child: DropdownButton(
-                      value: prov.payItem,
-                      hint: Text("Select Pay Item"),
+                    child:  DropdownButton<PayItemModel>(
+                      iconSize: 30,
+                      icon: Padding(
+                          padding: const EdgeInsets.only(left: 14),
+                          child: Icon(Icons.arrow_drop_down)),
+                      hint: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Pay Item",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ),
+                      value: selectpayItem,
                       isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("1"),
-                          value: "1",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2"),
-                          value: "2",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("3"),
-                          value: "3",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.payItem = value;
+                      items: payItemList.map((PayItemModel type) {
+                        return DropdownMenuItem<PayItemModel>(
+                          child: Text(type.name),
+                          value: type,
+                        );
+                      }).toList(),
+                      onChanged: (PayItemModel value) {
+                        setState(() {
+                          selectpayItem = value;
+                        });
                       },
                     ),
                   )),
@@ -1109,28 +1329,37 @@ class PayrollAdjustment extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child: DropdownButton(
-                      value: prov.startMonth,
-                      hint: Text("Select Start Month"),
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Januray"),
-                          value: "Januray",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("April"),
-                          value: "April",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Decemper"),
-                          value: "Decemper",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.startMonth = value;
-                      },
-                    ),
+                    child:DropdownButton<MonthModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Start Month",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selecStartmonth,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: monthlist.map((MonthModel month) {
+                            return DropdownMenuItem<MonthModel>(
+                                value: month,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    month.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (MonthModel value) {
+                            setState(() {
+                              selecStartmonth = value;
+                            });
+                          })
                   )),
             ),
             Container(
@@ -1141,30 +1370,38 @@ class PayrollAdjustment extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child: DropdownButton(
-                      value: prov.endMonth,
-                      hint: Text("Select End Month"),
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("March"),
-                          value: "March",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("May"),
-                          value: "May",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("June"),
-                          value: "June",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.endMonth = value;
-                      },
-                    ),
-                  )),
-            ),
+                    child:  DropdownButton<MonthModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select End Month",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectEndmonth,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: monthlist.map((MonthModel month) {
+                            return DropdownMenuItem<MonthModel>(
+                                value: month,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    month.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (MonthModel value) {
+                            setState(() {
+                              selectEndmonth = value;
+                            });
+                          })),
+            )),
             Container(
               height: 65.0,
               child: ListTile(
@@ -1173,28 +1410,37 @@ class PayrollAdjustment extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child: DropdownButton(
-                      value: prov.startYear,
-                      hint: Text("Select Start Year"),
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("2020"),
-                          value: "2020",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2021"),
-                          value: "2021",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2022"),
-                          value: "2022",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.startYear = value;
-                      },
-                    ),
+                    child:DropdownButton<YearModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select Start End",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectStartyear,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: yearList.map((YearModel year) {
+                            return DropdownMenuItem<YearModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (YearModel value) {
+                            setState(() {
+                              selectStartyear = value;
+                            });
+                          })
                   )),
             ),
             Container(
@@ -1224,28 +1470,37 @@ class PayrollAdjustment extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child: DropdownButton(
-                      value: prov.endyear,
-                      hint: Text("Select End year"),
-                      isExpanded: true,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("2023"),
-                          value: "2023",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2024"),
-                          value: "2024",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2025"),
-                          value: "2025",
-                        )
-                      ],
-                      onChanged: (value) {
-                        prov.endyear = value;
-                      },
-                    ),
+                    child: DropdownButton<YearModel>(
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "Select End Year",
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                          underline: Container(),
+                          value: selectEndyear,
+                          iconSize: 30,
+                          icon: Padding(
+                              padding: const EdgeInsets.only(left: 14),
+                              child: Icon(Icons.arrow_drop_down)),
+                          items: yearList.map((YearModel year) {
+                            return DropdownMenuItem<YearModel>(
+                                value: year,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Text(
+                                    year.name,
+                                    style: Theme.of(context).textTheme.headline,
+                                  ),
+                                ));
+                          }).toList(),
+                          onChanged: (YearModel value) {
+                            setState(() {
+                              selectEndyear = value;
+                            });
+                          })
                   )),
             ),
             Container(
