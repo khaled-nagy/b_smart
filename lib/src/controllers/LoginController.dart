@@ -11,11 +11,6 @@ class LoginController extends ControllerMVC {
   static LoginController _this;
 
   LoginController._();
-    
+
   static LoginController get con => _this;
-     loginButton(BuildContext context){
-    return   Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) { 
-         return HomePage();
-        }));
-     }
 }

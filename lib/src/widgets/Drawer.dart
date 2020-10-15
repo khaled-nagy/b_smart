@@ -22,7 +22,7 @@ class Drawerc extends StatelessWidget {
               onTap: () {
                 Navigator.pushAndRemoveUntil(
                     context,
-                    Scaletransition(screen: HomePage()),
+                    Scaletransition(screen: HomeScreen()),
                     (Route<dynamic> route) => false);
               },
               child: new ListTile(

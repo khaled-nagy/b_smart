@@ -9,18 +9,18 @@ import 'package:http/http.dart' as http;
 
 class UserService extends UserRebository {
   @override
-  Future<UserModel> signInWithEmailAndPassword(
-      String email, String pass) async {
-    String url = "${ConstantVarable.baseUrl}/api/login";
+  Future<Map<String, dynamic>> signInWithEmailAndPassword(
+      String userName, String pass) async {
+    String url = "${ConstantVarable.baseUrl}/api/Auth";
     print(url);
-    return await http
-        .post(url, body: {"email": email, "password": pass}).then((response) {
+    return await http.post(url,
+        body: {"userName": userName, "password": pass}).then((response) {
       if (response.statusCode == 200) {
         var jsonValue = jsonDecode(response.body);
-        ConstantVarable.accessToken = jsonValue["access_token"];
-        ConstantVarable.loginError = jsonValue["error"];
+        ConstantVarable.accessToken = jsonValue["accessToken"];
+        ConstantVarable.userName = jsonValue["userName"];
 
-        UserLocalStorage().saveToken(jsonValue["access_token"]).then((value) {
+        UserLocalStorage().saveToken(jsonValue["accessToken"]).then((value) {
           if (value == true) {
             print("تم تخزين ال token بنجاح");
           } else {
@@ -30,41 +30,12 @@ class UserService extends UserRebository {
 
         print(jsonValue);
         print(ConstantVarable.accessToken);
-        print(ConstantVarable.loginError);
-        return UserModel.fromJson(jsonValue["Data"]);
+        print(ConstantVarable.userName);
+        return jsonValue;
       } else {
-        var jsonValue = jsonDecode(response.body);
-        return UserModel.fromJson(jsonValue);
-      }
-    });
-  }
+        // var jsonValue = jsonDecode(response.body);
 
-  @override
-  Future<UserModel> regNewUser(String role, String fName, String lName,
-      String email, String phone, String cityId, String pass) async {
-    String url = ConstantVarable.baseUrl + "/api/register";
-    print(url);
-    print(role);
-    return await http.post(
-      url,
-      body: {
-        "role": role,
-        "fname": fName,
-        "lname": lName,
-        "email": email,
-        "phone": phone,
-        "city_id": cityId,
-        "password": pass,
-      },
-    ).then((response) {
-      if (response.statusCode == 200) {
-        var jsonValue = jsonDecode(response.body);
-        print(jsonValue);
-        return UserModel.fromJson(jsonValue);
-      } else {
-        var jsonValue = jsonDecode(response.body);
-        print(jsonValue);
-        return UserModel.fromJson(jsonValue);
+        return {};
       }
     });
   }

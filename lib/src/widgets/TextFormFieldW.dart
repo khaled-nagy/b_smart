@@ -6,13 +6,25 @@ class TextFormFieldC extends StatelessWidget {
   final String labeltext;
   final double width;
   final double height;
-  TextFormFieldC({this.labeltext, this.height, this.width});
+  final TextEditingController controller;
+  final Function validator;
+  final bool obSecureText;
+  TextFormFieldC(
+      {this.labeltext,
+      this.height,
+      this.width,
+      this.controller,
+      this.validator,
+      this.obSecureText});
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
       height: height,
       child: TextFormField(
+        controller: controller,
+        validator: validator,
+        obscureText: obSecureText,
         decoration: InputDecoration(
             labelText: labeltext,
             labelStyle: Theme.of(context).textTheme.headline2,

@@ -1,15 +1,18 @@
 import 'dart:developer';
 
+import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/controllers/LoginController.dart';
+import 'package:b_smart/src/controllers/UserController.dart';
 import 'package:b_smart/src/screens/forgot_password_screen.dart';
 import 'package:b_smart/src/widgets/BottomNavigationBar.dart';
 import 'package:b_smart/src/widgets/ButtonW.dart';
 import 'package:b_smart/src/widgets/Language_Dropdownbtn.dart';
 import 'package:b_smart/src/widgets/TextFormFieldW.dart';
- 
+
 import 'package:b_smart/src/widgets/transions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,10 +20,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginView extends StateMVC<LoginScreen> {
-  LoginView() : super(LoginController()) {
-    _loginController = LoginController.con;
+  LoginView() : super(UserController()) {
+    _userController = UserController.con;
   }
-  LoginController _loginController;
+  UserController _userController;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -34,6 +38,7 @@ class LoginView extends StateMVC<LoginScreen> {
       backgroundColor: Color(0xffF4F4F4),
       body: SingleChildScrollView(
         child: Form(
+          // key: ConstantVarable.loginformKey,
           child: Center(
               child: Column(
             children: [
@@ -49,17 +54,23 @@ class LoginView extends StateMVC<LoginScreen> {
                 height: size.height * 0.04,
               ),
               TextFormFieldC(
+                controller: ConstantVarable.userNameController,
                 width: size.width * 0.88,
                 height: size.height * 0.075,
                 labeltext: "Domain/Username",
+                // validator: (val) => _userController.validateUserName(val),
+                obSecureText: false,
               ),
               SizedBox(
                 height: size.height * 0.04,
               ),
               TextFormFieldC(
+                controller: ConstantVarable.passController,
                 width: size.width * 0.88,
                 height: size.height * 0.075,
                 labeltext: "Password",
+                // validator: (val) => _userController.validatePassword(val),
+                obSecureText: true,
               ),
               SizedBox(
                 height: size.height * 0.02,
@@ -76,16 +87,57 @@ class LoginView extends StateMVC<LoginScreen> {
               SizedBox(
                 height: size.height * 0.038,
               ),
-              ButtonW(
-                onpress: () {
-                  _loginController.loginButton(context);
-                },
-                height: size.height * 0.065,
-                width: size.width * 0.75,
-                color: Theme.of(context).accentIconTheme.color,
-                text: "Log In",
-                textstyle: Theme.of(context).textTheme.headline1,
-              ),
+              isLoading == false
+                  ? ButtonW(
+                      onpress: () {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        _userController
+                            .signInWithEmailAndPassword(
+                                context,
+                                ConstantVarable.userNameController.text,
+                                ConstantVarable.passController.text)
+                            .then((done) {
+                          if (done == true) {
+                            setState(() {
+                              isLoading = false;
+                            });
+                            Fluttertoast.showToast(
+                                msg: "You have successfully logged in",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Theme.of(context).backgroundColor,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          } else {
+                            setState(() {
+                              isLoading = false;
+                            });
+
+                            Fluttertoast.showToast(
+                                msg:
+                                    "You have an error in your username or password",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                        });
+                      },
+                      height: size.height * 0.065,
+                      width: size.width * 0.75,
+                      color: Theme.of(context).accentIconTheme.color,
+                      text: "Log In",
+                      textstyle: Theme.of(context).textTheme.headline1,
+                    )
+                  : CircularProgressIndicator(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                    ),
               SizedBox(
                 height: size.height * 0.04,
               ),

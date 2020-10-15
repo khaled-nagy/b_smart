@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConstantVarable {
-  static String baseUrl = "https://qsimh.com";
+  static String baseUrl = "https://hcm.bsmart-apps.com/be";
   static String apiImg = "https://www.q8pulse.app/public/";
   static String apiMap = "AIzaSyCZCgOpXKbNdhTHAe4ANYKteYQSIYZYlGA";
 
@@ -10,6 +10,7 @@ class ConstantVarable {
   static String userOrCompany;
   static String otp;
   static String accessToken;
+  static String userName;
   static String loginError;
 
   static final GlobalKey<FormState> regformKey = GlobalKey<FormState>();
@@ -113,25 +114,31 @@ class ConstantVarable {
   // static final TextEditingController vacationStartCalender =
   //     TextEditingController();
   static final TextEditingController amountController = TextEditingController();
-  
+
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
   ///
   ///
-  ///  
-      
-       static final TextEditingController vacationBalanceadjustNotesVontroller =TextEditingController();
-       static final TextEditingController vacationBalanceadjustValueVontroller =TextEditingController();
-       static final TextEditingController textEditingController =TextEditingController();
-       static final TextEditingController terminasionNotescontroller =TextEditingController();
-       static final TextEditingController loanValuecontroller =TextEditingController();
-       static final TextEditingController payrollValueController =TextEditingController();
-       static final TextEditingController payrollNotesController =TextEditingController();
-              static final TextEditingController vacationNotesController =TextEditingController();
-                     static final TextEditingController permissionNotesController =TextEditingController();
+  ///
 
-
-
+  static final TextEditingController vacationBalanceadjustNotesVontroller =
+      TextEditingController();
+  static final TextEditingController vacationBalanceadjustValueVontroller =
+      TextEditingController();
+  static final TextEditingController textEditingController =
+      TextEditingController();
+  static final TextEditingController terminasionNotescontroller =
+      TextEditingController();
+  static final TextEditingController loanValuecontroller =
+      TextEditingController();
+  static final TextEditingController payrollValueController =
+      TextEditingController();
+  static final TextEditingController payrollNotesController =
+      TextEditingController();
+  static final TextEditingController vacationNotesController =
+      TextEditingController();
+  static final TextEditingController permissionNotesController =
+      TextEditingController();
 
   static int vacationStartDay;
   static int vacationStartMonth;

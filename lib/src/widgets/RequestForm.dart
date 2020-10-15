@@ -416,7 +416,7 @@ class Assignment extends StatefulWidget {
   @override
   _AssignmentState createState() => _AssignmentState();
 }
-   
+
 class _AssignmentState extends State<Assignment> {
   List<LocationModel> locationList = [
     LocationModel(id: "1", name: "10"),
@@ -454,27 +454,29 @@ class _AssignmentState extends State<Assignment> {
         height: 470,
         width: size.width * 0.9,
         child: Column(
-          
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                    "New Location :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                   Container(
-                    child:  DropdownButton<LocationModel>(
+                  "New Location ",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                    width: size.width / 2,
+                    child: Card(
+                      child: DropdownButton<LocationModel>(
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Select Location",
+                              "Location",
                               style: Theme.of(context).textTheme.headline5,
                             ),
                           ),
                           underline: Container(),
                           value: selectlocation,
                           iconSize: 30,
+                          isExpanded: true,
                           icon: Padding(
                               padding: const EdgeInsets.only(left: 14),
                               child: Icon(Icons.arrow_drop_down)),
@@ -494,30 +496,35 @@ class _AssignmentState extends State<Assignment> {
                             setState(() {
                               selectlocation = value;
                             });
-                          })
-                  ),
-             
+                          }),
+                    )),
               ],
-            ), SizedBox(height: 40.0,),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                   Text(
-                    "New Department :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  Container(
-                    child:  DropdownButton<DepartmentModel>(
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "New Department ",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                    width: size.width / 2,
+                    child: Card(
+                      child: DropdownButton<DepartmentModel>(
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Select Department",
+                              "Department",
                               style: Theme.of(context).textTheme.headline5,
                             ),
                           ),
                           underline: Container(),
                           value: selectDepartment,
                           iconSize: 30,
+                          isExpanded: true,
                           icon: Padding(
                               padding: const EdgeInsets.only(left: 14),
                               child: Icon(Icons.arrow_drop_down)),
@@ -537,32 +544,35 @@ class _AssignmentState extends State<Assignment> {
                             setState(() {
                               selectDepartment = value;
                             });
-                          })
-                  ),
-            
-               ],),SizedBox(height: 40.0,),
-             Row
-             (
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               
-               children: [
-
-              Text(
-                    "New Position :",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                   Container(
-                    child:  DropdownButton<PositionModel>(
+                          }),
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "New Position ",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Container(
+                    width: size.width / 2,
+                    child: Card(
+                      child: DropdownButton<PositionModel>(
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Select Position",
+                              "Position",
                               style: Theme.of(context).textTheme.headline5,
                             ),
                           ),
                           underline: Container(),
                           value: selectPosition,
                           iconSize: 30,
+                          isExpanded: true,
                           icon: Padding(
                               padding: const EdgeInsets.only(left: 14),
                               child: Icon(Icons.arrow_drop_down)),
@@ -582,10 +592,10 @@ class _AssignmentState extends State<Assignment> {
                             setState(() {
                               selectPosition = value;
                             });
-                          })
-                   ),
-             ],
-             )
+                          }),
+                    )),
+              ],
+            )
           ],
         ),
       ),
@@ -875,51 +885,49 @@ class Loan extends StatefulWidget {
   _LoanState createState() => _LoanState();
 }
 
-
 class _LoanState extends State<Loan> {
-  
-List<LoanTypeModel> loantypelist = [
-  LoanTypeModel(id: "1", name: "10"),
-  LoanTypeModel(id: "2", name: "20"),
-  LoanTypeModel(id: "3", name: "30"),
-  LoanTypeModel(id: "4", name: "40"),
-  LoanTypeModel(id: "5", name: "50"),
-  LoanTypeModel(id: "6", name: "60"),
-];
+  List<LoanTypeModel> loantypelist = [
+    LoanTypeModel(id: "1", name: "10"),
+    LoanTypeModel(id: "2", name: "20"),
+    LoanTypeModel(id: "3", name: "30"),
+    LoanTypeModel(id: "4", name: "40"),
+    LoanTypeModel(id: "5", name: "50"),
+    LoanTypeModel(id: "6", name: "60"),
+  ];
 
-LoanTypeModel selectItemModel;
-MonthModel selectEndmonth;
-MonthModel selecStartmonth;
-YearModel selectStartyear;
-YearModel selectEndyear;
-List<MonthModel> monthlist = [
-  MonthModel(id: "1", name: "January"),
-  MonthModel(id: "2", name: "February"),
-  MonthModel(id: "3", name: "March"),
-  MonthModel(id: "4", name: "April"),
-  MonthModel(id: "5", name: "May"),
-  MonthModel(id: "6", name: "June"),
-  MonthModel(id: "7", name: "July"),
-  MonthModel(id: "8", name: "August"),
-  MonthModel(id: "9", name: "Septemper"),
-  MonthModel(id: "10", name: "October"),
-  MonthModel(id: "11", name: "November"),
-  MonthModel(id: "12", name: "December"),
-];
-List<YearModel> yearList = [
-  YearModel(id: "1", name: "2010"),
-  YearModel(id: "2", name: "2011"),
-  YearModel(id: "3", name: "2012"),
-  YearModel(id: "4", name: "2013"),
-  YearModel(id: "5", name: "2014"),
-  YearModel(id: "6", name: "2015"),
-  YearModel(id: "7", name: "2016"),
-  YearModel(id: "8", name: "2017"),
-  YearModel(id: "9", name: "2018"),
-  YearModel(id: "10", name: "2019"),
-  YearModel(id: "11", name: "2020"),
-  YearModel(id: "12", name: "2021"),
-];
+  LoanTypeModel selectItemModel;
+  MonthModel selectEndmonth;
+  MonthModel selecStartmonth;
+  YearModel selectStartyear;
+  YearModel selectEndyear;
+  List<MonthModel> monthlist = [
+    MonthModel(id: "1", name: "January"),
+    MonthModel(id: "2", name: "February"),
+    MonthModel(id: "3", name: "March"),
+    MonthModel(id: "4", name: "April"),
+    MonthModel(id: "5", name: "May"),
+    MonthModel(id: "6", name: "June"),
+    MonthModel(id: "7", name: "July"),
+    MonthModel(id: "8", name: "August"),
+    MonthModel(id: "9", name: "Septemper"),
+    MonthModel(id: "10", name: "October"),
+    MonthModel(id: "11", name: "November"),
+    MonthModel(id: "12", name: "December"),
+  ];
+  List<YearModel> yearList = [
+    YearModel(id: "1", name: "2010"),
+    YearModel(id: "2", name: "2011"),
+    YearModel(id: "3", name: "2012"),
+    YearModel(id: "4", name: "2013"),
+    YearModel(id: "5", name: "2014"),
+    YearModel(id: "6", name: "2015"),
+    YearModel(id: "7", name: "2016"),
+    YearModel(id: "8", name: "2017"),
+    YearModel(id: "9", name: "2018"),
+    YearModel(id: "10", name: "2019"),
+    YearModel(id: "11", name: "2020"),
+    YearModel(id: "12", name: "2021"),
+  ];
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -971,7 +979,8 @@ List<YearModel> yearList = [
                   )
                 ],
               ),
-              Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Value :",
@@ -992,7 +1001,7 @@ List<YearModel> yearList = [
                   ),
                 ],
               ),
-              new Row( 
+              new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Installments Count ",
@@ -1023,86 +1032,92 @@ List<YearModel> yearList = [
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Start Month :",
+                    "Start Month ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    width: size.width / 2,
-                    child: DropdownButton<MonthModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select Start Month",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<MonthModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "Start Month",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selecStartmonth,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: monthlist.map((MonthModel month) {
-                            return DropdownMenuItem<MonthModel>(
-                                value: month,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    month.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (MonthModel value) {
-                            setState(() {
-                              selecStartmonth = value;
-                            });
-                          })
-                  )
+                            underline: Container(),
+                            value: selecStartmonth,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Padding(
+                                padding: const EdgeInsets.only(),
+                                child: Icon(Icons.arrow_drop_down)),
+                            items: monthlist.map((MonthModel month) {
+                              return DropdownMenuItem<MonthModel>(
+                                  value: month,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      month.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (MonthModel value) {
+                              setState(() {
+                                selecStartmonth = value;
+                              });
+                            }),
+                      ))
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "End Month :",
+                    "End Month ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    width: size.width / 2,
-                    child: DropdownButton<MonthModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select End Month",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<MonthModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "End Month",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selectEndmonth,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: monthlist.map((MonthModel month) {
-                            return DropdownMenuItem<MonthModel>(
-                                value: month,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    month.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (MonthModel value) {
-                            setState(() {
-                              selectEndmonth = value;
-                            });
-                          })
-                  )
+                            underline: Container(),
+                            value: selectEndmonth,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Padding(
+                                padding: const EdgeInsets.only(),
+                                child: Icon(Icons.arrow_drop_down)),
+                            items: monthlist.map((MonthModel month) {
+                              return DropdownMenuItem<MonthModel>(
+                                  value: month,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      month.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (MonthModel value) {
+                              setState(() {
+                                selectEndmonth = value;
+                              });
+                            }),
+                      ))
                 ],
               ),
               new Row(
@@ -1140,39 +1155,40 @@ List<YearModel> yearList = [
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    width: size.width / 2,
-                    child:  DropdownButton<YearModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select Start End",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<YearModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "Start Year",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selectStartyear,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: yearList.map((YearModel year) {
-                            return DropdownMenuItem<YearModel>(
-                                value: year,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    year.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (YearModel value) {
-                            setState(() {
-                              selectStartyear = value;
-                            });
-                          })
-                  )
+                            underline: Container(),
+                            value: selectStartyear,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down),
+                            items: yearList.map((YearModel year) {
+                              return DropdownMenuItem<YearModel>(
+                                  value: year,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      year.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (YearModel value) {
+                              setState(() {
+                                selectStartyear = value;
+                              });
+                            }),
+                      ))
                 ],
               ),
               Row(
@@ -1183,39 +1199,40 @@ List<YearModel> yearList = [
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Container(
-                    width: size.width / 2,
-                    child: DropdownButton<YearModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select End Year",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<YearModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "End Year",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selectEndyear,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: yearList.map((YearModel year) {
-                            return DropdownMenuItem<YearModel>(
-                                value: year,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    year.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (YearModel value) {
-                            setState(() {
-                              selectEndyear = value;
-                            });
-                          })
-                  )
+                            underline: Container(),
+                            value: selectEndyear,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down),
+                            items: yearList.map((YearModel year) {
+                              return DropdownMenuItem<YearModel>(
+                                  value: year,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      year.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (YearModel value) {
+                              setState(() {
+                                selectEndyear = value;
+                              });
+                            }),
+                      ))
                 ],
               ),
             ],
@@ -1232,49 +1249,48 @@ class PayrollAdjustment extends StatefulWidget {
 }
 
 class _PayrollAdjustmentState extends State<PayrollAdjustment> {
-  
-List<PayItemModel> payItemList = [
-  PayItemModel(id: "1", name: "10"),
-  PayItemModel(id: "2", name: "20"),
-  PayItemModel(id: "3", name: "30"),
-  PayItemModel(id: "4", name: "40"),
-  PayItemModel(id: "5", name: "50"),
-  PayItemModel(id: "6", name: "60"),
-];
+  List<PayItemModel> payItemList = [
+    PayItemModel(id: "1", name: "10"),
+    PayItemModel(id: "2", name: "20"),
+    PayItemModel(id: "3", name: "30"),
+    PayItemModel(id: "4", name: "40"),
+    PayItemModel(id: "5", name: "50"),
+    PayItemModel(id: "6", name: "60"),
+  ];
 
-PayItemModel selectpayItem;
-MonthModel selectEndmonth;
-MonthModel selecStartmonth;
-YearModel selectStartyear;
-YearModel selectEndyear;
-List<MonthModel> monthlist = [
-  MonthModel(id: "1", name: "January"),
-  MonthModel(id: "2", name: "February"),
-  MonthModel(id: "3", name: "March"),
-  MonthModel(id: "4", name: "April"),
-  MonthModel(id: "5", name: "May"),
-  MonthModel(id: "6", name: "June"),
-  MonthModel(id: "7", name: "July"),
-  MonthModel(id: "8", name: "August"),
-  MonthModel(id: "9", name: "Septemper"),
-  MonthModel(id: "10", name: "October"),
-  MonthModel(id: "11", name: "November"),
-  MonthModel(id: "12", name: "December"),
-];
-List<YearModel> yearList = [
-  YearModel(id: "1", name: "2010"),
-  YearModel(id: "2", name: "2011"),
-  YearModel(id: "3", name: "2012"),
-  YearModel(id: "4", name: "2013"),
-  YearModel(id: "5", name: "2014"),
-  YearModel(id: "6", name: "2015"),
-  YearModel(id: "7", name: "2016"),
-  YearModel(id: "8", name: "2017"),
-  YearModel(id: "9", name: "2018"),
-  YearModel(id: "10", name: "2019"),
-  YearModel(id: "11", name: "2020"),
-  YearModel(id: "12", name: "2021"),
-];
+  PayItemModel selectpayItem;
+  MonthModel selectEndmonth;
+  MonthModel selecStartmonth;
+  YearModel selectStartyear;
+  YearModel selectEndyear;
+  List<MonthModel> monthlist = [
+    MonthModel(id: "1", name: "January"),
+    MonthModel(id: "2", name: "February"),
+    MonthModel(id: "3", name: "March"),
+    MonthModel(id: "4", name: "April"),
+    MonthModel(id: "5", name: "May"),
+    MonthModel(id: "6", name: "June"),
+    MonthModel(id: "7", name: "July"),
+    MonthModel(id: "8", name: "August"),
+    MonthModel(id: "9", name: "Septemper"),
+    MonthModel(id: "10", name: "October"),
+    MonthModel(id: "11", name: "November"),
+    MonthModel(id: "12", name: "December"),
+  ];
+  List<YearModel> yearList = [
+    YearModel(id: "1", name: "2010"),
+    YearModel(id: "2", name: "2011"),
+    YearModel(id: "3", name: "2012"),
+    YearModel(id: "4", name: "2013"),
+    YearModel(id: "5", name: "2014"),
+    YearModel(id: "6", name: "2015"),
+    YearModel(id: "7", name: "2016"),
+    YearModel(id: "8", name: "2017"),
+    YearModel(id: "9", name: "2018"),
+    YearModel(id: "10", name: "2019"),
+    YearModel(id: "11", name: "2020"),
+    YearModel(id: "12", name: "2021"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -1289,11 +1305,11 @@ List<YearModel> yearList = [
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "PayItem :",
+                    "PayItem ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child:  DropdownButton<PayItemModel>(
+                    child: DropdownButton<PayItemModel>(
                       iconSize: 30,
                       icon: Padding(
                           padding: const EdgeInsets.only(left: 14),
@@ -1325,123 +1341,130 @@ List<YearModel> yearList = [
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "Start Month :",
+                    "Start Month ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child:DropdownButton<MonthModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select Start Month",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<MonthModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "Start Month",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selecStartmonth,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: monthlist.map((MonthModel month) {
-                            return DropdownMenuItem<MonthModel>(
-                                value: month,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    month.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (MonthModel value) {
-                            setState(() {
-                              selecStartmonth = value;
-                            });
-                          })
-                  )),
+                            underline: Container(),
+                            value: selecStartmonth,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down),
+                            items: monthlist.map((MonthModel month) {
+                              return DropdownMenuItem<MonthModel>(
+                                  value: month,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      month.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (MonthModel value) {
+                              setState(() {
+                                selecStartmonth = value;
+                              });
+                            }),
+                      ))),
             ),
             Container(
-              height: 65.0,
-              child: ListTile(
+                height: 65.0,
+                child: ListTile(
                   leading: Text(
-                    "End Month :",
+                    "End Month ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child:  DropdownButton<MonthModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select End Month",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<MonthModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "End Month",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selectEndmonth,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: monthlist.map((MonthModel month) {
-                            return DropdownMenuItem<MonthModel>(
-                                value: month,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    month.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (MonthModel value) {
-                            setState(() {
-                              selectEndmonth = value;
-                            });
-                          })),
-            )),
+                            underline: Container(),
+                            value: selectEndmonth,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down),
+                            items: monthlist.map((MonthModel month) {
+                              return DropdownMenuItem<MonthModel>(
+                                  value: month,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      month.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (MonthModel value) {
+                              setState(() {
+                                selectEndmonth = value;
+                              });
+                            }),
+                      )),
+                )),
             Container(
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "Start Year :",
+                    "Start Year ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child:DropdownButton<YearModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select Start End",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<YearModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "Start Year",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selectStartyear,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: yearList.map((YearModel year) {
-                            return DropdownMenuItem<YearModel>(
-                                value: year,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    year.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (YearModel value) {
-                            setState(() {
-                              selectStartyear = value;
-                            });
-                          })
-                  )),
+                            underline: Container(),
+                            value: selectStartyear,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down),
+                            items: yearList.map((YearModel year) {
+                              return DropdownMenuItem<YearModel>(
+                                  value: year,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      year.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (YearModel value) {
+                              setState(() {
+                                selectStartyear = value;
+                              });
+                            }),
+                      ))),
             ),
             Container(
                 height: 65.0,
@@ -1466,42 +1489,44 @@ List<YearModel> yearList = [
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "End Year :",
+                    "End Year ",
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   title: Container(
-                    child: DropdownButton<YearModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Select End Year",
-                              style: Theme.of(context).textTheme.headline5,
+                      width: size.width / 2,
+                      child: Card(
+                        child: DropdownButton<YearModel>(
+                            hint: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "End Year",
+                                style: Theme.of(context).textTheme.headline5,
+                              ),
                             ),
-                          ),
-                          underline: Container(),
-                          value: selectEndyear,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: yearList.map((YearModel year) {
-                            return DropdownMenuItem<YearModel>(
-                                value: year,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    year.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (YearModel value) {
-                            setState(() {
-                              selectEndyear = value;
-                            });
-                          })
-                  )),
+                            underline: Container(),
+                            value: selectEndyear,
+                            iconSize: 30,
+                            isExpanded: true,
+                            icon: Icon(Icons.arrow_drop_down),
+                            items: yearList.map((YearModel year) {
+                              return DropdownMenuItem<YearModel>(
+                                  value: year,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8, right: 8),
+                                    child: Text(
+                                      year.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline,
+                                    ),
+                                  ));
+                            }).toList(),
+                            onChanged: (YearModel value) {
+                              setState(() {
+                                selectEndyear = value;
+                              });
+                            }),
+                      ))),
             ),
             Container(
               height: 65.0,

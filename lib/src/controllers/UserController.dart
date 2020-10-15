@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:b_smart/src/data/models/MonthModel.dart';
 import 'package:b_smart/src/data/models/ContactResonModel.dart';
+import 'package:b_smart/src/screens/homePage_Screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/data/services/UserServicess.dart';
@@ -41,90 +42,38 @@ class UserController extends ControllerMVC {
     MonthModel(id: "3", name: "جدة"),
   ];
 
-  // Future<bool> signInWithEmailAndPassword(
-  //     BuildContext context, String email, String pass) async {
-  //   final form = ConstantVarable.loginformKey.currentState;
-  //   ConstantVarable.loginAutoValid = true;
-  //   if (form.validate()) {
-  //     form.save();
+  Future<bool> signInWithEmailAndPassword(
+      BuildContext context, String userName, String pass) async {
+    // final form = ConstantVarable.loginformKey.currentState;
+    // ConstantVarable.loginAutoValid = true;
+    // if (form.validate()) {
+    //   form.save();
 
-  //     await userService.signInWithEmailAndPassword(email, pass).then((user) {
-  //       print(user.email);
-  //       if (user.email != null) {
-  //         UserLocalStorage().saveClient(user).then((saved) {
-  //           print(user.role);
-  //           if (user.role == "user") {
-  //             Navigator.pushAndRemoveUntil(
-  //                 context,
-  //                 MaterialPageRoute(builder: (context) => PagesTestWidget()),
-  //                 (Route<dynamic> route) => false);
-  //           } else {
-  //             Navigator.pushAndRemoveUntil(
-  //                 context,
-  //                 MaterialPageRoute(builder: (context) => CompanyPages()),
-  //                 (Route<dynamic> route) => false);
-  //           }
-  //         });
+    await userService
+        .signInWithEmailAndPassword(userName, pass)
+        .then((loginMap) {
+      if (loginMap.isNotEmpty) {
+        print("login map is :" + loginMap.toString());
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+            (Route<dynamic> route) => false);
 
-  //         return true;
-  //       } else {
-  //         print("error");
-  //         setState(() {
-  //           errorMsg = user.error;
-  //         });
-  //         return false;
-  //       }
-  //     });
-  //   }
-  //   refresh();
+        return true;
+      } else {
+        print("login map is :" + loginMap.toString());
+        print("error");
+        // setState(() {
+        //   errorMsg = user.error;
+        // });
+        return false;
+      }
+    });
+    // }
+    // refresh();
 
-  //   return false;
-  // }
-
-  // Future<bool> regNewUser(
-  //     BuildContext context,
-  //     String role,
-  //     String fName,
-  //     String lName,
-  //     String email,
-  //     String phone,
-  //     String cityId,
-  //     String pass) async {
-  //   final form = ConstantVarable.regformKey.currentState;
-  //   ConstantVarable.regAutoValid = true;
-  //   if (form.validate()) {
-  //     form.save();
-
-  //     await userService
-  //         .regNewUser(role, fName, lName, email, phone, cityId, pass)
-  //         .then((user) {
-  //       print(user.statusCode);
-  //       if (user.statusCode == 200) {
-  //         Navigator.pushAndRemoveUntil(
-  //             context,
-  //             MaterialPageRoute(
-  //                 builder: (context) => VerificationCodeScreen(
-  //                       email: email == null ? "" : email,
-  //                       verificationCode: user.otp,
-  //                     )),
-  //             (Route<dynamic> route) => false);
-
-  //         print("true");
-  //         return true;
-  //       } else {
-  //         errorMsg = user.error;
-
-  //         print("false $errorMsg");
-  //         print("false");
-  //         setState(() {});
-  //         return false;
-  //       }
-  //     });
-  //   }
-  //   refresh();
-
-  //   return false;
-  // }
+    // return false;
+  }
 
   Future<bool> sendCodeActivation(String email, String otp) async {
     return await http.post("${ConstantVarable.baseUrl}/api/getCodeActivation",

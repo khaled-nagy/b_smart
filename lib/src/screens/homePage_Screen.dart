@@ -5,13 +5,13 @@ import 'package:b_smart/src/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  createState() => HomePageView();
+  createState() => HomeView();
 }
 
-class HomePageView extends StateMVC<HomePage> {
-  HomePageView() : super(HomePageController()) {
+class HomeView extends StateMVC<HomeScreen> {
+  HomeView() : super(HomePageController()) {
     _homePageController = HomePageController.con;
   }
   HomePageController _homePageController;
