@@ -1,4 +1,10 @@
-import 'dart:io';
+import 'dart:convert';
+    
+           
+
+VacationIdModel vacationModelFromJson(String str) => VacationIdModel.fromjson(json.decode(str));
+
+String vacationModeltoJson(VacationIdModel data) => json.encode(data.toJson());
 
    class VacationIdModel {
         String name;
@@ -9,7 +15,10 @@ import 'dart:io';
           id: jsondata["id"],
           name: jsondata["name"]
         );
-         
+ 
        
-        
+         Map<String, dynamic> toJson() => {
+        "id": id,
+        "Name": name,
+      };
    }
