@@ -57,7 +57,7 @@ class LoginView extends StateMVC<LoginScreen> {
                 controller: ConstantVarable.userNameController,
                 width: size.width * 0.88,
                 height: size.height * 0.075,
-                labeltext: "Domain/Username",
+                labeltext: "_user_name".tr(),
                 // validator: (val) => _userController.validateUserName(val),
                 obSecureText: false,
               ),
@@ -68,7 +68,7 @@ class LoginView extends StateMVC<LoginScreen> {
                 controller: ConstantVarable.passController,
                 width: size.width * 0.88,
                 height: size.height * 0.075,
-                labeltext: "Password",
+                labeltext: "_pass".tr(),
                 // validator: (val) => _userController.validatePassword(val),
                 obSecureText: true,
               ),
@@ -79,7 +79,7 @@ class LoginView extends StateMVC<LoginScreen> {
                 width: size.width * 0.88,
                 height: size.height * 0.045,
                 child: Text(
-                  "Language",
+                  "_language".tr(),
                   style: Theme.of(context).textTheme.headline2,
                 ),
               ),
@@ -132,7 +132,7 @@ class LoginView extends StateMVC<LoginScreen> {
                       height: size.height * 0.065,
                       width: size.width * 0.75,
                       color: Theme.of(context).accentIconTheme.color,
-                      text: "Log In",
+                      text: "_login".tr(),
                       textstyle: Theme.of(context).textTheme.headline1,
                     )
                   : CircularProgressIndicator(
@@ -143,7 +143,7 @@ class LoginView extends StateMVC<LoginScreen> {
               ),
               InkWell(
                 child: Text(
-                  "Forget Password?",
+                  "_forgot_pass".tr(),
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 onTap: () {

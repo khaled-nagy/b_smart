@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+gauimport 'package:easy_localization/easy_localization.dart';
 class NotificationCard extends StatefulWidget {
   final int poision;
   NotificationCard({this.poision});
@@ -29,13 +29,13 @@ class _NotificationCardState extends State<NotificationCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Workflow Request Has Been Rejected",
+                      "_notificatin_1",
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                     Text(
-                      "vacation request #37 has been rejec...",
+                      "_notificatin_1",
                       style: Theme.of(context).textTheme.bodyText2,
-                    ),
+                    ).tr(),
                     Text(
                       "July 20.2020 (08:00 pm)",
                       style: Theme.of(context).textTheme.headline5,
@@ -51,9 +51,9 @@ class _NotificationCardState extends State<NotificationCard> {
               context: context,
               builder: (_) => AlertDialog(
                     content: Text(
-                      "vacation request #37 has been  Rejected",
+                      "_notificatin_1",
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                   ));
         },
       ),

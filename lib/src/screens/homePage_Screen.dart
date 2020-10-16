@@ -4,7 +4,7 @@ import 'package:b_smart/src/widgets/ButtonW.dart';
 import 'package:b_smart/src/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class HomeScreen extends StatefulWidget {
   @override
   createState() => HomeView();
@@ -32,7 +32,7 @@ class HomeView extends StateMVC<HomeScreen> {
                 height: 50.0,
                 onpress: () {},
                 width: size.width * 0.8,
-                text: "Sign IN",
+                text: "_login".tr(),
                 color: Theme.of(context).backgroundColor,
                 textstyle: Theme.of(context).textTheme.headline1,
               ),
@@ -45,7 +45,7 @@ class HomeView extends StateMVC<HomeScreen> {
                 height: 50.0,
                 onpress: () {},
                 width: size.width * 0.8,
-                text: "Sign Out",
+                text: "_log_Out".tr(),
                 color: Theme.of(context).backgroundColor,
                 textstyle: Theme.of(context).textTheme.headline1,
               ),

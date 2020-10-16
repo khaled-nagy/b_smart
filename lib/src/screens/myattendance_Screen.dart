@@ -8,7 +8,7 @@ import 'package:b_smart/src/widgets/CheckBox.dart';
 import 'package:b_smart/src/widgets/DropDown_BtnW.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 
 class MyAttendance extends StatefulWidget {
@@ -21,9 +21,8 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
     _myAttendanceController = MyAttendanceController.con;
   }
   MyAttendanceController _myAttendanceController;
-  String dropDownTitleMonth = "Select Month";
-  String dropDowntitleyear = "Select Year";
-  MonthModel selectedCity;
+   
+   MonthModel selectedCity;
   YearModel selectedYear;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                 height: 50.0,
                 onpress: () {},
                 width: size.width * 0.8,
-                text: "Sign IN",
+                text: "_login".tr(),
                 color: Theme.of(context).backgroundColor,
                 textstyle: Theme.of(context).textTheme.headline1,
               ),
@@ -58,7 +57,7 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                 height: 50.0,
                 onpress: () {},
                 width: size.width * 0.8,
-                text: "Sign Out",
+                text: "_log_Out".tr(),
                 color: Theme.of(context).backgroundColor,
                 textstyle: Theme.of(context).textTheme.headline1,
               ),
@@ -76,9 +75,9 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                 children: [
                   Container(
                     child: Text(
-                      "Display Attendance ?",
+                      "_Display_Attendance",
                       style: Theme.of(context).textTheme.bodyText1,
-                    ),
+                    ).tr(),
                     alignment: Alignment.topLeft,
                   ),
                   CheckBoxW()
@@ -107,11 +106,11 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                                       padding: const EdgeInsets.only(
                                           left: 8, right: 8),
                                       child: Text(
-                                        dropDowntitleyear,
+                                        "_Select_Year",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline5,
-                                      ),
+                                      ).tr(),
                                     ),
                                     underline: Container(),
                                     value: selectedYear,
@@ -159,11 +158,11 @@ class MyAttendanceView extends StateMVC<MyAttendance> {
                                       padding: const EdgeInsets.only(
                                           left: 8, right: 8),
                                       child: Text(
-                                        dropDownTitleMonth,
+                                        "_Select_Month",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline5,
-                                      ),
+                                      ).tr(),
                                     ),
                                     underline: Container(),
                                     value: selectedCity,

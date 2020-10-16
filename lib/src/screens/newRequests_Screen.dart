@@ -6,7 +6,7 @@ import 'package:b_smart/src/widgets/RequestsDropDown.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NewRequests extends StatefulWidget {
   @override
   createState() => NewRequestsView();
@@ -64,9 +64,9 @@ class NewRequestsView extends StateMVC<NewRequests> {
         child: FlatButton(
           onPressed: () {},
           child: Text(
-            "Save Request",
+            "_Save_Request",
             style: Theme.of(context).textTheme.headline1,
-          ),
+          ).tr(),
         ),
       ),
     );

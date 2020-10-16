@@ -31,8 +31,8 @@ Widget appbar({BuildContext context}) {
           width: size.width * 0.35,
           child: DropdownButton(
             underline: Container(),
-            hint: Text("Ahmed adel",
-                style: Theme.of(context).textTheme.headline3),
+            hint: Text("_User_Name",
+                style: Theme.of(context).textTheme.headline3).tr(),
             iconDisabledColor: Theme.of(context).backgroundColor,
 
             iconEnabledColor: Theme.of(context).backgroundColor,
@@ -51,7 +51,7 @@ Widget appbar({BuildContext context}) {
                         return MyProfile();
                       }));
                     },
-                    child: Text("My Profile")),
+                    child: Text("_My_Profile").tr()),
                 value: "Profile",
               ),
               DropdownMenuItem(
@@ -65,12 +65,12 @@ Widget appbar({BuildContext context}) {
                         );
                       }));
                     },
-                    child: Text("Change Password")),
+                    child: Text("_Change_Passwrod").tr()),
                 value: "ChangePass",
               ),
               DropdownMenuItem(
                 child: InkWell(
-                  child: Text("Log Out"),
+                  child: Text("_log_Out").tr(),
                   onTap: () {
                     Navigator.pushAndRemoveUntil(
                         context,

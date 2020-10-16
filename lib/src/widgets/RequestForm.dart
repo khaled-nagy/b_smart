@@ -15,9 +15,7 @@ import 'package:b_smart/src/widgets/TextFormFieldW%20copy.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:nepali_date_picker/nepali_date_picker.dart';
-import 'package:provider/provider.dart';
+  import 'package:provider/provider.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
 
 // forms types
@@ -53,18 +51,18 @@ class _VacationState extends State<Vacation> {
               Row(
                 children: [
                   Text(
-                    "Vacation Type ID ",
+                    "_Vacation_Type_ID",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                       width: size.width / 2.3,
                       child: DropdownButton<VacationIdModel>(
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Vacation ID",
+                              "_vacation_ID",
                               style: Theme.of(context).textTheme.headline5,
-                            ),
+                            ).tr(),
                           ),
                           underline: Container(),
                           value: selectedId,
@@ -95,8 +93,8 @@ class _VacationState extends State<Vacation> {
                   child: new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Number Of Days ",
-                      style: Theme.of(context).textTheme.headline2),
+                  Text("_Numers_of_Days",
+                      style: Theme.of(context).textTheme.headline2).tr(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: new Text(prov.counter.toString()),
@@ -125,9 +123,9 @@ class _VacationState extends State<Vacation> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Start Date",
+                    "_start_Date",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                     width: size.width / 2,
                     child: DateTimePicker(
@@ -157,9 +155,9 @@ class _VacationState extends State<Vacation> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "End Date",
+                    "_End_Date",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                     width: size.width / 2,
                     child: DateTimePicker(
@@ -195,15 +193,15 @@ class _VacationState extends State<Vacation> {
                 height: 80.0,
                 child: ListTile(
                   leading: Text(
-                    "Notes :",
+                    "_Notes",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: TextFormFieldW(
                     textInputType: TextInputType.text,
                     controller: ConstantVarable.vacationNotesController,
                     validator: (val) =>
                         UserController().validateAnyFeild(context, val),
-                    hintText: "You Can Add Notes Here",
+                    hintText: "_Add_notes_Here".tr(),
                     searchOrKnow: false,
                     obSecureText: false,
                     timeOrNo: true,
@@ -253,9 +251,9 @@ class _PermissionState extends State<Permission> {
             Row(
               children: [
                 Text(
-                  "Permission Type ID ",
+                  "_permission_type_id",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                   width: size.width / 2.3,
                   child: DropdownButton(
@@ -266,9 +264,9 @@ class _PermissionState extends State<Permission> {
                     hint: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Permision ID",
+                        "Permission_ID",
                         style: Theme.of(context).textTheme.headline5,
-                      ),
+                      ).tr(),
                     ),
                     value: selectedId,
                     isExpanded: true,
@@ -291,9 +289,9 @@ class _PermissionState extends State<Permission> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Permisson Date",
+                  "_Premission_Date",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                   width: size.width / 2,
                   child: DateTimePicker(
@@ -324,7 +322,7 @@ class _PermissionState extends State<Permission> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Duration ", style: Theme.of(context).textTheme.headline2),
+                Text("_Duration", style: Theme.of(context).textTheme.headline2).tr(),
                 SizedBox(
                   width: size.width * 0.040,
                 ),
@@ -341,15 +339,15 @@ class _PermissionState extends State<Permission> {
                     prov.durationIncaresment();
                   },
                 ),
-                Text("Minute")
+                Text("_Minute").tr()
               ],
             ),
             Row(
               children: [
                 Text(
-                  "Start Time",
+                  "_start_time",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                   width: size.width / 2,
                   child: TextFormFieldW(
@@ -368,9 +366,9 @@ class _PermissionState extends State<Permission> {
             Row(
               children: [
                 Text(
-                  "End Time",
+                  "_end_Time",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                   width: size.width / 2,
                   child: TextFormFieldW(
@@ -390,15 +388,15 @@ class _PermissionState extends State<Permission> {
               height: 80.0,
               child: ListTile(
                 leading: Text(
-                  "Notes",
+                  "_Notes",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 title: TextFormFieldW(
                   textInputType: TextInputType.text,
                   controller: ConstantVarable.permissionNotesController,
                   validator: (val) =>
                       UserController().validateAnyFeild(context, val),
-                  hintText: "You Can Add Notes here ",
+                  hintText: "_Add_notes_Here".tr(),
                   searchOrKnow: false,
                   obSecureText: false,
                   timeOrNo: true,
@@ -459,9 +457,9 @@ class _AssignmentState extends State<Assignment> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "New Location ",
+                  "_New_LOcation",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                     width: size.width / 2,
                     child: Card(
@@ -469,9 +467,9 @@ class _AssignmentState extends State<Assignment> {
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Location",
+                              "_Location",
                               style: Theme.of(context).textTheme.headline5,
-                            ),
+                            ).tr(),
                           ),
                           underline: Container(),
                           value: selectlocation,
@@ -507,9 +505,9 @@ class _AssignmentState extends State<Assignment> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "New Department ",
+                  "_New_Department",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                     width: size.width / 2,
                     child: Card(
@@ -517,9 +515,9 @@ class _AssignmentState extends State<Assignment> {
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Department",
+                              "_Department",
                               style: Theme.of(context).textTheme.headline5,
-                            ),
+                            ).tr(),
                           ),
                           underline: Container(),
                           value: selectDepartment,
@@ -555,9 +553,9 @@ class _AssignmentState extends State<Assignment> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "New Position ",
+                  "_New_Postion",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                     width: size.width / 2,
                     child: Card(
@@ -565,9 +563,9 @@ class _AssignmentState extends State<Assignment> {
                           hint: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Text(
-                              "Position",
+                              "_Position",
                               style: Theme.of(context).textTheme.headline5,
-                            ),
+                            ).tr(),
                           ),
                           underline: Container(),
                           value: selectPosition,
@@ -647,15 +645,15 @@ class _VacationBalanceState extends State<VacationBalance> {
                 height: 80.0,
                 child: ListTile(
                     leading: Text(
-                      "Vacation Type ID :",
+                      "_Vacation_Type_ID",
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                     title: Container(
                       child: DropdownButton(
                         hint: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("Vacation ID",
-                              style: Theme.of(context).textTheme.headline5),
+                          child: Text("_vacation_ID",
+                              style: Theme.of(context).textTheme.headline5).tr(),
                         ),
                         iconSize: 30.0,
                         icon: Padding(
@@ -680,15 +678,15 @@ class _VacationBalanceState extends State<VacationBalance> {
                 height: 80.0,
                 child: ListTile(
                     leading: Text(
-                      "Year :",
+                      "_Year",
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                     title: Container(
                       child: DropdownButton(
                         hint: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("Select Year",
-                              style: Theme.of(context).textTheme.headline5),
+                          child: Text("_Select_Year",
+                              style: Theme.of(context).textTheme.headline5).tr(),
                         ),
                         iconSize: 30.0,
                         icon: Padding(
@@ -713,9 +711,9 @@ class _VacationBalanceState extends State<VacationBalance> {
                 height: 80.0,
                 child: ListTile(
                     leading: Text(
-                      "Value :",
+                      "_Value",
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                     title: Container(
                       child: TextFormFieldW(
                         textInputType: TextInputType.text,
@@ -734,16 +732,16 @@ class _VacationBalanceState extends State<VacationBalance> {
                 height: 80.0,
                 child: ListTile(
                   leading: Text(
-                    "Notes",
+                    "_Notes",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: TextFormFieldW(
                     textInputType: TextInputType.text,
                     controller:
                         ConstantVarable.vacationBalanceadjustNotesVontroller,
                     validator: (val) =>
                         UserController().validateAnyFeild(context, val),
-                    hintText: "You Can Add Notes Here",
+                    hintText: "_Add_notes_Here".tr(),
                     searchOrKnow: false,
                     obSecureText: false,
                     timeOrNo: true,
@@ -786,16 +784,16 @@ class _TerminationState extends State<Termination> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Termination Type ",
+                  "_Termination_Type",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                   width: size.width / 2,
                   child: DropdownButton(
                     hint: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Select Type",
-                          style: Theme.of(context).textTheme.headline5),
+                      child: Text("_select_Type",
+                          style: Theme.of(context).textTheme.headline5).tr(),
                     ),
                     iconSize: 30.0,
                     icon: Padding(
@@ -821,9 +819,9 @@ class _TerminationState extends State<Termination> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Last Working day",
+                  "_last_Working_Day",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 Container(
                   width: size.width / 2,
                   child: DateTimePicker(
@@ -855,7 +853,7 @@ class _TerminationState extends State<Termination> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Notes :",
+                  "_Notes".tr(),
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 Container(
@@ -865,7 +863,7 @@ class _TerminationState extends State<Termination> {
                     controller: ConstantVarable.terminasionNotescontroller,
                     validator: (val) =>
                         UserController().validateAnyFeild(context, val),
-                    hintText: "You Can Add Notes Here",
+                    hintText: "_Add_notes_Here".tr(),
                     searchOrKnow: false,
                     obSecureText: false,
                     timeOrNo: true,
@@ -945,9 +943,9 @@ class _LoanState extends State<Loan> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Loan Type ",
+                    "_Loan_Type",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                     width: size.width / 2,
                     child: DropdownButton(
@@ -958,9 +956,9 @@ class _LoanState extends State<Loan> {
                       hint: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Permision ID",
+                          "_Loan_ID",
                           style: Theme.of(context).textTheme.headline5,
-                        ),
+                        ).tr(),
                       ),
                       value: selectItemModel,
                       isExpanded: true,
@@ -983,9 +981,9 @@ class _LoanState extends State<Loan> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Value :",
+                    "_Value",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Expanded(
                     flex: 1,
                     child: TextFormFieldW(
@@ -1004,8 +1002,8 @@ class _LoanState extends State<Loan> {
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Installments Count ",
-                      style: Theme.of(context).textTheme.headline2),
+                  Text("_Installment_Value",
+                      style: Theme.of(context).textTheme.headline2).tr(),
                   Text(prov.count.toString()),
                   Container(
                     width: 100,
@@ -1032,9 +1030,9 @@ class _LoanState extends State<Loan> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Start Month ",
+                    "_Start_Month",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                       width: size.width / 2,
                       child: Card(
@@ -1042,9 +1040,9 @@ class _LoanState extends State<Loan> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "Start Month",
+                                "_Select_Month",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selecStartmonth,
@@ -1078,9 +1076,9 @@ class _LoanState extends State<Loan> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "End Month ",
+                    "_End_Month",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                       width: size.width / 2,
                       child: Card(
@@ -1088,9 +1086,9 @@ class _LoanState extends State<Loan> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "End Month",
+                                "_Select_Month",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selectEndmonth,
@@ -1123,8 +1121,8 @@ class _LoanState extends State<Loan> {
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("InstallmentValue ",
-                      style: Theme.of(context).textTheme.headline2),
+                  Text("_Installment_Value",
+                      style: Theme.of(context).textTheme.headline2).tr(),
                   Text(prov.count.toString()),
                   Container(
                     width: 100,
@@ -1151,9 +1149,9 @@ class _LoanState extends State<Loan> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Start Year",
+                    "_Start_Year",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                       width: size.width / 2,
                       child: Card(
@@ -1161,9 +1159,9 @@ class _LoanState extends State<Loan> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "Start Year",
+                                "_Select_Year",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selectStartyear,
@@ -1195,9 +1193,9 @@ class _LoanState extends State<Loan> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "End Year",
+                    "_End_Year",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   Container(
                       width: size.width / 2,
                       child: Card(
@@ -1205,9 +1203,9 @@ class _LoanState extends State<Loan> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "End Year",
+                                "_Select_Year",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selectEndyear,
@@ -1305,9 +1303,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "PayItem ",
+                    "_Pay_Item",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: Container(
                     child: DropdownButton<PayItemModel>(
                       iconSize: 30,
@@ -1317,9 +1315,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                       hint: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Pay Item",
+                          "_Select_Item",
                           style: Theme.of(context).textTheme.headline5,
-                        ),
+                        ).tr(),
                       ),
                       value: selectpayItem,
                       isExpanded: true,
@@ -1341,9 +1339,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "Start Month ",
+                    "_Start_Month",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: Container(
                       width: size.width / 2,
                       child: Card(
@@ -1351,9 +1349,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "Start Month",
+                                "_Select_Month",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selecStartmonth,
@@ -1384,9 +1382,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                 height: 65.0,
                 child: ListTile(
                   leading: Text(
-                    "End Month ",
+                    "_End_Month",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: Container(
                       width: size.width / 2,
                       child: Card(
@@ -1394,9 +1392,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "End Month",
+                                "_Select_Month",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selectEndmonth,
@@ -1427,9 +1425,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "Start Year ",
+                    "_Start_Year",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: Container(
                       width: size.width / 2,
                       child: Card(
@@ -1437,9 +1435,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "Start Year",
+                                "_Select_Year",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selectStartyear,
@@ -1470,9 +1468,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                 height: 65.0,
                 child: ListTile(
                     leading: Text(
-                      "Value:",
+                      "_Value",
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                     title: Container(
                       child: TextFormFieldW(
                         textInputType: TextInputType.text,
@@ -1489,9 +1487,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
               height: 65.0,
               child: ListTile(
                   leading: Text(
-                    "End Year ",
+                    "_End_Year",
                     style: Theme.of(context).textTheme.headline2,
-                  ),
+                  ).tr(),
                   title: Container(
                       width: size.width / 2,
                       child: Card(
@@ -1499,9 +1497,9 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
                             hint: Padding(
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Text(
-                                "End Year",
+                                "_Select_Year",
                                 style: Theme.of(context).textTheme.headline5,
-                              ),
+                              ).tr(),
                             ),
                             underline: Container(),
                             value: selectEndyear,
@@ -1532,15 +1530,15 @@ class _PayrollAdjustmentState extends State<PayrollAdjustment> {
               height: 65.0,
               child: ListTile(
                 leading: Text(
-                  "Notes",
+                  "_Notes",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
                 title: TextFormFieldW(
                   textInputType: TextInputType.text,
                   controller: ConstantVarable.payrollNotesController,
                   validator: (val) =>
                       UserController().validateAnyFeild(context, val),
-                  hintText: "You Can Add Notes Here",
+                  hintText: "_Add_notes_Here".tr(),
                   searchOrKnow: false,
                   obSecureText: false,
                   timeOrNo: true,

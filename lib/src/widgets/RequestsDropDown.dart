@@ -1,7 +1,7 @@
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SelectRequestType extends StatefulWidget {
   @override
   _SelectRequestTypeState createState() => _SelectRequestTypeState();
@@ -23,36 +23,36 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
           
           child: DropdownButton(
             underline: Container(),
-            hint: Text("Select Request Type"),
+            hint: Text("_Select_Request_Type").tr(),
             value: prov.requesttype ,
             isExpanded: true,
             items: [
               DropdownMenuItem(
-                child: Text(" Vacation Request"),
+                child: Text("_Vacation_request").tr(),
                 value: "Vacation Request",
               ),
               DropdownMenuItem(
-                child: Text(" Permission Request"),
+                child: Text("_Permission_Request").tr(),
                 value: "Permission Request",
               ),
               DropdownMenuItem(
-                child: Text(" Assignment Change Request"),
+                child: Text("_Assignment_Change_Request").tr(),
                 value: "Assignment Change Request",
               ),
               DropdownMenuItem(
-                child: Text(" Vacation Balance Adjustment Request"),
+                child: Text("_Vacation_Balance_Request").tr(),
                 value: "Vacation Balance Adjustment Request",
               ),
               DropdownMenuItem(
-                child: Text(" Termination Request"),
+                child: Text("_termination_Request").tr(),
                 value: "Termination Request",
               ),
               DropdownMenuItem(
-                child: Text(" Loan request"),
+                child: Text("_loan_Request").tr(),
                 value: "Loan request",
               ),
               DropdownMenuItem(
-                child: Text(" Payroll Adjustment Request"),
+                child: Text("_Payroll_Adjustment_Request").tr(),
                 value: "Payroll Adjustment Request",
               ),
             ],
