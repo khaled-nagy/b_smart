@@ -2,6 +2,8 @@ import 'package:b_smart/src/screens/RequestDetailes_Screen.dart';
 import 'package:flutter/material.dart';
 
 class RequestCard extends StatefulWidget {
+  final Map<String, dynamic> data;
+  RequestCard({this.data});
   @override
   _RequestCardState createState() => _RequestCardState();
 }
@@ -13,7 +15,11 @@ class _RequestCardState extends State<RequestCard> {
       onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (BuildContext context) {
-          return MyRequestDetailes();
+          return MyRequestDetailes(
+            id: widget.data['id'],
+            requestType: widget.data["requestType"],
+            taskOrRequest: "request",
+          );
         }));
       },
       child: Padding(
@@ -32,13 +38,21 @@ class _RequestCardState extends State<RequestCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("#30",
+                        Text(
+                            widget.data["code"] == null
+                                ? "#"
+                                : "#${widget.data["code"]}",
                             style: Theme.of(context).textTheme.headline2),
                         Text(
-                          "Vacation Request",
+                          widget.data["requestType"] == null
+                              ? ""
+                              : "${widget.data["requestType"]}",
                           style: Theme.of(context).textTheme.headline2,
                         ),
-                        Text("15-10-2020" + " ( 5:00 PM )",
+                        Text(
+                            widget.data["requestDate"] == null
+                                ? ""
+                                : "${widget.data["requestDate"]}",
                             style: Theme.of(context).textTheme.headline5)
                       ],
                     ),
@@ -50,7 +64,9 @@ class _RequestCardState extends State<RequestCard> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Reject",
+                          widget.data["status"] == null
+                              ? ""
+                              : "${widget.data["status"]}",
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ),

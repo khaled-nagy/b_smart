@@ -6,21 +6,17 @@ LocationModel locationModelFromJson(String str) =>
 String locationModelToJson(LocationModel data) => json.encode(data.toJson());
 
 class LocationModel {
-  LocationModel({
-    this.id,
-    this.name,
-  });
+  LocationModel({this.id, this.localName, this.foreignName});
 
-  String id;
-  String name;
+  int id;
+  String localName;
+  String foreignName;
 
   factory LocationModel.fromJson(Map<String, dynamic> json) => LocationModel(
-        id: json["id"],
-        name: json["Name"],
-      );
+      id: json["id"],
+      localName: json["localName"],
+      foreignName: json["foreignName"]);
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "Name": name,
-      };
+  Map<String, dynamic> toJson() =>
+      {"id": id, "localName": localName, "foreignName": foreignName};
 }

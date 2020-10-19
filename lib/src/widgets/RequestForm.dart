@@ -1,46 +1,44 @@
 import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/controllers/UserController.dart';
+import 'package:b_smart/src/controllers/newRequestsController.dart';
 import 'package:b_smart/src/data/models/DepartmentModel.dart';
-import 'package:b_smart/src/data/models/LoanTypeModel.dart';
+import 'package:b_smart/src/data/models/LoanModel.dart';
 import 'package:b_smart/src/data/models/LocationModel.dart';
 import 'package:b_smart/src/data/models/MonthModel.dart';
 import 'package:b_smart/src/data/models/PayItemModel.dart';
-import 'package:b_smart/src/data/models/PostionModel.dart';
-import 'package:b_smart/src/data/models/TerminasiontypeModel.dart';
+import 'package:b_smart/src/data/models/PermissionIdModel.dart';
+import 'package:b_smart/src/data/models/PositionModel.dart';
+import 'package:b_smart/src/data/models/TerminasionModel.dart';
 import 'package:b_smart/src/data/models/VacationBalanceIDModel.dart';
-import 'package:b_smart/src/data/models/VacationIdModel.dart';
+import 'package:b_smart/src/data/models/VacationModel.dart';
 import 'package:b_smart/src/data/models/YearModel.dart';
 import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:b_smart/src/widgets/TextFormFieldW%20copy.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:nepali_date_picker/nepali_date_picker.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
-import 'package:nepali_date_picker/nepali_date_picker.dart' as picker;
 
 // forms types
 
 class Vacation extends StatefulWidget {
-  @override
-  _VacationState createState() => _VacationState();
+  createState() => VacationState();
 }
 
-class _VacationState extends State<Vacation> {
-  List<VacationIdModel> vacationidList = [
-    VacationIdModel(id: "1", name: "10"),
-    VacationIdModel(id: "2", name: "20"),
-    VacationIdModel(id: "3", name: "30"),
-    VacationIdModel(id: "4", name: "40"),
-    VacationIdModel(id: "5", name: "50"),
-    VacationIdModel(id: "6", name: "60"),
-  ];
-  VacationIdModel selectedId;
+class VacationState extends StateMVC<Vacation> {
+  VacationState() : super(NewRequestsController()) {
+    _newRequestsController = NewRequestsController.con;
+  }
+
+  NewRequestsController _newRequestsController;
+
+  VacationModel selectedVacationId;
+
   @override
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<VacationRequest>(context);
+
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
@@ -50,46 +48,45 @@ class _VacationState extends State<Vacation> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                children: [
-                  Text(
-                    "Vacation Type ID ",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  Container(
-                      width: size.width / 2.3,
-                      child: DropdownButton<VacationIdModel>(
-                          hint: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: Text(
-                              "Vacation ID",
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
+              Card(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButton<VacationModel>(
+                        hint: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Text(
+                            "Vacation Type",
+                            style: Theme.of(context).textTheme.headline2,
                           ),
-                          underline: Container(),
-                          value: selectedId,
-                          iconSize: 30,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: vacationidList.map((VacationIdModel year) {
-                            return DropdownMenuItem<VacationIdModel>(
-                                value: year,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 8),
-                                  child: Text(
-                                    year.name,
-                                    style: Theme.of(context).textTheme.headline,
-                                  ),
-                                ));
-                          }).toList(),
-                          onChanged: (VacationIdModel value) {
-                            setState(() {
-                              selectedId = value;
-                            });
-                          }))
-                ],
+                        ),
+                        underline: Container(),
+                        value: selectedVacationId,
+                        iconSize: 30,
+                        isExpanded: true,
+                        icon: Icon(Icons.arrow_drop_down),
+                        items: _newRequestsController.vacationList
+                            .map((VacationModel vacation) {
+                          return DropdownMenuItem<VacationModel>(
+                              value: vacation,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8, right: 8),
+                                child: Text(
+                                  vacation.foreignName,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ));
+                        }).toList(),
+                        onChanged: (VacationModel value) {
+                          setState(() {
+                            selectedVacationId = value;
+                          });
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
               Container(
                   child: new Row(
@@ -219,26 +216,18 @@ class _VacationState extends State<Vacation> {
 }
 
 class Permission extends StatefulWidget {
-  @override
-  _PermissionState createState() => _PermissionState();
+  createState() => PermissionState();
 }
 
-class _PermissionState extends State<Permission> {
-  List<VacationIdModel> vacationidList = [
-    VacationIdModel(
-      id: "1",
-      name: "10",
-    ),
-    VacationIdModel(
-      id: "2",
-      name: "20",
-    ),
-    VacationIdModel(
-      id: "3",
-      name: "30",
-    )
-  ];
-  VacationIdModel selectedId;
+class PermissionState extends StateMVC<Permission> {
+  PermissionState() : super(NewRequestsController()) {
+    _newRequestsController = NewRequestsController.con;
+  }
+
+  NewRequestsController _newRequestsController;
+
+  PermissionModel selectedPermissoonId;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -250,42 +239,44 @@ class _PermissionState extends State<Permission> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              children: [
-                Text(
-                  "Permission Type ID ",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-                Container(
-                  width: size.width / 2.3,
-                  child: DropdownButton(
-                    iconSize: 30,
-                    icon: Padding(
-                        padding: const EdgeInsets.only(left: 14),
-                        child: Icon(Icons.arrow_drop_down)),
-                    hint: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Permision ID",
-                        style: Theme.of(context).textTheme.headline5,
+            Card(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: DropdownButton<PermissionModel>(
+                      hint: Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Text(
+                          "Permission Type",
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
                       ),
+                      underline: Container(),
+                      value: selectedPermissoonId,
+                      iconSize: 30,
+                      isExpanded: true,
+                      icon: Icon(Icons.arrow_drop_down),
+                      items: _newRequestsController.permissionList
+                          .map((PermissionModel permission) {
+                        return DropdownMenuItem<PermissionModel>(
+                            value: permission,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                permission.foreignName,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ));
+                      }).toList(),
+                      onChanged: (PermissionModel value) {
+                        setState(() {
+                          selectedPermissoonId = value;
+                        });
+                      },
                     ),
-                    value: selectedId,
-                    isExpanded: true,
-                    items: vacationidList.map((VacationIdModel vacationid) {
-                      return DropdownMenuItem<VacationIdModel>(
-                        child: Text(vacationid.name),
-                        value: vacationid,
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedId = value;
-                      });
-                    },
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -413,38 +404,20 @@ class _PermissionState extends State<Permission> {
 }
 
 class Assignment extends StatefulWidget {
-  @override
-  _AssignmentState createState() => _AssignmentState();
+  createState() => _AssignmentState();
 }
 
-class _AssignmentState extends State<Assignment> {
-  List<LocationModel> locationList = [
-    LocationModel(id: "1", name: "10"),
-    LocationModel(id: "2", name: "20"),
-    LocationModel(id: "3", name: "30"),
-    LocationModel(id: "4", name: "40"),
-    LocationModel(id: "5", name: "50"),
-    LocationModel(id: "6", name: "60"),
-  ];
-  LocationModel selectlocation;
-  List<DepartmentModel> departmentList = [
-    DepartmentModel(id: "1", name: "10"),
-    DepartmentModel(id: "2", name: "20"),
-    DepartmentModel(id: "3", name: "30"),
-    DepartmentModel(id: "4", name: "40"),
-    DepartmentModel(id: "5", name: "50"),
-    DepartmentModel(id: "6", name: "60"),
-  ];
-  DepartmentModel selectDepartment;
-  List<PositionModel> positionList = [
-    PositionModel(id: "1", name: "10"),
-    PositionModel(id: "2", name: "20"),
-    PositionModel(id: "3", name: "30"),
-    PositionModel(id: "4", name: "40"),
-    PositionModel(id: "5", name: "50"),
-    PositionModel(id: "6", name: "60"),
-  ];
-  PositionModel selectPosition;
+class _AssignmentState extends StateMVC<Assignment> {
+  _AssignmentState() : super(NewRequestsController()) {
+    _newRequestsController = NewRequestsController.con;
+  }
+  NewRequestsController _newRequestsController;
+
+  LocationModel selectedlocation;
+
+  DepartmentModel selectedDepartment;
+
+  PositionModel selectedPosition;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -474,27 +447,26 @@ class _AssignmentState extends State<Assignment> {
                             ),
                           ),
                           underline: Container(),
-                          value: selectlocation,
+                          value: selectedlocation,
                           iconSize: 30,
                           isExpanded: true,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: locationList.map((LocationModel location) {
+                          icon: Icon(Icons.arrow_drop_down),
+                          items: _newRequestsController.locationList
+                              .map((LocationModel location) {
                             return DropdownMenuItem<LocationModel>(
                                 value: location,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(left: 8, right: 8),
                                   child: Text(
-                                    location.name,
+                                    location.foreignName,
                                     style: Theme.of(context).textTheme.headline,
                                   ),
                                 ));
                           }).toList(),
                           onChanged: (LocationModel value) {
                             setState(() {
-                              selectlocation = value;
+                              selectedlocation = value;
                             });
                           }),
                     )),
@@ -522,27 +494,26 @@ class _AssignmentState extends State<Assignment> {
                             ),
                           ),
                           underline: Container(),
-                          value: selectDepartment,
+                          value: selectedDepartment,
                           iconSize: 30,
                           isExpanded: true,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: departmentList.map((DepartmentModel year) {
+                          icon: Icon(Icons.arrow_drop_down),
+                          items: _newRequestsController.departmentList
+                              .map((DepartmentModel year) {
                             return DropdownMenuItem<DepartmentModel>(
                                 value: year,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(left: 8, right: 8),
                                   child: Text(
-                                    year.name,
+                                    year.foreignName,
                                     style: Theme.of(context).textTheme.headline,
                                   ),
                                 ));
                           }).toList(),
                           onChanged: (DepartmentModel value) {
                             setState(() {
-                              selectDepartment = value;
+                              selectedDepartment = value;
                             });
                           }),
                     )),
@@ -570,27 +541,26 @@ class _AssignmentState extends State<Assignment> {
                             ),
                           ),
                           underline: Container(),
-                          value: selectPosition,
+                          value: selectedPosition,
                           iconSize: 30,
                           isExpanded: true,
-                          icon: Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Icon(Icons.arrow_drop_down)),
-                          items: positionList.map((PositionModel year) {
+                          icon: Icon(Icons.arrow_drop_down),
+                          items: _newRequestsController.positionList
+                              .map((PositionModel position) {
                             return DropdownMenuItem<PositionModel>(
-                                value: year,
+                                value: position,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(left: 8, right: 8),
                                   child: Text(
-                                    year.name,
+                                    position.foreignName,
                                     style: Theme.of(context).textTheme.headline,
                                   ),
                                 ));
                           }).toList(),
                           onChanged: (PositionModel value) {
                             setState(() {
-                              selectPosition = value;
+                              selectedPosition = value;
                             });
                           }),
                     )),
@@ -759,18 +729,16 @@ class _VacationBalanceState extends State<VacationBalance> {
 }
 
 class Termination extends StatefulWidget {
-  @override
-  _TerminationState createState() => _TerminationState();
+  createState() => _TerminationState();
 }
 
-class _TerminationState extends State<Termination> {
-  List<TerminationTypeModel> terminationTypeList = [
-    TerminationTypeModel(id: "1", name: "01"),
-    TerminationTypeModel(id: "2", name: "02"),
-    TerminationTypeModel(id: "3", name: "03"),
-    TerminationTypeModel(id: "4", name: "04"),
-  ];
-  TerminationTypeModel selecttype;
+class _TerminationState extends StateMVC<Termination> {
+  _TerminationState() : super(NewRequestsController()) {
+    _newRequestsController = NewRequestsController.con;
+  }
+  NewRequestsController _newRequestsController;
+
+  TerminasionModel selectedTerminationt;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -782,40 +750,44 @@ class _TerminationState extends State<Termination> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Termination Type ",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-                Container(
-                  width: size.width / 2,
-                  child: DropdownButton(
-                    hint: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Select Type",
-                          style: Theme.of(context).textTheme.headline5),
+            Card(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: DropdownButton<TerminasionModel>(
+                      hint: Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Text(
+                          "Termination Type",
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                      ),
+                      underline: Container(),
+                      value: selectedTerminationt,
+                      iconSize: 30,
+                      isExpanded: true,
+                      icon: Icon(Icons.arrow_drop_down),
+                      items: _newRequestsController.terminationList
+                          .map((TerminasionModel terminasion) {
+                        return DropdownMenuItem<TerminasionModel>(
+                            value: terminasion,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                terminasion.foreignName,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ));
+                      }).toList(),
+                      onChanged: (TerminasionModel value) {
+                        setState(() {
+                          selectedTerminationt = value;
+                        });
+                      },
                     ),
-                    iconSize: 30.0,
-                    icon: Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: Icon(Icons.arrow_drop_down),
-                    ),
-                    isExpanded: true,
-                    value: selecttype,
-                    items: terminationTypeList.map((year) {
-                      return DropdownMenuItem<TerminationTypeModel>(
-                        child: Text(year.name),
-                        value: year,
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      selecttype = value;
-                    },
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -881,21 +853,16 @@ class _TerminationState extends State<Termination> {
 }
 
 class Loan extends StatefulWidget {
-  @override
-  _LoanState createState() => _LoanState();
+  createState() => _LoanState();
 }
 
-class _LoanState extends State<Loan> {
-  List<LoanTypeModel> loantypelist = [
-    LoanTypeModel(id: "1", name: "10"),
-    LoanTypeModel(id: "2", name: "20"),
-    LoanTypeModel(id: "3", name: "30"),
-    LoanTypeModel(id: "4", name: "40"),
-    LoanTypeModel(id: "5", name: "50"),
-    LoanTypeModel(id: "6", name: "60"),
-  ];
+class _LoanState extends StateMVC<Loan> {
+  _LoanState() : super(NewRequestsController()) {
+    _newRequestsController = NewRequestsController.con;
+  }
+  NewRequestsController _newRequestsController;
 
-  LoanTypeModel selectItemModel;
+  LoanModel selectedLoan;
   MonthModel selectEndmonth;
   MonthModel selecStartmonth;
   YearModel selectStartyear;
@@ -941,43 +908,45 @@ class _LoanState extends State<Loan> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Loan Type ",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  Container(
-                    width: size.width / 2,
-                    child: DropdownButton(
-                      iconSize: 30,
-                      icon: Padding(
-                          padding: const EdgeInsets.only(left: 14),
-                          child: Icon(Icons.arrow_drop_down)),
-                      hint: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Permision ID",
-                          style: Theme.of(context).textTheme.headline5,
+              Card(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButton<LoanModel>(
+                        hint: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Text(
+                            "Permission Type",
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
                         ),
+                        underline: Container(),
+                        value: selectedLoan,
+                        iconSize: 30,
+                        isExpanded: true,
+                        icon: Icon(Icons.arrow_drop_down),
+                        items: _newRequestsController.loanList
+                            .map((LoanModel loan) {
+                          return DropdownMenuItem<LoanModel>(
+                              value: loan,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8, right: 8),
+                                child: Text(
+                                  loan.foreignName,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ));
+                        }).toList(),
+                        onChanged: (LoanModel value) {
+                          setState(() {
+                            selectedLoan = value;
+                          });
+                        },
                       ),
-                      value: selectItemModel,
-                      isExpanded: true,
-                      items: loantypelist.map((LoanTypeModel type) {
-                        return DropdownMenuItem<LoanTypeModel>(
-                          child: Text(type.name),
-                          value: type,
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectItemModel = value;
-                        });
-                      },
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

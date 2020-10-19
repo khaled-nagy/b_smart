@@ -20,7 +20,13 @@ class NewRequestsView extends StateMVC<NewRequests> {
 
   @override
   void initState() {
-    print(DateTime.now());
+    _newRequestsController.getAllLookups("vacation-types");
+    _newRequestsController.getAllLookups("permission-types");
+    _newRequestsController.getAllLookups("termination-types");
+    _newRequestsController.getAllLookups("loan-types");
+    _newRequestsController.getAllLookups("locations");
+    _newRequestsController.getAllLookups("departments");
+    _newRequestsController.getAllLookups("positions");
     super.initState();
   }
 
@@ -39,18 +45,18 @@ class NewRequestsView extends StateMVC<NewRequests> {
             SizedBox(
               height: 20.0,
             ),
-            prov.requesttype == "Vacation Request"
+            prov.requesttype == "vacation-types"
                 ? Vacation()
-                : prov.requesttype == "Permission Request"
+                : prov.requesttype == "permission-types"
                     ? Permission()
                     : prov.requesttype == "Assignment Change Request"
                         ? Assignment()
                         : prov.requesttype ==
                                 "Vacation Balance Adjustment Request"
                             ? VacationBalance()
-                            : prov.requesttype == "Termination Request"
+                            : prov.requesttype == "termination-types"
                                 ? Termination()
-                                : prov.requesttype == "Loan request"
+                                : prov.requesttype == "loan-types"
                                     ? Loan()
                                     : prov.requesttype ==
                                             "Payroll Adjustment Request"

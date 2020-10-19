@@ -1,24 +1,24 @@
-
-
-
 import 'dart:convert';
 
-PermissionIdModel permissionIdModelFromJson(String str) => PermissionIdModel.fromJson(json.decode(str));
+PermissionModel permissionModelFromJson(String str) =>
+    PermissionModel.fromJson(json.decode(str));
 
-String permissionIdModelToJson(PermissionIdModel data) => json.encode(data.toJson());
+String permissionModelToJson(PermissionModel data) =>
+    json.encode(data.toJson());
 
-class PermissionIdModel {
-      String name;
-      String id;
-      PermissionIdModel({this.name,this.id});
-      factory PermissionIdModel.fromJson(Map <String,dynamic> jsondata)=>
-      PermissionIdModel(
-        name: jsondata["name"],
-        id: jsondata["id"]
-      );
-      
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "Name": name,
-      };
+class PermissionModel {
+  PermissionModel({this.id, this.localName, this.foreignName});
+
+  int id;
+  String localName;
+  String foreignName;
+
+  factory PermissionModel.fromJson(Map<String, dynamic> json) =>
+      PermissionModel(
+          id: json["id"],
+          localName: json["localName"],
+          foreignName: json["foreignName"]);
+
+  Map<String, dynamic> toJson() =>
+      {"id": id, "localName": localName, "foreignName": foreignName};
 }

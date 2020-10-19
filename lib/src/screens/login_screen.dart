@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/controllers/LoginController.dart';
 import 'package:b_smart/src/controllers/UserController.dart';
+import 'package:b_smart/src/data/services/UserServicess.dart';
 import 'package:b_smart/src/screens/forgot_password_screen.dart';
+import 'package:b_smart/src/screens/homePage_Screen.dart';
 import 'package:b_smart/src/widgets/BottomNavigationBar.dart';
 import 'package:b_smart/src/widgets/ButtonW.dart';
 import 'package:b_smart/src/widgets/Language_Dropdownbtn.dart';
@@ -38,7 +40,8 @@ class LoginView extends StateMVC<LoginScreen> {
       backgroundColor: Color(0xffF4F4F4),
       body: SingleChildScrollView(
         child: Form(
-          // key: ConstantVarable.loginformKey,
+          key: ConstantVarable.loginformKey,
+          autovalidate: ConstantVarable.loginAutoValid,
           child: Center(
               child: Column(
             children: [
@@ -93,26 +96,24 @@ class LoginView extends StateMVC<LoginScreen> {
                         setState(() {
                           isLoading = true;
                         });
-                        _userController
+                        UserService()
                             .signInWithEmailAndPassword(
-                                context,
                                 ConstantVarable.userNameController.text,
                                 ConstantVarable.passController.text)
                             .then((done) {
                           if (done == true) {
+                            print("done from true is : " + done.toString());
                             setState(() {
                               isLoading = false;
                             });
-                            Fluttertoast.showToast(
-                                msg: "You have successfully logged in",
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor:
-                                    Theme.of(context).backgroundColor,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
+
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()),
+                                (Route<dynamic> route) => false);
                           } else {
+                            print("done from false is : " + done.toString());
                             setState(() {
                               isLoading = false;
                             });

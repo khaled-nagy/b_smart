@@ -2,6 +2,8 @@ import 'package:b_smart/src/screens/RequestDetailes_Screen.dart';
 import 'package:flutter/material.dart';
 
 class TaskCard extends StatefulWidget {
+  final Map<String, dynamic> data;
+  TaskCard({this.data});
   @override
   _TaskCardState createState() => _TaskCardState();
 }
@@ -9,11 +11,36 @@ class TaskCard extends StatefulWidget {
 class _TaskCardState extends State<TaskCard> {
   @override
   Widget build(BuildContext context) {
+    Color stateClolor;
+    switch (widget.data["status"]) {
+      case "rejected":
+        {
+          stateClolor = Color(0xffd9534f);
+        }
+
+        break;
+      case "new":
+        {
+          stateClolor = Color(0xff5bc0de);
+        }
+
+        break;
+      case "approved":
+        {
+          stateClolor = Color(0xff5cb85c);
+        }
+
+        break;
+    }
     return InkWell(
       onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (BuildContext context) {
-          return MyRequestDetailes();
+          return MyRequestDetailes(
+            id: widget.data['id'],
+            requestType: widget.data["requestType"],
+            taskOrRequest: "task",
+          );
         }));
       },
       child: Padding(
@@ -32,25 +59,35 @@ class _TaskCardState extends State<TaskCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("#30",
+                        Text(
+                            widget.data["code"] == null
+                                ? "#"
+                                : "#${widget.data["code"]}",
                             style: Theme.of(context).textTheme.headline2),
                         Text(
-                          "Vacation Request",
+                          widget.data["requestType"] == null
+                              ? ""
+                              : "${widget.data["requestType"]}",
                           style: Theme.of(context).textTheme.headline2,
                         ),
-                        Text("15-10-2020" + " ( 5:00 PM )",
+                        Text(
+                            widget.data["requestDate"] == null
+                                ? ""
+                                : "${widget.data["requestDate"]}",
                             style: Theme.of(context).textTheme.headline5)
                       ],
                     ),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.green,
+                        color: stateClolor,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Approved",
+                          widget.data["status"] == null
+                              ? ""
+                              : "${widget.data["status"]}",
                           style: Theme.of(context).textTheme.headline3,
                         ),
                       ),

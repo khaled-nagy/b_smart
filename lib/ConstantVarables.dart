@@ -12,6 +12,7 @@ class ConstantVarable {
   static String accessToken;
   static String userName;
   static String loginError;
+  static String lookupsName;
 
   static final GlobalKey<FormState> regformKey = GlobalKey<FormState>();
 

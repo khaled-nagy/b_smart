@@ -1,6 +1,7 @@
 import 'package:b_smart/src/screens/splash_screen.dart';
 import 'package:b_smart/src/statemanagment/Change_Language.dart';
 import 'package:b_smart/src/statemanagment/Requests_type.dart';
+import 'package:b_smart/src/statemanagment/StateProvider.dart';
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:b_smart/src/statemanagment/show_Attendance.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -35,6 +36,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<StateProvider>(
+          create: (context) {
+            return StateProvider();
+          },
+        ),
         ChangeNotifierProvider<SelectRequest>(
           create: (context) {
             return SelectRequest();

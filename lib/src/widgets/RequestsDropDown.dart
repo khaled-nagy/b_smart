@@ -1,3 +1,5 @@
+import 'package:b_smart/ConstantVarables.dart';
+import 'package:b_smart/src/controllers/newRequestsController.dart';
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,20 +22,19 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
         child: new Container(
           height: 50.0,
           width: size.width,
-          
           child: DropdownButton(
             underline: Container(),
             hint: Text("Select Request Type"),
-            value: prov.requesttype ,
+            value: prov.requesttype,
             isExpanded: true,
             items: [
               DropdownMenuItem(
                 child: Text(" Vacation Request"),
-                value: "Vacation Request",
+                value: "vacation-types",
               ),
               DropdownMenuItem(
                 child: Text(" Permission Request"),
-                value: "Permission Request",
+                value: "permission-types",
               ),
               DropdownMenuItem(
                 child: Text(" Assignment Change Request"),
@@ -45,11 +46,11 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
               ),
               DropdownMenuItem(
                 child: Text(" Termination Request"),
-                value: "Termination Request",
+                value: "termination-types",
               ),
               DropdownMenuItem(
                 child: Text(" Loan request"),
-                value: "Loan request",
+                value: "loan-types",
               ),
               DropdownMenuItem(
                 child: Text(" Payroll Adjustment Request"),
@@ -57,9 +58,10 @@ class _SelectRequestTypeState extends State<SelectRequestType> {
               ),
             ],
             onChanged: (value) {
-              
-                prov.requesttype = value;
-              
+              prov.requesttype = value;
+
+              ConstantVarable.lookupsName = value;
+              print(ConstantVarable.lookupsName);
             },
           ),
         ),

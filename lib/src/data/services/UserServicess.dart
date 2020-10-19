@@ -9,12 +9,12 @@ import 'package:http/http.dart' as http;
 
 class UserService extends UserRebository {
   @override
-  Future<Map<String, dynamic>> signInWithEmailAndPassword(
-      String userName, String pass) async {
+  Future<bool> signInWithEmailAndPassword(String userName, String pass) async {
     String url = "${ConstantVarable.baseUrl}/api/Auth";
     print(url);
     return await http.post(url,
         body: {"userName": userName, "password": pass}).then((response) {
+      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonValue = jsonDecode(response.body);
         ConstantVarable.accessToken = jsonValue["accessToken"];
@@ -29,13 +29,14 @@ class UserService extends UserRebository {
         });
 
         print(jsonValue);
+
         print(ConstantVarable.accessToken);
         print(ConstantVarable.userName);
-        return jsonValue;
+        return true;
       } else {
         // var jsonValue = jsonDecode(response.body);
 
-        return {};
+        return false;
       }
     });
   }

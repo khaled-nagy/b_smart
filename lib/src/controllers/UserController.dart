@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:b_smart/src/data/models/MonthModel.dart';
 import 'package:b_smart/src/data/models/ContactResonModel.dart';
 import 'package:b_smart/src/screens/homePage_Screen.dart';
@@ -9,7 +10,6 @@ import 'package:b_smart/src/data/services/UserServicess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:location/location.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -42,38 +42,40 @@ class UserController extends ControllerMVC {
     MonthModel(id: "3", name: "جدة"),
   ];
 
-  Future<bool> signInWithEmailAndPassword(
-      BuildContext context, String userName, String pass) async {
-    // final form = ConstantVarable.loginformKey.currentState;
-    // ConstantVarable.loginAutoValid = true;
-    // if (form.validate()) {
-    //   form.save();
+  // Future<bool> signInWithEmailAndPassword(
+  //     BuildContext context, String userName, String pass) async {
+  //   final form = ConstantVarable.loginformKey.currentState;
+  //   ConstantVarable.loginAutoValid = true;
+  //   if (form.validate()) {
+  //     form.save();
 
-    await userService
-        .signInWithEmailAndPassword(userName, pass)
-        .then((loginMap) {
-      if (loginMap.isNotEmpty) {
-        print("login map is :" + loginMap.toString());
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-            (Route<dynamic> route) => false);
+  //     await userService
+  //         .signInWithEmailAndPassword(userName, pass)
+  //         .then((loginMap) {
+  //       if (loginMap["accessToken"] != null) {
+  //         print("login map is :" + loginMap.toString());
 
-        return true;
-      } else {
-        print("login map is :" + loginMap.toString());
-        print("error");
-        // setState(() {
-        //   errorMsg = user.error;
-        // });
-        return false;
-      }
-    });
-    // }
-    // refresh();
+  //         Navigator.pushAndRemoveUntil(
+  //             context,
+  //             MaterialPageRoute(builder: (context) => HomeScreen()),
+  //             (Route<dynamic> route) => false);
 
-    // return false;
-  }
+  //         return true;
+  //       } else {
+  //         print("user : $userName , pass : $pass");
+  //         print("login map is :" + loginMap.toString());
+  //         print("error");
+  //         // setState(() {
+  //         //   errorMsg = user.error;
+  //         // });
+  //         return false;
+  //       }
+  //     });
+  //   }
+  //   refresh();
+
+  //   return true;
+  // }
 
   Future<bool> sendCodeActivation(String email, String otp) async {
     return await http.post("${ConstantVarable.baseUrl}/api/getCodeActivation",
@@ -193,8 +195,8 @@ class UserController extends ControllerMVC {
   String validatePassword(String val) {
     if (val.trim().isEmpty)
       return "من فضلك ادخل الرقم السرى";
-    else if (val.length < 8) {
-      return "الرقم السرى اقل من 8";
+    else if (val.length < 5) {
+      return "الرقم السرى اقل من 6";
     } else
       return null;
   }
@@ -224,33 +226,5 @@ class UserController extends ControllerMVC {
       }
     } else
       return null;
-  }
-
-  Future<List<double>> locationData() async {
-    Location location = new Location();
-
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    LocationData _locationData;
-
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return null;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return null;
-      }
-    }
-
-    _locationData = await location.getLocation();
-
-    return [_locationData.latitude, _locationData.longitude];
   }
 }
