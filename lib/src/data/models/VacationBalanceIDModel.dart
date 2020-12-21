@@ -1,24 +1,24 @@
 import 'dart:convert';
-import 'dart:io';
-          
 
-VacationBalanceIdModel vacationBalanceModelFromJson(String str) => VacationBalanceIdModel.fromjson(json.decode(str));
+VacationBalanceModel vacationBalanceModelFromJson(String str) =>
+    VacationBalanceModel.fromJson(json.decode(str));
 
-String vacationBalanceModeltoJson(VacationBalanceIdModel data) => json.encode(data.toJson());
-   class VacationBalanceIdModel {
-        String name;
-        String id;
-        VacationBalanceIdModel({this.id,this.name});
-        factory VacationBalanceIdModel.fromjson(Map <String,dynamic>jsondata )=>
-        VacationBalanceIdModel(
-          id: jsondata["id"],
-          name: jsondata["name"]
-        );
-         
-         Map<String, dynamic> toJson() => {
-        "id": id,
-        "Name": name,
-      };
-       
-        
-   }
+String vacationBalanceModelToJson(VacationBalanceModel data) =>
+    json.encode(data.toJson());
+
+class VacationBalanceModel {
+  VacationBalanceModel({this.id, this.localName, this.foreignName});
+
+  int id;
+  String localName;
+  String foreignName;
+
+  factory VacationBalanceModel.fromJson(Map<String, dynamic> json) =>
+      VacationBalanceModel(
+          id: json["id"],
+          localName: json["localName"],
+          foreignName: json["foreignName"]);
+
+  Map<String, dynamic> toJson() =>
+      {"id": id, "localName": localName, "foreignName": foreignName};
+}

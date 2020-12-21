@@ -1,14 +1,18 @@
-import 'package:b_smart/src/screens/homePage_Screen.dart';
-import 'package:b_smart/src/screens/my_Requests.dart';
-import 'package:b_smart/src/screens/my_Tasks.dart';
-import 'package:b_smart/src/screens/myattendance_Screen.dart';
-import 'package:b_smart/src/screens/newRequests_Screen.dart';
+import 'package:b_smart/src/screens/HomeScreen.dart';
+import 'package:b_smart/src/screens/MyAttendanceScreen.dart';
+import 'package:b_smart/src/screens/MyRequests.dart';
+import 'package:b_smart/src/screens/MyTasks.dart';
+import 'package:b_smart/src/screens/NewRequestsScreen.dart';
 import 'package:b_smart/src/widgets/transions.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:provider/provider.dart';
+import 'package:b_smart/src/statemanagment/StateProvider.dart';
 
 class Drawerc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provState = Provider.of<StateProvider>(context);
     return Drawer(
       child: SingleChildScrollView(
         child: Column(
@@ -31,9 +35,9 @@ class Drawerc extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
-                  "Home Page",
+                  "_Home_Page",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
               ),
             ),
             Divider(),
@@ -47,9 +51,9 @@ class Drawerc extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
-                  "New Requests",
+                  "_New_Request",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
               ),
             ),
             Divider(),
@@ -64,14 +68,15 @@ class Drawerc extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
-                  "My Requests",
+                  "_My_Requests",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
               ),
             ),
             Divider(),
             InkWell(
               onTap: () {
+                provState.stateType("new");
                 Navigator.push(context, Scaletransition(screen: (MyTasks())));
               },
               child: new ListTile(
@@ -80,9 +85,9 @@ class Drawerc extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                 ),
                 title: Text(
-                  "My Tasks",
+                  "_My_Tasks",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
               ),
             ),
             Divider(),
@@ -100,9 +105,9 @@ class Drawerc extends StatelessWidget {
                       color: Theme.of(context).backgroundColor,
                     )),
                 title: Text(
-                  "My Attendance",
+                  "_My_Attendance",
                   style: Theme.of(context).textTheme.headline2,
-                ),
+                ).tr(),
               ),
             ),
             Divider(),

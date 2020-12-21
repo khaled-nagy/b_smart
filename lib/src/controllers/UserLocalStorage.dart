@@ -1,25 +1,23 @@
+import 'package:b_smart/src/data/models/SettingsModel.dart';
 import 'package:b_smart/src/data/models/UserModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserLocalStorage {
   Future<bool> saveClient(UserModel user) async {
-    print("befor save   ${user.email}");
-    print("********* FROM THE RESPONSE ********* save   ${user.fName}");
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       await prefs.setInt("id", user.id);
-      await prefs.setString("fname", user.fName);
-      await prefs.setString("lname", user.lName);
+      await prefs.setString("userName", user.userName);
+      await prefs.setString("accessToken", user.accessToken);
       await prefs.setString("email", user.email);
       await prefs.setString("role", user.role);
       await prefs.setString("phone", user.mobile);
 
       //await prefs.setString("imgPath", user.);
-      print("saved data ${user.id}+${user.fName} +${user.email}");
+
       return true;
     } catch (Excption) {
-      print("save to shared faild   :  $Excption");
       return false;
     }
   }
@@ -29,83 +27,53 @@ class UserLocalStorage {
 
     return new UserModel(
         id: prefs.getInt("id"),
-        fName: prefs.getString("fname"),
-        lName: prefs.getString("lname"),
+        userName: prefs.getString("userName"),
+        accessToken: prefs.getString("accessToken"),
         email: prefs.getString("email"),
         role: prefs.getString("role"),
         mobile: prefs.getString("phone"));
   }
 
-  Future<bool> saveToken(String token) async {
-    print("********* FROM THE RESPONSE ********* save   $token");
+  Future<bool> saveUserTextField(String username) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString("token", token);
-      print("saved token $token ");
+      await prefs.setString("username", username);
+
       return true;
     } catch (Excption) {
-      print("save to shared faild   :  $Excption");
       return false;
     }
   }
 
-  Future<String> getToken() async {
+  Future<String> getUserTextField() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token");
-    return token;
+    String username = prefs.getString("username");
+    return username;
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////
+  Future<bool> saveSettings(SettingModel setting) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Future<bool> saveSubSctionsInfo(SubSectionsModel subSectionsModel) async {
-  //   print("befor save   ${subSectionsModel.id}");
-  //   print(
-  //       "********* FROM THE RESPONSE ********* save   ${subSectionsModel.name}");
-  //   try {
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString("userName_finger", setting.userName);
+      await prefs.setString("pass_finger", setting.pass);
+      await prefs.setBool("finger", setting.finger);
 
-  //     await prefs.setString("id", subSectionsModel.id);
-  //     await prefs.setString("Name", subSectionsModel.name);
+      return true;
+    } catch (Excption) {
+      return false;
+    }
+  }
 
-  //     //await prefs.setString("imgPath", user.);
-  //     print("saved data ${subSectionsModel.id}+${subSectionsModel.name} ");
-  //     return true;
-  //   } catch (Excption) {
-  //     print("save to shared faild   :  $Excption");
-  //     return false;
-  //   }
-  // }
+  Future<SettingModel> getSettings() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Future<SubSectionsModel> getSubSctionsInfo() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  //   return new SubSectionsModel(
-  //     id: prefs.getString("id"),
-  //     name: prefs.getString("Name"),
-  //   );
-  // }
-
-  ///////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // Future<bool> saveSctionsInfo(SubSectionsModel sectionsModel) async {
-  //   print("befor save   ${sectionsModel.id}");
-  //   print("********* FROM THE RESPONSE ********* save   ${sectionsModel.name}");
-  //   try {
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  //     await prefs.setString("id", sectionsModel.id);
-  //     await prefs.setString("Name", sectionsModel.name);
-
-  //     //await prefs.setString("imgPath", user.);
-  //     print("saved data ${sectionsModel.id}+${sectionsModel.name} ");
-  //     return true;
-  //   } catch (Excption) {
-  //     print("save to shared faild   :  $Excption");
-  //     return false;
-  //   }
-  // }
+    return new SettingModel(
+      userName: prefs.getString("userName_finger"),
+      pass: prefs.getString("pass_finger"),
+      finger: prefs.getBool("finger"),
+    );
+  }
 
   Future<bool> clear() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

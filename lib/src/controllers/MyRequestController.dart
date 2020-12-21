@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:b_smart/ConstantVarables.dart';
@@ -16,50 +15,52 @@ class MyRequestController extends ControllerMVC {
   MyRequestController._();
 
   static MyRequestController get con => _this;
+  List<dynamic> requestsList = List();
+  Map<String, dynamic> requestDetails = Map();
+  List<dynamic> requestStatus = List();
 
-  final getRequestsStream = StreamController.broadcast();
-  getRequestsList() async {
+  Future<bool> getRequestsList() async {
     String url = "${ConstantVarable.baseUrl}/api/requests/mine";
-    print(url);
+
     await http.get(url, headers: {
       "Authorization": "Bearer ${ConstantVarable.accessToken}",
       "Accept": "application/json",
       // "Content-Type": "application/json"
     }).then((response) {
-      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonValu = jsonDecode(response.body);
-        print(" requests Response is ::::::::: " + jsonValu.toString());
-        getRequestsStream.sink.add(jsonValu);
+
+        setState(() {
+          requestsList = jsonValu;
+        });
+        return true;
       } else {
-        print("error");
+        return false;
       }
-    }, onError: (error) {
-      getRequestsStream.close();
-      print(" requests error is :::: $error");
-    });
+    }, onError: (error) {});
+    return false;
   }
 
-  final getRequestsDetailsStream = StreamController.broadcast();
-  getRequestsDetails(int id, String requestType) async {
+  Future<bool> getRequestsDetails(int id, String requestType) async {
     String url = "${ConstantVarable.baseUrl}/api/requests/$requestType/$id";
-    print(url);
+
     await http.get(url, headers: {
       "Authorization": "Bearer ${ConstantVarable.accessToken}",
       "Accept": "application/json",
       // "Content-Type": "application/json"
     }).then((response) {
-      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonValu = jsonDecode(response.body);
-        print(" requests Details Response is ::::::::: " + jsonValu.toString());
-        getRequestsDetailsStream.sink.add(jsonValu);
+
+        setState(() {
+          requestDetails = jsonValu;
+          requestStatus = jsonValu["states"];
+        });
+        return true;
       } else {
-        print("error");
+        return false;
       }
-    }, onError: (error) {
-      getRequestsDetailsStream.close();
-      print(" requests Details error is :::: $error");
-    });
+    }, onError: (error) {});
+    return false;
   }
 }

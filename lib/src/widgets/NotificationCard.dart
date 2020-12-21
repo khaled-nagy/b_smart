@@ -1,8 +1,11 @@
+import 'package:b_smart/src/controllers/NotificationController.dart';
+import 'package:b_smart/src/data/models/NotificationModel.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NotificationCard extends StatefulWidget {
-  final int poision;
-  NotificationCard({this.poision});
+  final NotificationModel data;
+  NotificationCard({this.data});
   @override
   _NotificationCardState createState() => _NotificationCardState();
 }
@@ -10,6 +13,8 @@ class NotificationCard extends StatefulWidget {
 class _NotificationCardState extends State<NotificationCard> {
   @override
   Widget build(BuildContext context) {
+    String message = widget.data.message;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -17,7 +22,7 @@ class _NotificationCardState extends State<NotificationCard> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Container(
-            height: 100,
+            height: 122,
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(12)),
             width: MediaQuery.of(context).size.width,
@@ -29,15 +34,17 @@ class _NotificationCardState extends State<NotificationCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Workflow Request Has Been Rejected",
+                      widget.data.title,
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                     Text(
-                      "vacation request #37 has been rejec...",
+                      message.length > 50
+                          ? message.substring(0, 35) + "..."
+                          : message,
                       style: Theme.of(context).textTheme.bodyText2,
-                    ),
+                    ).tr(),
                     Text(
-                      "July 20.2020 (08:00 pm)",
+                      widget.data.notificationDate.toString(),
                       style: Theme.of(context).textTheme.headline5,
                     ),
                   ],
@@ -51,10 +58,17 @@ class _NotificationCardState extends State<NotificationCard> {
               context: context,
               builder: (_) => AlertDialog(
                     content: Text(
-                      "vacation request #37 has been  Rejected",
+                      widget.data.message,
                       style: Theme.of(context).textTheme.headline2,
-                    ),
+                    ).tr(),
                   ));
+          NotificationController()
+              .readNotification(widget.data.id)
+              .then((value) {
+            if (value == true) {
+              NotificationController().getAllNotifications();
+            } else {}
+          });
         },
       ),
     );

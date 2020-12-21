@@ -11,7 +11,7 @@ class MonthModel {
     this.name,
   });
 
-  String id;
+  int id;
   String name;
 
   factory MonthModel.fromJson(Map<String, dynamic> json) => MonthModel(

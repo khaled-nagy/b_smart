@@ -10,7 +10,7 @@ class YearModel {
     this.name,
   });
 
-  String id;
+  int id;
   String name;
 
   factory YearModel.fromJson(Map<String, dynamic> json) => YearModel(

@@ -22,23 +22,29 @@ class _AttendanceCardState extends State<AttendanceCard> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("15/11/1993",
-                        style: Theme.of(context).textTheme.headline2),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "From  08:00 am",
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
-                        Text(
-                          "To       05:00 bm",
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
-                      ],
+                    Text(
+                        widget.data["dayDate"] == null
+                            ? ""
+                            : widget.data["dayDate"],
+                        style: Theme.of(context).textTheme.headline5),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 8,
+                    ),
+                    Text(
+                      widget.data["inTime"] == null
+                          ? ""
+                          : widget.data["inTime"],
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 5,
+                    ),
+                    Text(
+                      widget.data["outTime"] == null
+                          ? ""
+                          : widget.data["outTime"],
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                   ],
                 ),

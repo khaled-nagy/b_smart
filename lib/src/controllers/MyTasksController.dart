@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:b_smart/ConstantVarables.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,29 +20,72 @@ class MyTasksController extends ControllerMVC {
 
   static MyTasksController get con => _this;
 
-  final getTasksStream = StreamController.broadcast();
+  List<dynamic> tasksList = List();
   Future<bool> getTasksList(String state) async {
     String url = "${ConstantVarable.baseUrl}/api/inbox/my-tasks?status=$state";
-    print(url);
+
     await http.get(url, headers: {
       "Authorization": "Bearer ${ConstantVarable.accessToken}",
       "Accept": "application/json",
       // "Content-Type": "application/json"
     }).then((response) {
-      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonValu = jsonDecode(response.body);
-        print(" Tasks Response is ::::::::: " + jsonValu.toString());
-        getTasksStream.sink.add(jsonValu);
+        setState(() {
+          tasksList = jsonValu;
+        });
+
         return true;
       } else {
-        print("error");
         return false;
       }
-    }, onError: (error) {
-      getTasksStream.close();
-      print(" Tasks error is :::: $error");
-    });
+    }, onError: (error) {});
     return false;
+  }
+
+  Future<bool> approveOrReject(String requestType, int requestId,
+      int requestEntryId, String approveOrReject, BuildContext context) async {
+    String url =
+        "${ConstantVarable.baseUrl}/api/requests/$requestType/$requestId/entries/$requestEntryId/$approveOrReject";
+
+    return await http.post(url, headers: {
+      "Authorization": "Bearer ${ConstantVarable.accessToken}",
+      "Accept": "application/json",
+      // "Content-Type": "application/json"
+    }).then((response) {
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        var jsonValue = jsonDecode(response.body);
+        Fluttertoast.showToast(
+            msg: jsonValue["message"],
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+
+        return false;
+      }
+    });
+  }
+
+  Future<bool> deleteTask(int requestId) async {
+    String url = "${ConstantVarable.baseUrl}/api/requests/$requestId";
+
+    return await http.delete(url, headers: {
+      "Authorization": "Bearer ${ConstantVarable.accessToken}",
+      "Accept": "application/json",
+      // "Content-Type": "application/json"
+    }).then((response) {
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        // var jsonValue = jsonDecode(response.body);
+
+        return false;
+      }
+    });
   }
 }

@@ -1,9 +1,9 @@
-import 'package:b_smart/src/screens/splash_screen.dart';
+import 'package:b_smart/src/screens/SplashScreen.dart';
 import 'package:b_smart/src/statemanagment/Change_Language.dart';
+import 'package:b_smart/src/statemanagment/NotificationCount.dart';
 import 'package:b_smart/src/statemanagment/Requests_type.dart';
 import 'package:b_smart/src/statemanagment/StateProvider.dart';
 import 'package:b_smart/src/statemanagment/selectRequestType.dart';
-import 'package:b_smart/src/statemanagment/show_Attendance.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,6 +18,7 @@ void main() {
     path: "assets/langs",
     startLocale: Locale('en'),
     //  fallbackLocale: Locale('ar'),
+
     saveLocale: true,
     // useOnlyLangCode: true,
     // optional assetLoader default used is RootBundleAssetLoader which uses flutter's assetloader
@@ -49,11 +50,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ChangeLanguage>(
           create: (context) {
             return ChangeLanguage();
-          },
-        ),
-        ChangeNotifierProvider<ShowAttendance>(
-          create: (context) {
-            return ShowAttendance();
           },
         ),
         ChangeNotifierProvider<VacationRequest>(
@@ -89,6 +85,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<PayrollAdjustmentRequest>(
           create: (context) {
             return PayrollAdjustmentRequest();
+          },
+        ),
+        ChangeNotifierProvider<NotificationCounter>(
+          create: (context) {
+            return NotificationCounter();
           },
         )
       ],

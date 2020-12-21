@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StateProvider extends ChangeNotifier {
-  String state = "rejicted";
+  String state = "new";
   bool newButton = false;
   bool rejictedButton = false;
   bool approvedButton = false;

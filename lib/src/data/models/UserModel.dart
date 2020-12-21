@@ -13,8 +13,8 @@ class UserModel {
       {this.statusCode,
       this.id,
       this.email,
-      this.fName,
-      this.lName,
+      this.userName,
+      this.accessToken,
       this.address,
       this.mobile,
       this.error,
@@ -24,8 +24,8 @@ class UserModel {
   int statusCode;
   int id;
   String email;
-  String fName;
-  String lName;
+  String userName;
+  String accessToken;
   String address;
   String mobile;
   String error;
@@ -35,8 +35,8 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       id: json["id"],
       email: json["email"],
-      fName: json["fname"],
-      lName: json["lname"],
+      userName: json["userName"],
+      accessToken: json["accessToken"],
       mobile: json["phone"],
       error: json["error"],
       otp: json["randomCode"],
@@ -47,8 +47,8 @@ class UserModel {
         "id": id,
         "Status Code": statusCode,
         "email": email,
-        "fname": fName,
-        "lname": lName,
+        "userName": userName,
+        "accessToken": accessToken,
         "phone": mobile,
         "error": error,
         "randomCode": otp,

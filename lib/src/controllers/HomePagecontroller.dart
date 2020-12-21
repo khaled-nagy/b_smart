@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:b_smart/ConstantVarables.dart';
@@ -18,6 +19,8 @@ class HomePageController extends ControllerMVC {
   HomePageController._();
 
   static HomePageController get con => _this;
+
+  Map<String, dynamic> dashBordData = Map();
 
   Future<List<double>> locationData() async {
     Location location = new Location();
@@ -50,28 +53,24 @@ class HomePageController extends ControllerMVC {
   Future<bool> signIn(
       double long, double lat, BuildContext context, String inOrOut) async {
     String urlIn = "${ConstantVarable.baseUrl}/api/attendance/sign-in";
-    String urlOt = "${ConstantVarable.baseUrl}/api/attendance/sign-in";
-    print(inOrOut == "in" ? urlIn : urlOt);
+    String urlOt = "${ConstantVarable.baseUrl}/api/attendance/sign-out";
+
     return await http.post(inOrOut == "in" ? urlIn : urlOt, body: {
       "longitude": long.toString(),
       "latitude": lat.toString()
     }, headers: {
       "Authorization": "Bearer ${ConstantVarable.accessToken}",
       "Accept": "application/json",
-      // "Content-Type": "application/json"
     }).then((response) {
-      print(response.statusCode);
       if (response.statusCode == 200) {
-        var jsonValue = jsonDecode(response.body);
-
-        print(jsonValue);
-
         Fluttertoast.showToast(
-            msg: "Attendance has been registered successfully",
+            msg: inOrOut == "in"
+                ? "Attendance has been registered successfully"
+                : "Departure has been registered successfully",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.TOP,
             timeInSecForIosWeb: 1,
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: inOrOut == "in" ? Colors.green : Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
 
@@ -91,5 +90,53 @@ class HomePageController extends ControllerMVC {
         return false;
       }
     });
+  }
+
+  Future<bool> signInOutValidator(BuildContext context, String inOrOut) async {
+    String urlIn = "${ConstantVarable.baseUrl}/api/attendance/sign-in/validate";
+    String urlOut =
+        "${ConstantVarable.baseUrl}/api/attendance/sign-out/validate";
+
+    return await http.post(inOrOut == "in" ? urlIn : urlOut, headers: {
+      "Authorization": "Bearer ${ConstantVarable.accessToken}",
+      "Accept": "application/json",
+      // "Content-Type": "application/json"
+    }).then((response) {
+      if (response.statusCode == 200) {
+        var jsonValue = jsonDecode(response.body);
+
+        return jsonValue;
+      } else {
+        var jsonValue = jsonDecode(response.body);
+
+        return jsonValue;
+      }
+    });
+  }
+
+  Future<Map<String, dynamic>> getDashBordData() async {
+    String year = DateTime.now().year.toString();
+    String url = "${ConstantVarable.baseUrl}/api/dashboard/$year";
+
+    await http.get(url, headers: {
+      "Authorization": "Bearer ${ConstantVarable.accessToken}",
+      "Accept": "application/json",
+      // "Content-Type": "application/json"
+    }).then((response) {
+      if (response.statusCode == 200) {
+        var jsonValu = jsonDecode(response.body);
+        setState(() {
+          dashBordData = jsonValu;
+        });
+
+        return jsonValu;
+      } else {
+        setState(() {
+          dashBordData = jsonDecode(response.body);
+        });
+        return response.body;
+      }
+    }, onError: (error) {});
+    return {};
   }
 }

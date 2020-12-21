@@ -2,14 +2,12 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:provider/provider.dart';
 
 class SharedWidget {
   static loading(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(
-        backgroundColor: Colors.blue,
-      ),
+      child: CircularProgressIndicator(),
     );
   }
 
@@ -156,7 +154,7 @@ class SharedWidget {
                   height: MediaQuery.of(context).size.height / 20,
                   width: MediaQuery.of(context).size.width / 4,
                   child: Material(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).backgroundColor,
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
@@ -185,7 +183,7 @@ class SharedWidget {
                   height: MediaQuery.of(context).size.height / 20,
                   width: MediaQuery.of(context).size.width / 4,
                   child: Material(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).backgroundColor,
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
@@ -211,122 +209,6 @@ class SharedWidget {
                   Navigator.pop(context);
 
                   await function();
-                },
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  static Future<void> wonderAlertDialog(
-      BuildContext context, Function sendOrder) {
-    var progressDialog = ProgressDialog(context, isDismissible: false);
-
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setMyState) =>
-              AlertDialog(
-            content: Container(
-              height: MediaQuery.of(context).size.height / 11,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.error,
-                          color: Theme.of(context).accentColor,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                  EasyLocalization.of(context).locale ==
-                                          Locale('en')
-                                      ? "login "
-                                      : " سجل دخول ",
-                                  style: Theme.of(context).textTheme.title),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              InkWell(
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 20,
-                  width: MediaQuery.of(context).size.width / 4,
-                  child: Material(
-                    color: Theme.of(context).accentColor,
-                    elevation: 0.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 0.0, bottom: 0.0),
-                        child: Text(
-                          EasyLocalization.of(context).locale == Locale('en')
-                              ? "cancel"
-                              : "الغاء",
-                          style: TextStyle(
-                              color: Colors.grey[50],
-                              fontSize: MediaQuery.of(context).size.width / 23),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              InkWell(
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 20,
-                  width: MediaQuery.of(context).size.width / 4,
-                  child: Material(
-                    color: Theme.of(context).accentColor,
-                    elevation: 0.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 0.0, bottom: 0.0),
-                        child: Text(
-                          EasyLocalization.of(context).locale == Locale('en')
-                              ? "ok"
-                              : "حسنا",
-                          style: TextStyle(
-                              color: Colors.grey[50],
-                              fontSize: MediaQuery.of(context).size.width / 23),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                onTap: () async {
-                  setMyState(() {});
-
-                  Navigator.pop(context);
-                  await progressDialog.show();
-
-                  await sendOrder();
-                  progressDialog.hide();
                 },
               )
             ],

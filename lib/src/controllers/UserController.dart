@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:b_smart/src/data/models/MonthModel.dart';
-import 'package:b_smart/src/data/models/ContactResonModel.dart';
-import 'package:b_smart/src/screens/homePage_Screen.dart';
+import 'package:b_smart/src/controllers/NotificationController.dart';
+import 'package:b_smart/src/controllers/UserLocalStorage.dart';
+import 'package:b_smart/src/screens/HomeScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:b_smart/ConstantVarables.dart';
 import 'package:b_smart/src/data/services/UserServicess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -25,86 +25,176 @@ class UserController extends ControllerMVC {
   UserController._();
 
   static UserController get con => _this;
+  bool isLoading = false;
+
+  static final GlobalKey<FormState> loginformKey = GlobalKey<FormState>();
+
+  static bool loginAutoValid = false;
+  static final TextEditingController userNameController =
+      TextEditingController();
+  static final TextEditingController passController = TextEditingController();
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  ///
+  static final GlobalKey<FormState> passFormKey = GlobalKey<FormState>();
+
+  static bool passAutoValidate = false;
+
+  static final TextEditingController oldPassController =
+      TextEditingController();
+
+  static final TextEditingController emailController = TextEditingController();
+
+  static final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   bool apiCall = false;
   String errorMsg = "";
   bool error = true;
   UserService userService = UserService();
-  List<ContactResonModel> resonContactList = [
-    ContactResonModel(id: "1", name: "الانضمام كمشهور"),
-    ContactResonModel(id: "2", name: "الانضمام كشركة"),
-    ContactResonModel(id: "3", name: " مشكلة تتعلق بقسيمتى"),
-    ContactResonModel(id: "4", name: "اخرى")
-  ];
-  List<MonthModel> monthlist = [
-    MonthModel(id: "1", name: "تبوك"),
-    MonthModel(id: "2", name: "الرياض"),
-    MonthModel(id: "3", name: "جدة"),
-  ];
 
-  // Future<bool> signInWithEmailAndPassword(
-  //     BuildContext context, String userName, String pass) async {
-  //   final form = ConstantVarable.loginformKey.currentState;
-  //   ConstantVarable.loginAutoValid = true;
-  //   if (form.validate()) {
-  //     form.save();
+  Future<bool> signInWithEmailAndPassword(
+      BuildContext context, String userName, String pass) async {
+    // final form = ConstantVarable.loginformKey.currentState;
+    // ConstantVarable.loginAutoValid = true;
+    // if (form.validate()) {
+    //   form.save();
 
-  //     await userService
-  //         .signInWithEmailAndPassword(userName, pass)
-  //         .then((loginMap) {
-  //       if (loginMap["accessToken"] != null) {
-  //         print("login map is :" + loginMap.toString());
+    await userService.signInWithEmailAndPassword(userName, pass).then((user) {
+      if (user.accessToken != null) {
+        UserLocalStorage().saveClient(user).then((value) {
+          if (value == true) {
+            UserLocalStorage().saveUserTextField(userName).then((value) {
+              if (value == true) {
+                NotificationController().getAllNotifications().then((value) {
+                  if (value == true) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        (Route<dynamic> route) => false);
+                  } else {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        (Route<dynamic> route) => false);
+                  }
+                });
+              }
+            });
 
-  //         Navigator.pushAndRemoveUntil(
-  //             context,
-  //             MaterialPageRoute(builder: (context) => HomeScreen()),
-  //             (Route<dynamic> route) => false);
+            return true;
+          } else {
+            return false;
+          }
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: "You have an error in your username or password",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        setState(() {
+          isLoading = false;
+        });
 
-  //         return true;
-  //       } else {
-  //         print("user : $userName , pass : $pass");
-  //         print("login map is :" + loginMap.toString());
-  //         print("error");
-  //         // setState(() {
-  //         //   errorMsg = user.error;
-  //         // });
-  //         return false;
-  //       }
-  //     });
-  //   }
-  //   refresh();
+        // setState(() {
+        //   errorMsg = user.error;
+        // });
+        return false;
+      }
+    });
+    // }
+    // refresh();
 
-  //   return true;
-  // }
+    return false;
+  }
 
   Future<bool> sendCodeActivation(String email, String otp) async {
     return await http.post("${ConstantVarable.baseUrl}/api/getCodeActivation",
         body: {"email": email, "verified_code": otp},
         headers: {"Accept": "application/json"}).then((response) {
       if (response.statusCode == 200) {
-        final responseJson = json.decode(utf8.decode(response.bodyBytes));
-        print("respnse json $responseJson");
         setState(() {
           // errorMsg = responseJson['MessageEn'];
         });
-        print(" true  ");
+
         return true;
       } else {
-        print(" false  ");
         return false;
       }
     });
   }
 
-  Future<bool> updateProfile(BuildContext context, String fName, String lName,
-      String email, String phone, String cityId) async {
-    await userService
-        .updateUser(fName, lName, email, phone, cityId)
-        .then((done) {
-      print(done);
-      if (done == true) {
+  Map<String, dynamic> userData = Map();
+  getUserProfileData() async {
+    String url = "${ConstantVarable.baseUrl}/api/UserProfile";
+
+    await http.get(url, headers: {
+      "Authorization": "Bearer ${ConstantVarable.accessToken}",
+      "Accept": "application/json",
+    }).then((response) {
+      if (response.statusCode == 200) {
+        var jsonValu = jsonDecode(response.body);
+
+        setState(() {
+          userData = jsonValu;
+        });
+      } else {}
+    }, onError: (error) {});
+  }
+
+  Future<bool> changePassword(String oldPass, String newPass) async {
+    final form = passFormKey.currentState;
+    passAutoValidate = true;
+    if (form.validate()) {
+      form.save();
+
+      String url = "${ConstantVarable.baseUrl}/api/UserProfile/password";
+
+      return await http.put(url, body: {
+        "oldPassword": oldPass,
+        "newPassword": newPass
+      }, headers: {
+        "Authorization": "Bearer ${ConstantVarable.accessToken}",
+        "Accept": "application/json",
+        // "Content-Type": "application/json"
+      }).then((response) {
+        if (response.statusCode == 200 || response.statusCode == 400) {
+          UserController().clearTextFields();
+          return true;
+        } else {
+          // var jsonValue = jsonDecode(response.body);
+
+          return false;
+        }
+      });
+    }
+    refresh();
+
+    return false;
+  }
+
+  Future<bool> resetPass(String email, String userName) async {
+    return await http.post(
+        "${ConstantVarable.baseUrl}/api/UserProfile/password/reset",
+        body: {"email": email, "userName": userName},
+        headers: {"Accept": "application/json"}).then((response) {
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        final responseJson = json.decode(utf8.decode(response.bodyBytes));
+
         Fluttertoast.showToast(
-            msg: "تم تحديث بياناتك بنجاح",
+            msg: "${responseJson["message"]}",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -112,39 +202,40 @@ class UserController extends ControllerMVC {
             textColor: Colors.white,
             fontSize: 16.0);
 
-        print("true");
-        return true;
-      } else {
-        // errorMsg = user.error;
-
-        print("false $errorMsg");
-        print("false");
-        setState(() {});
         return false;
       }
     });
-
-    refresh();
-
-    return false;
   }
 
   Future<bool> logOut() async {
     clearTextFields();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
+    cancelAuthentication();
 
     return true;
   }
 
+  Future<bool> authenticate() async {
+    return await LocalAuthentication().authenticateWithBiometrics(
+        localizedReason: 'Scan your fingerprint to authenticate',
+        useErrorDialogs: true,
+        stickyAuth: true);
+  }
+
+  void cancelAuthentication() {
+    LocalAuthentication().stopAuthentication();
+  }
+
+  Future<bool> checkBiometrics() async {
+    return await LocalAuthentication().canCheckBiometrics;
+  }
+
   void clearTextFields() {
-    ConstantVarable.fNameController.text = "";
-    ConstantVarable.lNameController.text = "";
-    ConstantVarable.userNameController.text = "";
-    ConstantVarable.emailController.text = "";
-    ConstantVarable.passController.text = "";
-    ConstantVarable.confirmPasswordController.text = "";
-    ConstantVarable.phoneController.text = "";
+    // ConstantVarable.userNameController.text = "";
+    // ConstantVarable.emailController.text = "";
+    passController.text = "";
+    confirmPasswordController.text = "";
 
     setState(() {
       errorMsg = "";
@@ -195,8 +286,8 @@ class UserController extends ControllerMVC {
   String validatePassword(String val) {
     if (val.trim().isEmpty)
       return "من فضلك ادخل الرقم السرى";
-    else if (val.length < 5) {
-      return "الرقم السرى اقل من 6";
+    else if (val.length < 1) {
+      return "الرقم السرى اقل من 2";
     } else
       return null;
   }
@@ -211,7 +302,7 @@ class UserController extends ControllerMVC {
   String validateConfirmPassword(String val) {
     if (val.trim().isEmpty)
       return "من فضلك ادخل الرقم السرى";
-    else if (val != ConstantVarable.passController.text) {
+    else if (val != passController.text) {
       return "الرقم السرى غير مطابق";
     } else
       return null;

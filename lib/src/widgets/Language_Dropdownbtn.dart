@@ -7,7 +7,7 @@ class DropDownButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var prov = Provider.of<ChangeLanguage>(context);
-    print(prov.lang);
+
     return Container(
       color: Theme.of(context).accentColor,
       height: 50.0,

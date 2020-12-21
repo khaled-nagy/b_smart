@@ -6,21 +6,17 @@ PayItemModel payItemModelFromJson(String str) =>
 String payItemModelToJson(PayItemModel data) => json.encode(data.toJson());
 
 class PayItemModel {
-  PayItemModel({
-    this.id,
-    this.name,
-  });
+  PayItemModel({this.id, this.localName, this.foreignName});
 
-  String id;
-  String name;
+  int id;
+  String localName;
+  String foreignName;
 
   factory PayItemModel.fromJson(Map<String, dynamic> json) => PayItemModel(
-        id: json["id"],
-        name: json["Name"],
-      );
+      id: json["id"],
+      localName: json["localName"],
+      foreignName: json["foreignName"]);
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "Name": name,
-      };
+  Map<String, dynamic> toJson() =>
+      {"id": id, "localName": localName, "foreignName": foreignName};
 }
