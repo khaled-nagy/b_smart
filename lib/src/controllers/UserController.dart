@@ -64,7 +64,7 @@ class UserController extends ControllerMVC {
       if (user.accessToken != null) {
         UserLocalStorage().saveClient(user).then((value) {
           if (value == true) {
-            UserLocalStorage().saveUserTextField(userName).then((value) {
+            UserLocalStorage().saveUserTextField(userName, pass).then((value) {
               if (value == true) {
                 NotificationController().getAllNotifications().then((value) {
                   if (value == true) {

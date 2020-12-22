@@ -34,10 +34,11 @@ class UserLocalStorage {
         mobile: prefs.getString("phone"));
   }
 
-  Future<bool> saveUserTextField(String username) async {
+  Future<bool> saveUserTextField(String username, String pass) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString("username", username);
+      await prefs.setString("pass", pass);
 
       return true;
     } catch (Excption) {
@@ -45,10 +46,11 @@ class UserLocalStorage {
     }
   }
 
-  Future<String> getUserTextField() async {
+  Future<Map<String, dynamic>> getUserTextField() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString("username");
-    return username;
+    String pass = prefs.getString("pass");
+    return {"username": username, "pass": pass};
   }
 
   Future<bool> saveSettings(SettingModel setting) async {

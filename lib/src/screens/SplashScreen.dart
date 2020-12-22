@@ -19,10 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      UserLocalStorage().getUserTextField().then((username) {
-        UserController.userNameController.text = username;
+      UserLocalStorage().getUserTextField().then((userData) {
+        print(userData);
+        UserController.userNameController.text = userData['username'];
         UserLocalStorage().getUser().then((user) {
-          if (user.accessToken == null) {
+          if (userData['username'] == null || userData['pass'] == null) {
             Navigator.pushReplacement(
                 context, Scaletransition(screen: LoginScreen()));
           } else {
